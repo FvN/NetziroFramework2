@@ -1,13 +1,15 @@
 <?php
 
 
-require_once( "core/database/NFDatabase.class.php" );
+require_once( "core/NFBootstrap.core.php" );
 
-$credentials[ "profile" ] = "Profile1";
+echo NF_INSTANCE_ROOT_RELATIVE;
+
+//$credentials[ "profile" ] = "Profile1";
 /*$credentials[ "database" ] = "test";
 $credentials[ "username" ] = "root";
 $credentials[ "password" ] = "ph03nix";*/
-
+/*
 $NFDatabase = new NFDatabase( $credentials );
 $linkopened = $NFDatabase->OpenLink();
 
@@ -29,5 +31,5 @@ if( $linkopened === true ){
 	
 	$NFDatabase->PrintErrors();
 	
-}
+}*/
 
