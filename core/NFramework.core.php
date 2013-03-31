@@ -27,16 +27,34 @@
  */
 class NFramework{
 	
+	/**
+	 * @desc
+	 * Netziro Framework AutoLoader method
+	 * 
+	 */
 	public static function AutoLoader( $class ){
 		
-		if( $class == "NFDatabase.class.php" ){
-			require_once( "core/database/NFDatabase.class.php" );
-		} elseif( $class == "NFCore" ){
-			require_once( "core/NFCore.core.php" );
-		} elseif( $class == "NFLogger" ){
-			require_once( "core/util/NFLogger.util.php" );
+		switch( $class ){
+			
+			case strstr( $class, "NFMod" ) != FALSE:
+				require_once( "modules/$class.module.php" );
+				break;
+				
+			case "NFDatabase":
+				require_once( "core/database/NFDatabase.class.php" );
+				break;
+				
+			case "NFCore":
+				require_once( "core/NFCore.core.php" );
+				break;
+				
+			case "NFLogger":
+				require_once( "core/util/NFLogger.util.php" );
+				break;
+			
+			
+			
 		}
-		
 		
 	}
 		

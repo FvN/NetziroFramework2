@@ -30,6 +30,7 @@ try{
 	
 	// ------------------------------------- | START Executing bootstrap functions
 	NFCore::DefineDebugMode();
+	NFCore::DefinePHPSettings();
 	NFCore::DefineApplicationPath();
 	NFCore::DefineLocaleSettings();
 	NFCore::DefineTimeZoneSettings();

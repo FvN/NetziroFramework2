@@ -29,6 +29,20 @@ class NFCore extends NFramework{
 
 	/**
 	 * @desc
+	 * Define PHP Settings
+	 * 
+	 */
+	public static function DefinePHPSettings(){
+		
+		// ------------------------------------- | START Define the maximum upload file size
+		if( defined( "NF_INSTANCE_UPLOAD_MAXFILESIZE" ) AND ctype_alnum( NF_INSTANCE_UPLOAD_MAXFILESIZE ) ){ ini_set( "upload_max_filesize", NF_INSTANCE_UPLOAD_MAXFILESIZE ); }
+		ini_set( "auto_detect_line_endings", TRUE );
+		// ------------------------------------- | END
+		
+	}
+	
+	/**
+	 * @desc
 	 * Check if the session has been started
 	 * 
 	 */

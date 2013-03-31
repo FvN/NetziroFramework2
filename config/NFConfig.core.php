@@ -29,3 +29,7 @@ define( "NF_INSTANCE_LOG_BACKTRACE", true );
 define( "NF_INSTANCE_LOCALE_DEFAULT", "en-GB" );
 define( "NF_INSTANCE_TIMEZONE_DEFAULT", "Europe/Amsterdam" );
 // ------------------------------------- | END
+
+// ------------------------------------- | START PHP Settings
+define( "NF_INSTANCE_UPLOAD_MAXFILESIZE", "10M" );
+// ------------------------------------- | END
