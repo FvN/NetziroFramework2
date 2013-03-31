@@ -7,7 +7,7 @@
 * CREATOR:					Alessio Nobile
 * CREATING DATA:			02/01/12
 * ----------------------------------------------------------------------
-* FILE DESCRIPTION:			
+* FILE DESCRIPTION:			NFCore class will contain core methods used overall the application
 * ----------------------------------------------------------------------
 * TRACKING  LOG - LOG YOUR CHANGES ONLY IF YOU ARE DOING IMPORTANT UPDATES ( CHANGE OF METHOD, ADDING/DELETING LINES OF CODE, BUGFIX)
 * ----------------------------------------------------------------------
@@ -16,13 +16,24 @@
 * ----------------------------------------------------------------------
 */
 
+/**
+ * @copyright 	Alessio Nobile <netziro@gmail.com>
+ * @author 		Alessio Nobile
+ * @package		NFCore
+ *
+ * @desc
+ * NFCore class will contain core methods used overall the application
+ * 
+ */
+class NFCore{
+
 	/**
 	 * @desc
 	 * This function will define application's URL and real path
 	 * 
 	 */
 
-	function nfDefineApplicationPath(){
+	public static function DefineApplicationPath(){
 		
 		// ------------------------------------- | START Fetch instance informations
 		$script_filename = $_SERVER[ "SCRIPT_FILENAME" ];
@@ -58,3 +69,5 @@
 		
 		
 	}
+	
+}

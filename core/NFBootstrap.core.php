@@ -18,12 +18,14 @@
 
 try{
 	
+	// ------------------------------------- | START Including Netziro Framework Core files
 	require_once( "core/database/NFDatabase.class.php" );
 	require_once( "core/NFCore.core.php" );
+	// ------------------------------------- | END
 	
-	
-	nfDefineApplicationPath();
-	
-	
+	// ------------------------------------- | START Executing bootstrap functions
+	NFCore::DefineApplicationPath();
+	// ------------------------------------- | END
+		
 	
 } catch( Exception $e ){  }
