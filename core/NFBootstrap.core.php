@@ -19,7 +19,7 @@
 try{
 	
 	// ------------------------------------- | START Debugging options
-	if( defined( "CG_INSTANCE_DEBUG" ) AND CG_INSTANCE_DEBUG ){ error_reporting( E_ALL ); ini_set( "display_errors", 1 ); }
+	if( defined( "NF_INSTANCE_DEBUG" ) AND NF_INSTANCE_DEBUG ){ error_reporting( E_ALL ); ini_set( "display_errors", 1 ); }
 	// ------------------------------------- | END
 	
 	// ------------------------------------- | START Including Netziro Framework Core files
@@ -36,6 +36,8 @@ try{
 	
 	// ------------------------------------- | START Executing bootstrap functions
 	NFCore::DefineApplicationPath();
+	NFCore::DefineLocaleSettings();
+	NFCore::DefineTimeZoneSettings();
 	// ------------------------------------- | END
 		
 	

@@ -74,7 +74,7 @@ class NFLogger{
 			self::$array_log[ $level ][ $class ][ ][ "code" ] = $code;
 			self::$array_log[ $level ][ $class ][ ][ "log" ] = $log;
 			
-			if( defined( "CG_INSTANCE_LOG_OUTPUT" ) AND CG_INSTANCE_LOG_OUTPUT ){ echo "$class - ( $code ) $log"; }
+			if( defined( "NF_INSTANCE_LOG_OUTPUT" ) AND NF_INSTANCE_LOG_OUTPUT ){ echo "$class - ( $code ) $log"; }
 			
 		}
 		
@@ -114,7 +114,7 @@ class NFLogger{
 	 */
 	public static function BackTracePrint(){
 		
-		if( defined( "CG_INSTANCE_LOG_BACKTRACE" ) AND CG_INSTANCE_LOG_BACKTRACE ){
+		if( defined( "NF_INSTANCE_LOG_BACKTRACE" ) AND NF_INSTANCE_LOG_BACKTRACE ){
 			print_r( self::$array_log );
 		}
 		

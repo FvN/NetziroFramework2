@@ -17,11 +17,15 @@
 */
 
 // ------------------------------------- | START Debugging settings
-define( "CG_INSTANCE_DEBUG", true );
+define( "NF_INSTANCE_DEBUG", true );
 // ------------------------------------- | END
 
 // ------------------------------------- | START Logging settings
-define( "CG_INSTANCE_LOG_OUTPUT", true );
-define( "CG_INSTANCE_LOG_BACKTRACE", true );
+define( "NF_INSTANCE_LOG_OUTPUT", true );
+define( "NF_INSTANCE_LOG_BACKTRACE", true );
 // ------------------------------------- | END
 
+// ------------------------------------- | START Locale&TimeZone settings
+define( "NF_INSTANCE_LOCALE_DEFAULT", "en-GB" );
+define( "NF_INSTANCE_TIMEZONE_DEFAULT", "Europe/Amsterdam" );
+// ------------------------------------- | END
