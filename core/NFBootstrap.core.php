@@ -18,9 +18,20 @@
 
 try{
 	
+	// ------------------------------------- | START Debugging options
+	if( defined( "CG_INSTANCE_DEBUG" ) AND CG_INSTANCE_DEBUG ){ error_reporting( E_ALL ); ini_set( "display_errors", 1 ); }
+	// ------------------------------------- | END
+	
 	// ------------------------------------- | START Including Netziro Framework Core files
-	require_once( "core/database/NFDatabase.class.php" );
+	require_once( "config/NFConfig.core.php" );
+	require_once( "core/util/NFLogger.util.php" );
 	require_once( "core/NFCore.core.php" );
+	require_once( "core/database/NFDatabase.class.php" );
+	// ------------------------------------- | END
+	
+	// ------------------------------------- | START Instance&Security checks
+	if( !defined( "NF_INSTANCE" ) ){ throw new Exception( "Netziro Framework instance not defined yet", 1 ); }
+	if( session_status() != PHP_SESSION_ACTIVE ){ throw new Exception( "Netziro Framework session has been not started yet", 2 ); }
 	// ------------------------------------- | END
 	
 	// ------------------------------------- | START Executing bootstrap functions
@@ -28,4 +39,4 @@ try{
 	// ------------------------------------- | END
 		
 	
-} catch( Exception $e ){  }
+} catch( Exception $e ){ NFLogger::LogWrite( 0, $e->getMessage(), "General.NFBootstrap", $e->getCode() ); exit(0); }

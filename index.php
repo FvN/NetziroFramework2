@@ -1,5 +1,8 @@
 <?php
+ob_start();
+session_start();
 
+define( "NF_INSTANCE", "application" );
 
 require_once( "core/NFBootstrap.core.php" );
 
@@ -33,3 +36,4 @@ if( $linkopened === true ){
 	
 }*/
 
+ob_end_flush( );

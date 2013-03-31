@@ -43,23 +43,80 @@
  * @desc
  * This is a static class which will be included overall projects and it will fetch all logs from your platform
  * in order to store it somewhere you will like
+ * 
+ * LOG/ERRORS LEVELS
+ * 
+ * 0 - Critical Error which is affecting the application behavior
+ * 1 - Medium importance error which is affecting single classes on the application
+ * 3 - Notices ( DEFAULT ) 
+ * 
  */
 
 class NFLogger{
 	
-	public static function LogWrite(){
+	private static $array_log = array();
+	
+	/**
+	 * @desc
+	 * Static method which will write the given log into an array
+	 *  
+	 * @param intege $level		| Log importance level
+	 * @param string $log		| Log text
+	 * @param string $class		| Class where the log come from
+	 * @param intege $code		| Log/Error code
+	 *  
+	 */
+	public static function LogWrite( $level = 3, $log, $class = "General", $code = 0 ){
+		
+		if( !empty( $log ) ){
+				
+			self::$array_log[ $level ][ $class ][ ][ "message" ] = "$class - ( $code ) $log";
+			self::$array_log[ $level ][ $class ][ ][ "code" ] = $code;
+			self::$array_log[ $level ][ $class ][ ][ "log" ] = $log;
+			
+			if( defined( "CG_INSTANCE_LOG_OUTPUT" ) AND CG_INSTANCE_LOG_OUTPUT ){ echo "$class - ( $code ) $log"; }
+			
+		}
 		
 	}
 	
+	/**
+	 * @desc
+	 * Static method which will read logs from the given class
+	 *  
+	 */
 	public static function LogRead(){
 		
 	}
 	
+	/**
+	 * @desc
+	 * Error code inint
+	 *  
+	 */
 	public static function ErrorCodeInit(){
 		
 	}
 	
+	/**
+	 * @desc
+	 * Errors code list
+	 *  
+	 */ 
 	public static function ErrorCodeList(){
+		
+	}
+	
+	/**
+	 * @desc
+	 * Print out the TraceBack
+	 *  
+	 */
+	public static function BackTracePrint(){
+		
+		if( defined( "CG_INSTANCE_LOG_BACKTRACE" ) AND CG_INSTANCE_LOG_BACKTRACE ){
+			print_r( self::$array_log );
+		}
 		
 	}
 	

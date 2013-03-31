@@ -97,17 +97,17 @@ class NFDatabase {
 					
 					if( file_exists( $profile_file ) ){ 
 						require_once( $profile_file );
-					} else { throw new Exception( "You have specified a db profile, but the file has been not found" ); }
+					} else { throw new Exception( "You have specified a db profile, but the file has been not found", 1010 ); }
 					
 				}
 			}
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Check core variables existence
-			if( !empty( $credentials[ "hostname" ] ) ){ $this->hostname = $credentials[ "hostname" ]; } else { throw new Exception( "You must specify the hostname" ); }
-			if( !empty( $credentials[ "database" ] ) ){ $this->database = $credentials[ "database" ]; } else { throw new Exception( "You must specify the database name" ); }
-			if( !empty( $credentials[ "username" ] ) ){ $this->username = $credentials[ "username" ]; } else { throw new Exception( "You must specify an username" ); }
-			if( !empty( $credentials[ "password" ] ) ){ $this->password = $credentials[ "password" ]; } else { throw new Exception( "You must specify a password" ); }
+			if( !empty( $credentials[ "hostname" ] ) ){ $this->hostname = $credentials[ "hostname" ]; } else { throw new Exception( "You must specify the hostname", 1000  ); }
+			if( !empty( $credentials[ "database" ] ) ){ $this->database = $credentials[ "database" ]; } else { throw new Exception( "You must specify the database name", 1001 ); }
+			if( !empty( $credentials[ "username" ] ) ){ $this->username = $credentials[ "username" ]; } else { throw new Exception( "You must specify an username", 1002 ); }
+			if( !empty( $credentials[ "password" ] ) ){ $this->password = $credentials[ "password" ]; } else { throw new Exception( "You must specify a password", 1003 ); }
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Set secondary importance database variables
@@ -121,7 +121,8 @@ class NFDatabase {
 			 
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = $e->getMessage(); 
-			$this->lock = true; 
+			$this->lock = true;
+			NFLogger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
 			return false; 
 			// ------------------------------------- | END
 			
@@ -169,12 +170,13 @@ class NFDatabase {
 				return true;
 				// ------------------------------------- | END
 				
-			} else { throw new PDOException( "The database class is locked" ); return false; }
+			} else { throw new PDOException( "The database class is locked", 1020 ); return false; }
 			
 		} catch( PDOException $e ){ 
 			
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = 'Line: ' . $e->getLine() . ' ' . $e->getMessage(); 
+			NFLogger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
 			return false; 
 			// ------------------------------------- | END
 		
@@ -223,7 +225,7 @@ class NFDatabase {
 				if( preg_match( "/^INSERT/", $this->query ) ){ $this->id = $this->link->lastInsertId(); }
 				// ------------------------------------- | END
 				
-			} else { throw new PDOException( "Something wrong on the query" ); }
+			} else { throw new PDOException( "Something wrong on the query", 1030 ); }
 			// ------------------------------------- | END
 
 			// ------------------------------------- | START Variables cleaning up
@@ -239,6 +241,7 @@ class NFDatabase {
 			
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = 'Line: ' . $e->getLine() . ' ' . $e->getMessage(); 
+			NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
 			return false; 
 			// ------------------------------------- | END
 		
