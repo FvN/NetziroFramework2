@@ -10,13 +10,12 @@ echo NF_INSTANCE_ROOT_RELATIVE . "<br />";
 echo NF_INSTANCE_TIMEZONE . "<br />";
 echo NF_INSTANCE_LOCALE . "<br />";
 
-print_r( get_included_files() );
 
-//$credentials[ "profile" ] = "Profile1";
+$credentials[ "profile" ] = "Profile1";
 /*$credentials[ "database" ] = "test";
 $credentials[ "username" ] = "root";
 $credentials[ "password" ] = "ph03nix";*/
-/*
+
 $NFDatabase = new NFDatabase( $credentials );
 $linkopened = $NFDatabase->OpenLink();
 
@@ -38,6 +37,8 @@ if( $linkopened === true ){
 	
 	$NFDatabase->PrintErrors();
 	
-}*/
+}
+
+print_r( get_included_files() );
 
 ob_end_flush( );

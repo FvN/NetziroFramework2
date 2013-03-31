@@ -221,8 +221,8 @@ class NFDatabase {
 				// ------------------------------------- | END
 
 				// ------------------------------------- | START Define some info
-				if( preg_match( "/^SELECT/", $this->query ) OR preg_match( "/^SHOW/", $this->query ) ){ $this->rows = count( $this->result );	}
-				if( preg_match( "/^INSERT/", $this->query ) ){ $this->id = $this->link->lastInsertId(); }
+				if( preg_match( "/^SELECT/", $query ) OR preg_match( "/^SHOW/", $query ) ){ $this->rows = count( $this->result );	}
+				if( preg_match( "/^INSERT/", $query ) ){ $this->id = $this->link->lastInsertId(); }
 				// ------------------------------------- | END
 				
 			} else { throw new PDOException( "Something wrong on the query", 1030 ); }
