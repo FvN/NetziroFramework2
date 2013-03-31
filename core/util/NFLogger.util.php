@@ -52,7 +52,7 @@
  * 
  */
 
-class NFLogger{
+class NFLogger extends NFramework{
 	
 	private static $array_log = array();
 	

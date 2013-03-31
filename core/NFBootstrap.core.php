@@ -18,23 +18,18 @@
 
 try{
 	
-	// ------------------------------------- | START Debugging options
-	if( defined( "NF_INSTANCE_DEBUG" ) AND NF_INSTANCE_DEBUG ){ error_reporting( E_ALL ); ini_set( "display_errors", 1 ); }
-	// ------------------------------------- | END
-	
 	// ------------------------------------- | START Including Netziro Framework Core files
 	require_once( "config/NFConfig.core.php" );
-	require_once( "core/util/NFLogger.util.php" );
-	require_once( "core/NFCore.core.php" );
-	require_once( "core/database/NFDatabase.class.php" );
+	require_once( "core/NFramework.core.php" );
 	// ------------------------------------- | END
 	
 	// ------------------------------------- | START Instance&Security checks
-	if( !defined( "NF_INSTANCE" ) ){ throw new Exception( "Netziro Framework instance not defined yet", 1 ); }
-	if( session_status() != PHP_SESSION_ACTIVE ){ throw new Exception( "Netziro Framework session has been not started yet", 2 ); }
+	NFCore::CheckInstance();
+	NFCore::CheckSession();
 	// ------------------------------------- | END
 	
 	// ------------------------------------- | START Executing bootstrap functions
+	NFCore::DefineDebugMode();
 	NFCore::DefineApplicationPath();
 	NFCore::DefineLocaleSettings();
 	NFCore::DefineTimeZoneSettings();

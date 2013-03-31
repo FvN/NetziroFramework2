@@ -25,8 +25,35 @@
  * NFCore class will contain core methods used overall the application
  * 
  */
-class NFCore{
+class NFCore extends NFramework{
 
+	/**
+	 * @desc
+	 * Check if the session has been started
+	 * 
+	 */
+	public static function CheckSession(){
+		if( session_status() != PHP_SESSION_ACTIVE ){ throw new Exception( "Netziro Framework session has been not started yet", 2 ); }
+	}
+	
+	/**
+	 * @desc
+	 * Check if the Netziro Framework has been defined
+	 * 
+	 */
+	public static function CheckInstance(){
+		if( !defined( "NF_INSTANCE" ) ){ throw new Exception( "Netziro Framework instance not defined yet", 1 ); }
+	}
+	
+	/**
+	 * @desc
+	 * Check if the session has been started
+	 * 
+	 */
+	public static function DefineDebugMode(){
+		if( defined( "NF_INSTANCE_DEBUG" ) AND NF_INSTANCE_DEBUG ){ error_reporting( E_ALL ); ini_set( "display_errors", 1 ); }
+	}
+	
 	/**
 	 * @desc
 	 * Defining timezone settings
@@ -52,6 +79,11 @@ class NFCore{
 		// ------------------------------------- | START Define Timezone
 		define( 'NF_INSTANCE_TIMEZONE', $timezone );
 		date_default_timezone_set( NF_INSTANCE_TIMEZONE );
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Unset Variables
+		unset( $timezone );
+		unset( $zones );
 		// ------------------------------------- | END
 		
 	}
@@ -306,6 +338,12 @@ class NFCore{
 		define( 'NF_INSTANCE_LANGUAGE', strtoupper( substr( $locale, 0, 2 ) ) );
 		// ------------------------------------- | END
 		
+		// ------------------------------------- | START Unset variables
+		unset( $locales );
+		unset( $locale );
+		unset( $locale_file );
+		// ------------------------------------- | END
+		
 	}
 		
 	/**
@@ -345,6 +383,18 @@ class NFCore{
 		define( "NF_INSTANCE_URL", $application_url );
 		define( "NF_INSTANCE_ROOT_DIRECTORY", $real_directory );
 		define( "NF_INSTANCE_ROOT_RELATIVE", $relative_directory );
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Unset variables
+		unset( $application_url );
+		unset( $real_directory );
+		unset( $relative_directory );
+		unset( $script_filename );
+		unset( $script_name );
+		unset( $request_uri );
+		unset( $server_name );
+		unset( $script_name_exploded );
+		unset( $last_index );
 		// ------------------------------------- | END
 		
 		
