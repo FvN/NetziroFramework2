@@ -114,9 +114,36 @@ class NFLogger extends NFramework{
 	 */
 	public static function BackTracePrint(){
 		
-		if( defined( "NF_INSTANCE_LOG_BACKTRACE" ) AND NF_INSTANCE_LOG_BACKTRACE ){
-			print_r( self::$array_log );
-		}
+		// ------------------------------------- | START Request info
+		echo "<br />// ------------------------------------- | <strong>START Request informations:</strong><br />";
+		echo "<strong>Server:</strong> " . $_SERVER[ "SERVER_ADDR" ] . "<br />";
+		echo "<strong>Request method:</strong> " . $_SERVER[ "REQUEST_METHOD" ] . "<br />";
+		echo "<strong>Request URI:</strong> " . $_SERVER[ "REQUEST_URI" ] . "<br />";
+		echo "<strong>Request Script:</strong> " . $_SERVER[ "PHP_SELF" ] . "<br />";
+		echo "<strong>Remote IP:</strong> " . $_SERVER[ "REMOTE_ADDR" ] . "<br />";
+		echo "// ------------------------------------- | <strong>END</strong><br />";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Logs printing
+		echo "// ------------------------------------- | <strong>START Netziro Framework logs:</strong><br />";
+		NFCore::PrintPre( self::$array_log );
+		echo "// ------------------------------------- | <strong>END</strong><br />";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START print out the list of included files
+		echo "// ------------------------------------- | <strong>START File Included:</strong><br />";
+		NFCore::PrintPre( get_included_files() );
+		echo "// ------------------------------------- | <strong>END</strong><br />";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Request headers
+		echo "// ------------------------------------- | <strong>START Apache headers:</strong><br />";
+		if( !isset( $argv ) ){ $headers = apache_request_headers(); }
+		echo "<strong>Request headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
+		if( !isset( $argv ) ){ $headers = apache_response_headers(); }
+		echo "<strong>Response headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
+		echo "// ------------------------------------- | <strong>END</strong><br />";
+		// ------------------------------------- | END
 		
 	}
 	

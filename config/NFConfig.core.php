@@ -16,6 +16,14 @@
 * ----------------------------------------------------------------------
 */
 
+// ------------------------------------- | START Database settings
+//$credentials[ "Profile1" ][ "profile" ] = "Profile1";
+$credentials[ "Profile1" ][ "hostname" ] = "localhost";
+$credentials[ "Profile1" ][ "database" ] = "test";
+$credentials[ "Profile1" ][ "username" ] = "root";
+$credentials[ "Profile1" ][ "password" ] = "ph03nix";
+// ------------------------------------- | END
+
 // ------------------------------------- | START Debugging settings
 define( "NF_INSTANCE_DEBUG", true );
 // ------------------------------------- | END

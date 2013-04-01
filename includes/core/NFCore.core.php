@@ -27,6 +27,33 @@
  */
 class NFCore extends NFramework{
 
+	public static $database_links = array();
+	public static $database_links_counter = 0;
+	
+	/**
+	 * @desc
+	 * Load Database links
+	 * 
+	 */
+	public static function LoadDatabaseLinks(){
+		
+		global $credentials;
+		
+		if( is_array( $credentials ) ){
+				
+			foreach( $credentials as $profile_name => $credential ){
+				
+				if( empty( $profile_name ) ){ $profile_name = self::$database_links_counter; }
+				self::$database_links[ $profile_name ] = new NFDatabase( $credential );
+				self::$database_links[ $profile_name ]->OpenLink();
+				self::$database_links_counter++;
+				
+			}
+			
+		} else { throw new Exception( "Database credentials array has been not instanciated yet. Check your NFConfig file", 1000 ); } 
+		
+	}
+	
 	/**
 	 * @desc
 	 * Define PHP Settings
@@ -64,8 +91,17 @@ class NFCore extends NFramework{
 	 * Check if the session has been started
 	 * 
 	 */
-	public static function DefineDebugMode(){
+	public static function DefineDebugSettings(){
+		
+		// ------------------------------------- | START Check if debug mode is on
 		if( defined( "NF_INSTANCE_DEBUG" ) AND NF_INSTANCE_DEBUG ){ error_reporting( E_ALL ); ini_set( "display_errors", 1 ); }
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Check if backtrace needs to be printed out at the end of the execution
+		if( defined( "NF_INSTANCE_LOG_BACKTRACE" ) AND NF_INSTANCE_LOG_BACKTRACE ){
+			register_shutdown_function( array( "NFLogger", "BackTracePrint" ) );
+		}
+		// ------------------------------------- | END
 	}
 	
 	/**
@@ -412,6 +448,19 @@ class NFCore extends NFramework{
 		// ------------------------------------- | END
 		
 		
+	}
+	
+	/**
+	 * @desc
+	 * This function will print out an array having <pre>$array</pre>
+	 * 
+	 */
+	public static function PrintPre( $array ){
+			
+		echo "<pre>";
+			print_r( $array );
+		echo "</pre>";
+			
 	}
 	
 }

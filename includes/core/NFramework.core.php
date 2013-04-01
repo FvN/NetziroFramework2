@@ -36,23 +36,29 @@ class NFramework{
 		
 		switch( $class ){
 			
+			// ------------------------------------- | START Module Including logic
 			case strstr( $class, "NFMod" ) != FALSE:
 				require_once( "modules/$class.module.php" );
 				break;
-				
+			// ------------------------------------- | END
+			 
+			// ------------------------------------- | START NFDatabase logic 
 			case "NFDatabase":
 				require_once( "includes/core/database/NFDatabase.class.php" );
 				break;
+			// ------------------------------------- | END
 				
+			// ------------------------------------- | START NFCore Logic
 			case "NFCore":
 				require_once( "includes/core/NFCore.core.php" );
 				break;
+			// ------------------------------------- | END
 				
+			// ------------------------------------- | START NFLogger
 			case "NFLogger":
 				require_once( "includes/core/util/NFLogger.util.php" );
 				break;
-			
-			
+			// ------------------------------------- | END
 			
 		}
 		
@@ -62,4 +68,3 @@ class NFramework{
 }
 
 spl_autoload_register( array( "NFramework", "AutoLoader" ) );
-register_shutdown_function( array( "NFLogger", "BackTracePrint" ) );

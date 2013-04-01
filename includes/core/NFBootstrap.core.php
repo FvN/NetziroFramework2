@@ -29,11 +29,12 @@ try{
 	// ------------------------------------- | END
 	
 	// ------------------------------------- | START Executing bootstrap functions
-	NFCore::DefineDebugMode();
+	NFCore::DefineDebugSettings();
 	NFCore::DefinePHPSettings();
 	NFCore::DefineApplicationPath();
 	NFCore::DefineLocaleSettings();
 	NFCore::DefineTimeZoneSettings();
+	NFCore::LoadDatabaseLinks();
 	// ------------------------------------- | END
 		
 	

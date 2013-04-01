@@ -104,10 +104,10 @@ class NFDatabase {
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Check core variables existence
-			if( !empty( $credentials[ "hostname" ] ) ){ $this->hostname = $credentials[ "hostname" ]; } else { throw new Exception( "You must specify the hostname", 1000  ); }
-			if( !empty( $credentials[ "database" ] ) ){ $this->database = $credentials[ "database" ]; } else { throw new Exception( "You must specify the database name", 1001 ); }
-			if( !empty( $credentials[ "username" ] ) ){ $this->username = $credentials[ "username" ]; } else { throw new Exception( "You must specify an username", 1002 ); }
-			if( !empty( $credentials[ "password" ] ) ){ $this->password = $credentials[ "password" ]; } else { throw new Exception( "You must specify a password", 1003 ); }
+			if( !empty( $credentials[ "hostname" ] ) ){ $this->hostname = $credentials[ "hostname" ]; } else { throw new Exception( "You must specify the hostname", 1001  ); }
+			if( !empty( $credentials[ "database" ] ) ){ $this->database = $credentials[ "database" ]; } else { throw new Exception( "You must specify the database name", 1002 ); }
+			if( !empty( $credentials[ "username" ] ) ){ $this->username = $credentials[ "username" ]; } else { throw new Exception( "You must specify an username", 1003 ); }
+			if( !empty( $credentials[ "password" ] ) ){ $this->password = $credentials[ "password" ]; } else { throw new Exception( "You must specify a password", 1004 ); }
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Set secondary importance database variables
