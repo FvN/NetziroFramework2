@@ -20,7 +20,7 @@ try{
 	
 	// ------------------------------------- | START Including Netziro Framework Core files
 	require_once( "config/NFConfig.core.php" );
-	require_once( "core/NFramework.core.php" );
+	require_once( "includes/core/NFramework.core.php" );
 	// ------------------------------------- | END
 	
 	// ------------------------------------- | START Instance&Security checks

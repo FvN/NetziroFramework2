@@ -41,15 +41,15 @@ class NFramework{
 				break;
 				
 			case "NFDatabase":
-				require_once( "core/database/NFDatabase.class.php" );
+				require_once( "includes/core/database/NFDatabase.class.php" );
 				break;
 				
 			case "NFCore":
-				require_once( "core/NFCore.core.php" );
+				require_once( "includes/core/NFCore.core.php" );
 				break;
 				
 			case "NFLogger":
-				require_once( "core/util/NFLogger.util.php" );
+				require_once( "includes/core/util/NFLogger.util.php" );
 				break;
 			
 			
@@ -62,3 +62,4 @@ class NFramework{
 }
 
 spl_autoload_register( array( "NFramework", "AutoLoader" ) );
+register_shutdown_function( array( "NFLogger", "BackTracePrint" ) );

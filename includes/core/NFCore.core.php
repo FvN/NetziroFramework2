@@ -339,7 +339,7 @@ class NFCore extends NFramework{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Define locales files
-		$locale_file = "locales/$locale.php";
+		$locale_file = "includes/locales/$locale.php";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Always include the default template 

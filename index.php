@@ -4,7 +4,7 @@ session_start();
 
 define( "NF_INSTANCE", "application" );
 
-require_once( "core/NFBootstrap.core.php" );
+require_once( "includes/core/NFBootstrap.core.php" );
 
 echo NF_INSTANCE_ROOT_RELATIVE . "<br />";
 echo NF_INSTANCE_TIMEZONE . "<br />";
@@ -14,7 +14,7 @@ echo NF_INSTANCE_LOCALE . "<br />";
 $credentials[ "profile" ] = "Profile1";
 /*$credentials[ "database" ] = "test";
 $credentials[ "username" ] = "root";
-$credentials[ "password" ] = "ph03nix";*/
+$credentials[ "password" ] = "";*/
 
 $NFDatabase = new NFDatabase( $credentials );
 $linkopened = $NFDatabase->OpenLink();
