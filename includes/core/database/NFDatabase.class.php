@@ -56,6 +56,7 @@ class NFDatabase {
 	protected $database_type;
 	protected $encoding;
 	protected $lock = false;
+	protected $linked = false;
 	public $database; 		// Database Name			|
 	public $link;			// Database Link ID			| This variable will contain the ID of MySQL connection you started
 	public $query;			// Query String				| This variable will contain the last MySQL string you sent
@@ -167,6 +168,7 @@ class NFDatabase {
 				// ------------------------------------- | END
 				
 				// ------------------------------------- | START Return
+				$this->linked = true;
 				return true;
 				// ------------------------------------- | END
 				
@@ -177,6 +179,7 @@ class NFDatabase {
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = 'Line: ' . $e->getLine() . ' ' . $e->getMessage(); 
 			NFLogger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
+			$this->linked = false;
 			return false; 
 			// ------------------------------------- | END
 		
@@ -264,5 +267,13 @@ class NFDatabase {
 	 * @return array
 	 */
 	public function PrintErrors( ){ if( !empty( $this->errors ) ){ print_r ( $this->errors ); } else { return false; } }
+	
+	/**
+	 * @desc
+	 * Return the link's status
+	 * 
+	 * @return bool
+	 */
+	public function IsLinked( ){ return $this->linked; }
 	
 }
