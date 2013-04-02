@@ -1,19 +1,19 @@
 <?php
 ob_start();
 session_start();
-error_reporting( E_ALL ); ini_set( "display_errors", 1 );
 
 define( "NF_INSTANCE", "application" );
 
 require_once( "includes/core/NFBootstrap.core.php" );
 
-echo NF_INSTANCE_ROOT_RELATIVE . "<br />";
-echo NF_INSTANCE_TIMEZONE . "<br />";
-echo NF_INSTANCE_LOCALE . "<br />";
-
+echo "Formatted currency<br />";
 echo NFIntl::NumberFormatCurrency( 545454645.54655 );
 
+
+echo "<br />Translated label<br />";
 echo _( "Test" );
+
+NFCore::PrintPre( NFIntl::GetLocalesSupported() );
 
 /*if( NFCore::$database_links[ "Profile1" ]->IsLinked() ){
 
