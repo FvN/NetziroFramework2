@@ -16,6 +16,10 @@
 * ----------------------------------------------------------------------
 */
 
+// ------------------------------------- | START Debugging settings
+define( "NF_INSTANCE_APPLICATION_NAME", "NetziroFramework2" );
+// ------------------------------------- | END
+
 // ------------------------------------- | START Database settings
 //$credentials[ "Profile1" ][ "profile" ] = "Profile1";
 $credentials[ "Profile1" ][ "hostname" ] = "localhost";
@@ -34,7 +38,7 @@ define( "NF_INSTANCE_LOG_BACKTRACE", true );
 // ------------------------------------- | END
 
 // ------------------------------------- | START Locale&TimeZone settings
-define( "NF_INSTANCE_LOCALE_DEFAULT", "en-GB" );
+define( "NF_INSTANCE_LOCALE_DEFAULT", "en_GB" );
 define( "NF_INSTANCE_TIMEZONE_DEFAULT", "Europe/Amsterdam" );
 // ------------------------------------- | END
 

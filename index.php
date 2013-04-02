@@ -1,6 +1,7 @@
 <?php
 ob_start();
 session_start();
+error_reporting( E_ALL ); ini_set( "display_errors", 1 );
 
 define( "NF_INSTANCE", "application" );
 
@@ -10,7 +11,11 @@ echo NF_INSTANCE_ROOT_RELATIVE . "<br />";
 echo NF_INSTANCE_TIMEZONE . "<br />";
 echo NF_INSTANCE_LOCALE . "<br />";
 
-if( NFCore::$database_links[ "Profile1" ]->IsLinked() ){
+echo NFIntl::NumberFormatCurrency( 545454645.54655 );
+
+echo _( "Test" );
+
+/*if( NFCore::$database_links[ "Profile1" ]->IsLinked() ){
 
 	echo "Socket opened";
 	
@@ -22,6 +27,6 @@ if( NFCore::$database_links[ "Profile1" ]->IsLinked() ){
 		
 	NFCore::$database_links[ "Profile1" ]->PrintErrors();
 	
-}
+}*/
 
 ob_end_flush( );

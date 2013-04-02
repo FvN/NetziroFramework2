@@ -60,6 +60,12 @@ class NFramework{
 				break;
 			// ------------------------------------- | END
 			
+			// ------------------------------------- | START NFIntl
+			case "NFIntl":
+				require_once( "includes/core/util/NFIntl.util.php" );
+				break;
+			// ------------------------------------- | END
+			
 		}
 		
 	}
