@@ -33,7 +33,7 @@ class NFSettings extends NFramework{
 	 * 
 	 * @return array
 	 */
-	public function FetchAll(){
+	public static function FetchAll(){
 		
 		// ------------------------------------- | START Query executing
 		$sql = "SELECT `value` FROM `nf_settings`";
@@ -59,7 +59,7 @@ class NFSettings extends NFramework{
 	 * 
 	 * @return string
 	 */
-	public function FetchByKey( $key ){
+	public static function FetchByKey( $key ){
 		
 		// ------------------------------------- | START Process the request if $key is a sane value
 		if( !empty( $key ) AND ctype_alnum( $key ) ){

@@ -45,17 +45,19 @@
 
 class NFUserInterface extends NFramework{
 	
-	
-	private static $theme_default = "default";
+	private static $template = "default";
 	
 	/**
 	 * @desc
 	 * Constructor
 	 *  
 	 */
-	static function NFUserInterface(){
+	public static function Init(){
 		
-		
+		// ------------------------------------- | START Load template settings
+		self::LoadTemplateSettings();
+		self::LoadTemplate();
+		// ------------------------------------- | END
 		
 	}
 	
@@ -66,7 +68,8 @@ class NFUserInterface extends NFramework{
 	 */
 	private static function LoadTemplateSettings(){
 		
-		
+		$template = NFSettings::FetchByKey( "template" );
+		if( $template !== false ){ self::$template = $template; }
 		
 	}
 	

@@ -42,6 +42,10 @@ define( "NF_INSTANCE_LOCALE_DEFAULT", "en_GB" );
 define( "NF_INSTANCE_TIMEZONE_DEFAULT", "Europe/Amsterdam" );
 // ------------------------------------- | END
 
+// ------------------------------------- | START Crypto Key
+//define( "NF_INSTANCE_CRYPTO_KEY", "AlExxSAallsdKKAS" );
+// ------------------------------------- | END
+
 // ------------------------------------- | START PHP Settings
 define( "NF_INSTANCE_UPLOAD_MAXFILESIZE", "10M" );
 // ------------------------------------- | END

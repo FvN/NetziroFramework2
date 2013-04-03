@@ -78,6 +78,12 @@ class NFramework{
 				break;
 			// ------------------------------------- | END
 			
+			// ------------------------------------- | START NFCrypto
+			case "NFCrypto":
+				require_once( "includes/core/util/NFCrypto.util.php" );
+				break;
+			// ------------------------------------- | END
+			
 			// ------------------------------------- | START NFIntl
 			case "NFIntl":
 				require_once( "includes/core/util/NFIntl.util.php" );
