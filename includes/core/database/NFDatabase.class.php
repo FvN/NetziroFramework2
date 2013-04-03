@@ -254,6 +254,30 @@ class NFDatabase {
 	
 	/**
 	 * @desc
+	 * Calling this method you will return the the number of records fetch from the last query
+	 * 
+	 * @return array
+	 */
+	public function GetRows( ){ return $this->rows; }
+	
+	/**
+	 * @desc
+	 * Calling this method you will return the the current TimeZone
+	 * 
+	 * @return array
+	 */
+	public function GetTimezone( ){ return $this->timezone; }
+	
+	/**
+	 * @desc
+	 * Calling this method you will return the database type
+	 * 
+	 * @return array
+	 */
+	public function GetDatabaseType( ){ return $this->database_type; }
+	
+	/**
+	 * @desc
 	 * Calling this method you will return the errors array
 	 * 
 	 * @return array

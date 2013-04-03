@@ -15,18 +15,18 @@ echo _( "Test" );
 
 NFCore::PrintPre( NFIntl::GetLocalesSupported() );
 
-/*if( NFCore::$database_links[ "Profile1" ]->IsLinked() ){
+if( NFCore::$database_links[ "master" ]->IsLinked() ){
 
 	echo "Socket opened";
 	
 	$sql = "SELECT * FROM `test` WHERE `test` = :param1";
 	$params = array( ':param1' => "d'alessio" );
-	$results = NFCore::$database_links[ "Profile1" ]->Query( $sql, $params );
+	$results = NFCore::$database_links[ "master" ]->Query( $sql, $params );
 		
 	print_r( $results );
 		
-	NFCore::$database_links[ "Profile1" ]->PrintErrors();
+	NFCore::$database_links[ "master" ]->PrintErrors();
 	
-}*/
+}
 
 ob_end_flush( );

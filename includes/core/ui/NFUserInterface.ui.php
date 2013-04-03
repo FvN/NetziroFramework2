@@ -43,14 +43,39 @@
  * Class used to renderize your user interface and handle the responsiveness of your application
  */
 
-class NFUserInterface{
+class NFUserInterface extends NFramework{
+	
+	
+	private static $theme_default = "default";
 	
 	/**
 	 * @desc
 	 * Constructor
 	 *  
 	 */
-	function NFUserInterface(){
+	static function NFUserInterface(){
+		
+		
+		
+	}
+	
+	/**
+	 * @desc
+	 * Template settings loader
+	 *  
+	 */
+	private static function LoadTemplateSettings(){
+		
+		
+		
+	}
+	
+	/**
+	 * @desc
+	 * Templates loader
+	 *  
+	 */
+	private static function LoadTemplate(){
 		
 		
 		
@@ -61,7 +86,7 @@ class NFUserInterface{
 	 * RenderMenu will render the menu object
 	 *  
 	 */
-	private function RenderMenu(){
+	private static function RenderMenu(){
 
 		$html = "
 		<ul class=\"nav\">
@@ -149,7 +174,7 @@ class NFUserInterface{
 	 * @param string $action
 	 *  
 	 */
-	private function RequireJS( $module = "", $action = ""){
+	private static function RequireJS( $module = "", $action = ""){
 	
 		// ------------------------------------- | START Define the module name depending on action
 		if( !empty( $module ) AND !empty( $action ) ){

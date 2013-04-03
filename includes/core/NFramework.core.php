@@ -53,6 +53,24 @@ class NFramework{
 				require_once( "includes/core/NFCore.core.php" );
 				break;
 			// ------------------------------------- | END
+			
+			// ------------------------------------- | START NFSettings Logic
+			case "NFSettings":
+				require_once( "includes/core/NFSettings.core.php" );
+				break;
+			// ------------------------------------- | END
+				
+			// ------------------------------------- | START NFUserInterface
+			case "NFDependencies":
+				require_once( "includes/core/dependencies/NFDependencies.core.php" );
+				break;
+			// ------------------------------------- | END	
+				
+			// ------------------------------------- | START NFUserInterface
+			case "NFUserInterface":
+				require_once( "includes/core/ui/NFUserInterface.ui.php" );
+				break;
+			// ------------------------------------- | END	
 				
 			// ------------------------------------- | START NFLogger
 			case "NFLogger":

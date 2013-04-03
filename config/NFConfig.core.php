@@ -22,10 +22,10 @@ define( "NF_INSTANCE_APPLICATION_NAME", "NetziroFramework2" );
 
 // ------------------------------------- | START Database settings
 //$credentials[ "Profile1" ][ "profile" ] = "Profile1";
-$credentials[ "Profile1" ][ "hostname" ] = "localhost";
-$credentials[ "Profile1" ][ "database" ] = "test";
-$credentials[ "Profile1" ][ "username" ] = "root";
-$credentials[ "Profile1" ][ "password" ] = "ph03nix";
+$credentials[ "master" ][ "hostname" ] = "localhost";
+$credentials[ "master" ][ "database" ] = "test";
+$credentials[ "master" ][ "username" ] = "root";
+$credentials[ "master" ][ "password" ] = "ph03nix";
 // ------------------------------------- | END
 
 // ------------------------------------- | START Debugging settings
