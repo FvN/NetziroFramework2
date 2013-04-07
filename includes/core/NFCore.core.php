@@ -9,11 +9,6 @@
 * ----------------------------------------------------------------------
 * FILE DESCRIPTION:			NFCore class will contain core methods used overall the application
 * ----------------------------------------------------------------------
-* TRACKING  LOG - LOG YOUR CHANGES ONLY IF YOU ARE DOING IMPORTANT UPDATES ( CHANGE OF METHOD, ADDING/DELETING LINES OF CODE, BUGFIX)
-* ----------------------------------------------------------------------
-* UPDATE : 
-* MODDER: ALESSIO NOBILE / DATE AND HOUR : 02/11/2011 - 12:45
-* ----------------------------------------------------------------------
 */
 
 /**
@@ -23,6 +18,8 @@
  *
  * @desc
  * NFCore class will contain core methods used overall the application
+ * 
+ * ERROR CODES 0-1000
  * 
  */
 class NFCore extends NFramework{
@@ -75,6 +72,17 @@ class NFCore extends NFramework{
 	 */
 	public static function CheckSession(){
 		if( session_status() != PHP_SESSION_ACTIVE ){ throw new Exception( "Netziro Framework session has been not started yet", 2 ); }
+	}
+	
+	/**
+	 * @desc
+	 * Check the installation integrity
+	 * 
+	 */
+	public static function CheckInstallationIntegrity(){
+		
+		if( !NFSettings::IsTableExisting() ){ throw new Exception( "Netziro Framework Settings tables has been not created yet", 3 ); }
+		
 	}
 	
 	/**

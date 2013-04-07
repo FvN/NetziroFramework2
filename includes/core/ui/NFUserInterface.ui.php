@@ -27,11 +27,6 @@
 * ----------------------------------------------------------------------
 * CLASS DESCRIPTION:		Class used to renderize your user interface and handle the responsiveness of your application
 * ----------------------------------------------------------------------
-* TRACKING  LOG - LOG YOUR CHANGES ONLY IF YOU ARE DOING IMPORTANT UPDATES ( CHANGE OF METHOD, ADDING/DELETING LINES OF CODE, BUGFIX)
-* ----------------------------------------------------------------------
-* UPDATE : 
-* MODDER: ALESSIO NOBILE / DATE AND HOUR : 02/11/2011 - 12:45
-* ----------------------------------------------------------------------
 */
 
 /**
@@ -41,11 +36,23 @@
  *
  * @desc
  * Class used to renderize your user interface and handle the responsiveness of your application
+ * 
+ * ERROR CODES 4000-5000
+ * 
  */
 
 class NFUserInterface extends NFramework{
 	
-	private static $template = "default";
+	protected static $template = "default";
+	protected static $template_directory = "content/themes/default";
+	protected static $template_index = "content/themes/default/index.php";
+	protected static $template_init = "content/themes/default/init.php";
+	
+	
+	public static function GetTemplate(){ return self::$template; }
+	public static function GetTemplateDirectory(){ return self::$template_directory; }
+	public static function GetTemplateIndex(){ return self::$template_index; }
+	public static function GetTemplateInit(){ return self::$template_init; }
 	
 	/**
 	 * @desc
@@ -69,7 +76,13 @@ class NFUserInterface extends NFramework{
 	private static function LoadTemplateSettings(){
 		
 		$template = NFSettings::FetchByKey( "template" );
-		if( $template !== false ){ self::$template = $template; }
+		if( $template !== false ){ 
+			self::$template = $template;
+			self::$template_directory = "content/themes/$template";
+			self::$template_index = "content/themes/$template/index.php";
+			self::$template_init = "content/themes/$template/init.php";
+			 
+		}
 		
 	}
 	
@@ -80,7 +93,11 @@ class NFUserInterface extends NFramework{
 	 */
 	private static function LoadTemplate(){
 		
-		
+		if( file_exists( self::$template_directory ) AND file_exists( self::$template_index ) AND file_exists( self::$template_init ) ){
+			
+			NFTheme::Init();
+			
+		} else { throw new Exception( "The template " . self::$template . " directory or index doesn't exist", 4000 ); }
 		
 	}
 	

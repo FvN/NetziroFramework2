@@ -9,11 +9,6 @@
 * ----------------------------------------------------------------------
 * FILE DESCRIPTION:			NFCore class will contain core methods used overall the application
 * ----------------------------------------------------------------------
-* TRACKING  LOG - LOG YOUR CHANGES ONLY IF YOU ARE DOING IMPORTANT UPDATES ( CHANGE OF METHOD, ADDING/DELETING LINES OF CODE, BUGFIX)
-* ----------------------------------------------------------------------
-* UPDATE : 
-* MODDER: ALESSIO NOBILE / DATE AND HOUR : 02/11/2011 - 12:45
-* ----------------------------------------------------------------------
 */
 
 /**

@@ -9,11 +9,6 @@
 * ----------------------------------------------------------------------
 * FILE DESCRIPTION:			NFCore class will contain core methods used overall the application
 * ----------------------------------------------------------------------
-* TRACKING  LOG - LOG YOUR CHANGES ONLY IF YOU ARE DOING IMPORTANT UPDATES ( CHANGE OF METHOD, ADDING/DELETING LINES OF CODE, BUGFIX)
-* ----------------------------------------------------------------------
-* UPDATE : 
-* MODDER: ALESSIO NOBILE / DATE AND HOUR : 02/11/2011 - 12:45
-* ----------------------------------------------------------------------
 */
 
 /**
@@ -87,6 +82,13 @@ class NFramework{
 			// ------------------------------------- | START NFIntl
 			case "NFIntl":
 				require_once( "includes/core/util/NFIntl.util.php" );
+				break;
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START NFTheme
+			case "NFTheme":
+				$template_init = NFUserInterface::GetTemplateInit();
+				require_once( $template_init );
 				break;
 			// ------------------------------------- | END
 			

@@ -9,11 +9,6 @@
 * ----------------------------------------------------------------------
 * FILE DESCRIPTION:			NFSettings class will contain core methods to handle framework settings
 * ----------------------------------------------------------------------
-* TRACKING  LOG - LOG YOUR CHANGES ONLY IF YOU ARE DOING IMPORTANT UPDATES ( CHANGE OF METHOD, ADDING/DELETING LINES OF CODE, BUGFIX)
-* ----------------------------------------------------------------------
-* UPDATE : 
-* MODDER: ALESSIO NOBILE / DATE AND HOUR : 02/11/2011 - 12:45
-* ----------------------------------------------------------------------
 */
 
 /**
@@ -27,6 +22,34 @@
  */
 class NFSettings extends NFramework{
 	
+	protected static $settings_core_table = "nf_settings";
+	
+	
+	/**
+	 * @desc
+	 * Check if the settings table exists
+	 * 
+	 * @return array
+	 */
+	public static function IsTableExisting(){
+		
+		// ------------------------------------- | START Query executing
+		$sql = "SELECT COUNT(*) AS `check` FROM `information_schema`.`tables` WHERE `table_schema` = :database_name AND `table_name` = :table_name;";
+		$params = array( ':table_name' => self::$settings_core_table, ':database_name' => NFCore::$database_links[ "master" ]->GetDatabaseName() );
+		$results = NFCore::$database_links[ "master" ]->Query( $sql, $params );
+		$rows = NFCore::$database_links[ "master" ]->GetRows();
+		// ------------------------------------- | END
+			
+		// ------------------------------------- | START Return results if there are, false otherwise
+		if( $rows == 1 ){
+			
+			return $results[ 0 ][ "check" ];
+				
+		} else { return false; }
+		// ------------------------------------- | END
+		
+	}
+	
 	/**
 	 * @desc
 	 * Fetch All settings putting them into an array key value
@@ -36,8 +59,9 @@ class NFSettings extends NFramework{
 	public static function FetchAll(){
 		
 		// ------------------------------------- | START Query executing
-		$sql = "SELECT `value` FROM `nf_settings`";
-		$results = NFCore::$database_links[ "master" ]->Query( $sql );
+		$sql = "SELECT `value` FROM :table_name";
+		$params = array( ':table_name' => self::$settings_core_table );
+		$results = NFCore::$database_links[ "master" ]->Query( $sql, $params );
 		$rows = NFCore::$database_links[ "master" ]->GetRows();
 		// ------------------------------------- | END
 			
@@ -65,8 +89,9 @@ class NFSettings extends NFramework{
 		if( !empty( $key ) AND ctype_alnum( $key ) ){
 			
 			// ------------------------------------- | START Query executing
-			$sql = "SELECT `value` FROM `nf_settings` WHERE `key` = :key";
-			$params = array( ':key' => $key );
+			$table_name = self::$settings_core_table;
+			$sql = "SELECT `value` FROM `$table_name` WHERE `key` = :string_value";
+			$params = array( ":string_value" => $key );
 			$results = NFCore::$database_links[ "master" ]->Query( $sql, $params );
 			$rows = NFCore::$database_links[ "master" ]->GetRows();
 			// ------------------------------------- | END

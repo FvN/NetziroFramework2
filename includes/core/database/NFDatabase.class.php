@@ -29,11 +29,6 @@
 * 							STRINGS CONNECTION WILL SET AS GLOBAL CLASS VARIABLES.
 * 							THIS CLASS SHOULD BE REQUIRED AS FIRST OBJECT EVERY API.
 * ----------------------------------------------------------------------
-* TRACKING  LOG - LOG YOUR CHANGES ONLY IF YOU ARE DOING IMPORTANT UPDATES ( CHANGE OF METHOD, ADDING/DELETING LINES OF CODE, BUGFIX)
-* ----------------------------------------------------------------------
-* UPDATE : 
-* MODDER: ALESSIO NOBILE / DATE AND HOUR : 02/11/2011 - 12:45
-* ----------------------------------------------------------------------
 */
 
 /**
@@ -45,10 +40,13 @@
  * METHODS WITHIN CLASS USED FOR COMMUNICATION WITH DATABASE.
  * STRINGS CONNECTION WILL SET AS GLOBAL CLASS VARIABLES.
  * THIS CLASS SHOULD BE REQUIRED AS FIRST OBJECT.
+ * 
+ * ERROR CODES 1000-2000
  */
 class NFDatabase {
 	 
 	protected $hostname; 	// Database Hostname 		| Use IP as possible. We will save time on dns resolution.
+	protected $database;	// Database Name			|
 	protected $username; 	// Database MySQL User		| 
 	protected $password; 	// Database MySQL Password	|
 	protected $timezone;	// Timezone to use on database link
@@ -57,7 +55,6 @@ class NFDatabase {
 	protected $encoding;
 	protected $lock = false;
 	protected $linked = false;
-	public $database; 		// Database Name			|
 	public $link;			// Database Link ID			| This variable will contain the ID of MySQL connection you started
 	public $query;			// Query String				| This variable will contain the last MySQL string you sent
 	public $result;			// Result Variable			| This variable will contain results returned by the last query string
@@ -212,28 +209,25 @@ class NFDatabase {
 			$this->query = $this->link->prepare( $query );
 			// ------------------------------------- | END
 			
-			// ------------------------------------- | START Query executing
-			$result = $this->query->execute( $params );
-			// ------------------------------------- | END
-			
 			// ------------------------------------- | START Results fetch
-			if( $result ){ 
+			if( $this->query->execute( $params ) ){ 
 				
 				// ------------------------------------- | START Fetch results
 				$this->result = $this->query->fetchAll();
 				// ------------------------------------- | END
-
+				
 				// ------------------------------------- | START Define some info
 				if( preg_match( "/^SELECT/", $query ) OR preg_match( "/^SHOW/", $query ) ){ $this->rows = count( $this->result );	}
 				if( preg_match( "/^INSERT/", $query ) ){ $this->id = $this->link->lastInsertId(); }
 				// ------------------------------------- | END
 				
-			} else { throw new PDOException( "Something wrong on the query", 1030 ); }
+			} else { throw new PDOException( "Something wrong on the query", 1030 ); $this->query->closeCursor(); }
 			// ------------------------------------- | END
 
 			// ------------------------------------- | START Variables cleaning up
 			unset( $query );
 			unset( $result );
+			$this->query->closeCursor();
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Return
@@ -256,15 +250,40 @@ class NFDatabase {
 	 * @desc
 	 * Calling this method you will return the the number of records fetch from the last query
 	 * 
-	 * @return array
+	 * @return integer
 	 */
 	public function GetRows( ){ return $this->rows; }
 	
 	/**
 	 * @desc
+	 * Calling this method you will return the hostname
+	 * 
+	 * @return string
+	 */
+	public function GetHostname( ){ return $this->hostname; }
+	
+	/**
+	 * @desc
+	 * Calling this method you will return the database name
+	 * 
+	 * @return string
+	 */
+	public function GetDatabaseName( ){ return $this->database; }
+	
+	/**
+	 * @desc
+	 * Calling this method you will return the username
+	 * 
+	 * @return string
+	 */
+	public function GetUsername( ){ return $this->username; }
+	
+	
+	/**
+	 * @desc
 	 * Calling this method you will return the the current TimeZone
 	 * 
-	 * @return array
+	 * @return string
 	 */
 	public function GetTimezone( ){ return $this->timezone; }
 	
@@ -272,7 +291,7 @@ class NFDatabase {
 	 * @desc
 	 * Calling this method you will return the database type
 	 * 
-	 * @return array
+	 * @return string
 	 */
 	public function GetDatabaseType( ){ return $this->database_type; }
 	
