@@ -27,9 +27,18 @@
 * ----------------------------------------------------------------------
 * CLASS DESCRIPTION:		
 * ----------------------------------------------------------------------
+* 
+* CREDITS: 
+* This class is a fork of the PHP-Secure-Session made by Enrico Zimuel (enrico@zimuel.it) 
+* having the goal to re-use the same logic to crypt/encrypt strings. 
+* The cryptography method&logic is fully property of Enrico Zimuel.
+* 
+* https://github.com/ezimuel/PHP-Secure-Session
+* 
 */
 
 /**
+ * 
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
  * @package		NFCrypto
