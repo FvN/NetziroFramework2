@@ -45,21 +45,135 @@
  */
 class NFDatabase {
 	 
-	protected $hostname; 	// Database Hostname 		| Use IP as possible. We will save time on dns resolution.
-	protected $database;	// Database Name			|
-	protected $username; 	// Database MySQL User		| 
-	protected $password; 	// Database MySQL Password	|
-	protected $timezone;	// Timezone to use on database link
-	protected $ssl;			// SSL Link
+	/**
+	 * Database Hostname Use IP as possible. You will save time on dns resolution.
+	 * 
+	 * @var string
+	 * 
+	 */
+	protected $hostname;
+	
+	/**
+	 * Database Name
+	 * 
+	 * @var string
+	 * 
+	 */
+	protected $database;
+	
+	/**
+	 * Database server user
+	 * 
+	 * @var string
+	 *  
+	 */
+	protected $username;
+	 
+	/**
+	 * Database server password
+	 * 
+	 * @var string
+	 *
+	 */
+	protected $password;
+	
+	/**
+	 * Database session timezone
+	 * 
+	 * @var string
+	 * 
+	 */
+	protected $timezone;
+	
+	/**
+	 * SSL mode value
+	 * 
+	 * @var string
+	 * 
+	 */
+	protected $ssl;
+	
+	/**
+	 * Database Type
+	 * 
+	 * @var string
+	 * @example MySQL, MSSQL, Sybase
+	 * 
+	 */
 	protected $database_type;
+	
+	/**
+	 * Database session encoding type
+	 * 
+	 * @var string
+	 * @example UTF8
+	 * 
+	 */
 	protected $encoding;
+	
+	/**
+	 * Lock of the class
+	 * 
+	 * @var boolean
+	 * 
+	 */
 	protected $lock = false;
+		
+	/**
+	 * Link status
+	 * 
+	 * @var boolean
+	 * 
+	 */
 	protected $linked = false;
-	public $link;			// Database Link ID			| This variable will contain the ID of MySQL connection you started
-	public $query;			// Query String				| This variable will contain the last MySQL string you sent
-	public $result;			// Result Variable			| This variable will contain results returned by the last query string
-	public $rows;			// Number of rows found		| This variable will contain the number of rows found by SELECT queries
+	
+	/**
+	 * Database Link ID | This variable will contain the ID of MySQL connection you started
+	 * 
+	 * @var string
+	 */
+	public $link;
+	
+	/**
+	 * Query String | This variable will contain the last MySQL string you sent
+	 * 
+	 * @var string
+	 * 
+	 */
+	public $query;
+	 
+	/**
+	 * Result Variable | This variable will contain results returned by the last query string
+	 * 
+	 * @var string
+	 * 
+	 */
+	public $result;
+	 
+	/**
+	 * Number of rows found	| This variable will contain the number of rows found by SELECT queries
+	 * 
+	 * @var integer
+	 * 
+	 */
+	public $rows;
+
+	
+	/**
+	 * Last selected record id
+	 * 
+	 * @var integer
+	 * 
+	 */
 	public $id;
+	
+	
+	/**
+	 * Array containing errors
+	 * 
+	 * @var array
+	 * 
+	 */
 	public $errors = array();
 	
 	/**

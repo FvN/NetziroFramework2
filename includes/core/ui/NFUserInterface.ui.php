@@ -44,50 +44,66 @@
 class NFUserInterface extends NFramework{
 	
 	/**
-	 * @var string 
 	 * Default relative themes directory
+	 * 
+	 * @var string 
+	 * 
 	 */
 	protected static $nf_template_directory = "content/themes/";
 	
 	/**
-	 * @var string
 	 * Default theme index file
+	 * 
+	 * @var string
+	 *
 	 */
 	protected static $nf_template_index = "index.php";
 	
 	/**
-	 * @var string 
 	 * Default theme init file
+	 * 
+	 * @var string 
+	 * 
 	 */
 	protected static $nf_template_init = "init.php";
 	
 	/**
-	 * @var string 
 	 * Default template name
+	 * 
+	 * @var string 
+	 * 
 	 */
 	protected static $default_template = "default";
 	
 	/**
-	 * @var string
 	 * Current template selected after the Init method
+	 * 
+	 * @var string
+	 * 
 	 */
 	protected static $template;
 	
 	/**
-	 * @var string
 	 * Current template relative directory
+	 * 
+	 * @var string
+	 * 
 	 */
 	protected static $template_directory;
 	
 	/**
-	 * @var string
 	 * Current template's index file
+	 * 
+	 * @var string
+	 * 
 	 */
 	protected static $template_index;
 	
 	/**
-	 * @var string
 	 * Current template's init file
+	 * 
+	 * @var string
+	 * 
 	 */
 	protected static $template_init;
 	
