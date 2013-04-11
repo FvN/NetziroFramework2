@@ -43,12 +43,62 @@
 
 class NFUserInterface extends NFramework{
 	
-	protected static $template = "default";
-	protected static $template_directory = "content/themes/default";
-	protected static $template_index = "content/themes/default/index.php";
-	protected static $template_init = "content/themes/default/init.php";
+	/**
+	 * @var string 
+	 * Default relative themes directory
+	 */
+	protected static $nf_template_directory = "content/themes/";
 	
+	/**
+	 * @var string
+	 * Default theme index file
+	 */
+	protected static $nf_template_index = "index.php";
 	
+	/**
+	 * @var string 
+	 * Default theme init file
+	 */
+	protected static $nf_template_init = "init.php";
+	
+	/**
+	 * @var string 
+	 * Default template name
+	 */
+	protected static $default_template = "default";
+	
+	/**
+	 * @var string
+	 * Current template selected after the Init method
+	 */
+	protected static $template;
+	
+	/**
+	 * @var string
+	 * Current template relative directory
+	 */
+	protected static $template_directory;
+	
+	/**
+	 * @var string
+	 * Current template's index file
+	 */
+	protected static $template_index;
+	
+	/**
+	 * @var string
+	 * Current template's init file
+	 */
+	protected static $template_init;
+	
+		
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Templates informations getters methods
+	 *
+	 */
 	public static function GetTemplate(){ return self::$template; }
 	public static function GetTemplateDirectory(){ return self::$template_directory; }
 	public static function GetTemplateIndex(){ return self::$template_index; }
@@ -75,14 +125,17 @@ class NFUserInterface extends NFramework{
 	 */
 	private static function LoadTemplateSettings(){
 		
+		// ------------------------------------- | START Define the template name
 		$template = NFSettings::FetchByKey( "template" );
-		if( $template !== false ){ 
-			self::$template = $template;
-			self::$template_directory = "content/themes/$template";
-			self::$template_index = "content/themes/$template/index.php";
-			self::$template_init = "content/themes/$template/init.php";
-			 
-		}
+		if( $template === false ){ $template = self::$default_template; }
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Initialize template settings
+		self::$template = $template;
+		self::$template_directory = self::$nf_template_directory . $template;
+		self::$template_index = self::$nf_template_directory . $template . "/" . self::$nf_template_index;
+		self::$template_init = self::$nf_template_directory . $template . "/" . self::$nf_template_init;
+		// ------------------------------------- | END
 		
 	}
 	
