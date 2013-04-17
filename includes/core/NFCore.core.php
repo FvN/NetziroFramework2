@@ -67,6 +67,51 @@ class NFCore extends NFramework{
 	
 	/**
 	 * @desc
+	 * Check if the PHP environment matches the framework needs
+	 * 
+	 */
+	public static function CheckPHPEnvironment(){
+		
+		self::CheckPHPVersion();
+		self::CheckPHPModules();
+	}
+	
+	/**
+	 * @desc
+	 * Check if needed PHP modules are loaded
+	 * 
+	 */
+	public static function CheckPHPModules(){
+		
+		$modules = get_loaded_extensions( );
+		
+		if( !in_array( "Core" , $modules ) ){ 
+			throw new Exception( "Netziro Framework requires the PHP Core module" , 5 );
+		} elseif( !in_array( "session" , $modules ) ){ 
+			throw new Exception( "Netziro Framework requires the PHP Session module" , 5 );
+		} elseif( !in_array( "SimpleXML" , $modules ) ){ 
+			throw new Exception( "Netziro Framework requires the PHP SimpleXML module" , 5 );
+		} elseif( !in_array( "PDO" , $modules ) ){ 
+			throw new Exception( "Netziro Framework requires the PHP PDO module" , 5 );
+		} elseif( !in_array( "pdo_mysql" , $modules ) ){ 
+			throw new Exception( "Netziro Framework requires the PHP pdo_mysql module" , 5 );
+		} elseif( !in_array( "mcrypt" , $modules ) ){ 
+			throw new Exception( "Netziro Framework requires the PHP mcrypt module" , 5 );
+		}
+		
+	}
+	
+	/**
+	 * @desc
+	 * Check the PHP Version
+	 * 
+	 */
+	public static function CheckPHPVersion(){
+		if( ( PHP_MAJOR_VERSION !== 5 ) OR !( PHP_MINOR_VERSION >= 4 ) ){ throw new Exception( "Netziro Framework requires PHP 5.4>. You got " . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION , 4 ); }
+	}
+	
+	/**
+	 * @desc
 	 * Check if the session has been started
 	 * 
 	 */

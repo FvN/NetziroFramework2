@@ -21,6 +21,7 @@ try{
 	// ------------------------------------- | START Instance&Security checks
 	NFCore::CheckInstance();
 	NFCore::CheckSession();
+	NFCore::CheckPHPEnvironment();
 	// ------------------------------------- | END
 	
 	// ------------------------------------- | START Executing bootstrap functions
