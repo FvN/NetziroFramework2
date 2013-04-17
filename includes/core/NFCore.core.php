@@ -74,6 +74,7 @@ class NFCore extends NFramework{
 		
 		self::CheckPHPVersion();
 		self::CheckPHPModules();
+		
 	}
 	
 	/**
@@ -125,9 +126,7 @@ class NFCore extends NFramework{
 	 * 
 	 */
 	public static function CheckInstallationIntegrity(){
-		
 		if( !NFSettings::IsTableExisting() ){ throw new Exception( "Netziro Framework Settings tables has been not created yet", 3 ); }
-		
 	}
 	
 	/**
@@ -136,7 +135,6 @@ class NFCore extends NFramework{
 	 * 
 	 */
 	public static function CheckInstance(){
-		
 		if( !defined( "NF_INSTANCE" ) ){ throw new Exception( "Netziro Framework instance not defined yet", 1 ); }
 	}
 	
@@ -156,6 +154,7 @@ class NFCore extends NFramework{
 			register_shutdown_function( array( "NFLogger", "BackTracePrint" ) );
 		}
 		// ------------------------------------- | END
+		
 	}
 	
 	/**
@@ -293,11 +292,7 @@ class NFCore extends NFramework{
 	 * 
 	 */
 	public static function PrintPre( $array ){
-			
-		echo "<pre>";
-			print_r( $array );
-		echo "</pre>";
-			
+		echo "<pre>"; print_r( $array ); echo "</pre>";
 	}
 	
 }
