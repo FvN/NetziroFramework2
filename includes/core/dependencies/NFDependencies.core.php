@@ -22,7 +22,25 @@
  */
 class NFDependencies extends NFramework{
 
+	/**
+	 * @var string | Core tables name prefix
+	 */
 	private static $tables_prefix = "nfcore_";
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * This is the Init method which will be run the first time you load/install the application
+	 * It will generate all core tables populating it by core settings
+	 * 
+	 */
+	public static function Init(){
+		
+		self::GenerateTables();
+		self::PopulateCoreSettings();
+		
+	}
 	
 	/**
 	 * @desc
@@ -36,14 +54,40 @@ class NFDependencies extends NFramework{
 	}
 	
 	/**
-	 * @desc
-	 * Settings table Generator
+	 * @author Alessio Nobile
 	 * 
+	 * @desc
+	 * It populates the master database with core framework settings
+	 *
+	 */
+	public static function PopulateCoreSettings(){
+		
+		self::InsertCoreKey( "template" , "default" );
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Get on the fly the settings table name
+	 *
+	 * @return string
+	 */
+	public static function GetCoreSettingsTableName(){
+		return self::$tables_prefix . "settings";
+	}
+	
+	/**
+	 * @desc
+	 * Core settings table generator
+	 * 
+	 * @return boolean
 	 */
 	private static function GenerateTablesSettings(){
 		
 		// ------------------------------------- | START Define table name
-		$table = self::$tables_prefix . "settings";
+		$table = self::GetCoreSettingsTableName();
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Query building
@@ -72,7 +116,43 @@ class NFDependencies extends NFramework{
 		
 	}
 	
-	
-	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Insert a key into the core settings table 
+	 *
+	 * @param string $key
+	 * @param string $value
+	 * 
+	 * @return boolean
+	 */
+	public static function InsertCoreKey( $key, $value ){
+
+		if( !empty( $key ) AND !empty( $value ) ){
+			
+			// ------------------------------------- | START Define table name
+			$table = self::GetCoreSettingsTableName();
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START Define query params array
+			$param = array( ":key" => $key, ":value" => $value );
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START SQL
+			$sql = "INSERT INTO `$table` SET `key` = :key, `value` = :value";
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START Query executing
+			$created = NFCore::$database_links[ "master" ]->Query( $sql );
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START Return
+			if( $created !== false ){ return true; } else { return false; }
+			// ------------------------------------- | END
+						
+		} else { return false; } 
+		
+	}
 	
 }
