@@ -23,6 +23,26 @@
 class NFramework{
 	
 	/**
+	 * @var $autoloader_array
+	 */
+	public static $autoloader_array = array();
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Include the Autoloader array
+	 *
+	 */
+	public static function InitAutoloader(){
+		
+		require_once( "includes/core/autoloader/NFAutoloader.core.php" );
+		self::$autoloader_array = $autoloader;
+		
+	}
+	
+	
+	/**
 	 * @desc
 	 * Netziro Framework AutoLoader method
 	 * 
@@ -33,62 +53,40 @@ class NFramework{
 			
 			// ------------------------------------- | START Module Including logic
 			case strstr( $class, "NFMod" ) != FALSE:
-				require_once( "modules/$class.module.php" );
-				break;
-			// ------------------------------------- | END
-			 
-			// ------------------------------------- | START NFDatabase logic 
-			case "NFDatabase":
-				require_once( "includes/core/database/NFDatabase.class.php" );
-				break;
-			// ------------------------------------- | END
 				
-			// ------------------------------------- | START NFCore Logic
-			case "NFCore":
-				require_once( "includes/core/NFCore.core.php" );
-				break;
-			// ------------------------------------- | END
-			
-			// ------------------------------------- | START NFSettings Logic
-			case "NFSettings":
-				require_once( "includes/core/NFSettings.core.php" );
-				break;
-			// ------------------------------------- | END
+				$module_file = "modules/$class.module.php";
 				
-			// ------------------------------------- | START NFUserInterface
-			case "NFDependencies":
-				require_once( "includes/core/dependencies/NFDependencies.core.php" );
-				break;
-			// ------------------------------------- | END	
+				if( file_exists( $module_file ) ){
+					
+					require_once( $module_file );
+						
+				} else { throw new Exception( "NFAutoloader - You tried to load the module $class, but the file doesn't exist" , 7 ); }
 				
-			// ------------------------------------- | START NFUserInterface
-			case "NFUserInterface":
-				require_once( "includes/core/ui/NFUserInterface.ui.php" );
-				break;
-			// ------------------------------------- | END	
-				
-			// ------------------------------------- | START NFLogger
-			case "NFLogger":
-				require_once( "includes/core/util/NFLogger.util.php" );
-				break;
-			// ------------------------------------- | END
-			
-			// ------------------------------------- | START NFCrypto
-			case "NFCrypto":
-				require_once( "includes/core/util/NFCrypto.util.php" );
-				break;
-			// ------------------------------------- | END
-			
-			// ------------------------------------- | START NFIntl
-			case "NFIntl":
-				require_once( "includes/core/util/NFIntl.util.php" );
 				break;
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START NFTheme
 			case "NFTheme":
+				
 				$template_init = NFUserInterface::GetTemplateInit();
-				require_once( $template_init );
+				
+				if( file_exists( $template_init ) ){
+					
+					require_once( $template_init );
+						
+				} else { throw new Exception( "NFAutoloader - You tried to load the template $class, but the file doesn't exist" , 8 ); }
+				
+				break;
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START Default case
+			default:
+				if( key_exists( $class , self::$autoloader_array ) ){
+					
+					require_once( self::$autoloader_array[ $class ] );
+					
+				} else { throw new Exception( "NFAutoloader - You tried to load the class $class, but cannot be associated" , 6 ); }
+					
 				break;
 			// ------------------------------------- | END
 			
