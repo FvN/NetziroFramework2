@@ -117,6 +117,35 @@ class NFUserInterface extends NFramework{
 	 */
 	protected static $template_js_paths = array();
 	
+	/**
+	 * @var string $html_title
+	 */
+	public static $meta_title = "Netziro Framework";
+	
+	/**
+	 * @var string
+	 */
+	public static $meta_copyright = "Alessio Nobile - All rights reserved";
+	
+	/**
+	 * @var string
+	 */
+	public static $meta_vendor = "Netziro Framework";
+	
+	/**
+	 * @var string
+	 */
+	public static $meta_author = "Alessio Nobile";
+	
+	/**
+	 * @var string
+	 */
+	public static $meta_email = "netziro@gmail.com";
+	
+	/**
+	 * @var string
+	 */
+	public static $meta_generator = "Netziro Framework";
 		
 	/**
 	 * @author Alessio Nobile
@@ -188,6 +217,71 @@ class NFUserInterface extends NFramework{
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
+	 * Render HTML Headers
+	 *
+	 */
+	public static function RenderHTMLHead(){
+		
+		// ------------------------------------- | START Get Params
+		$lang = NF_INSTANCE_LANGUAGE;
+		$title = self::$meta_title;
+		$copyright = self::$meta_copyright;
+		$vendor = self::$meta_vendor;
+		$author = self::$meta_author;
+		$email = self::$meta_email;
+		$generator = self::$meta_generator;
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Open Headers
+		echo "<!DOCTYPE html>\n";
+		echo "<html lang=\"$lang\" debug=\"true\">\n";
+		echo "<head>\n";
+		echo "<title>$title</title>\n";
+		echo "<meta charset=\"utf-8\" />\n";
+		echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n";
+		echo "<meta name=\"Copyright\" content=\"$copyright\" />\n";
+		echo "<meta name=\"vendor\" content=\"$vendor\" />\n";
+		echo "<meta name=\"author\" content=\"$author\" />\n";
+		echo "<meta name=\"email\" content=\"$email\" />\n";
+		echo "<meta name=\"generator\" content=\"$generator\" />\n";
+		echo "<meta name=\"Language\" content=\"$lang\" />\n";
+		echo "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=8\" />\n";
+		self::IncludeCSS();
+		echo "</head>\n";
+		echo "<body>\n";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Unsets
+		unset( $lang );
+		unset( $title );
+		unset( $copyright );
+		unset( $vendor );
+		unset( $author );
+		unset( $email );
+		unset( $generator );
+		// ------------------------------------- | END
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Render HTML Footer
+	 *
+	 */
+	public static function RenderHTMLFooter(){
+		
+		echo "</body>";
+		echo "</html>";
+		
+	}
+	
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
 	 * It populates the JS array
 	 *
 	 * @param string $js
@@ -207,6 +301,50 @@ class NFUserInterface extends NFramework{
 	 */
 	public static function IncludeCSS( $css ){
 		if( !empty( $css ) ){ array_push( self::$template_css_paths , $css ); }
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Render html tags in order to include JS scripts previously loaded by IncludeJS
+	 *
+	 */
+	public static function RenderJS(){
+		
+		if( count( self::$template_js_paths ) != 0 ){
+			
+			for( $r = 0; $r < count( self::$template_js_paths ); $r++ ){
+				
+				$js_path = self::$template_js_paths[ $r ];
+				echo "<script type=\"text/javascript\" src=\"$js_path\"></script>\n";
+					
+			}
+			
+		}
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Render html tags in order to include CSS scripts previously loaded by IncludeCSS
+	 *
+	 */
+	public static function RenderCSS(){
+		
+		if( count( self::$template_css_paths ) != 0 ){
+			
+			for( $r = 0; $r < count( self::$template_css_paths ); $r++ ){
+				
+				$css_path = self::$template_css_paths[ $r ];
+				echo "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"$css_path\" />\n";
+					
+			}
+			
+		}
+		
 	}
 	
 	/**
