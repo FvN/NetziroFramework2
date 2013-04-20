@@ -33,6 +33,39 @@ class NFramework{
 	public static $autoloader_path = "includes/core/autoloader/NFAutoloader.core.php";
 	
 	/**
+	 * @var $configurations_path
+	 */
+	public static $configurations_path = "config/NFConfig.core.php";
+	
+	/**
+	 * @var $credentials
+	 */
+	protected static $credentials = array();
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
+	public static function InitConf(){
+		
+		if( file_exists( self::$configurations_path ) ){
+	
+			require_once( self::$configurations_path );
+			
+			if( isset( $credentials ) ){
+				
+				self::$credentials = $credentials;
+				
+			} else { throw new Exception( "NFAutoloader - You tried to load the DB credentials configurations, but it doesn't exist" , 11 ); }
+			
+		} else { throw new Exception( "NFAutoloader - You tried to load the configuration file, but the file doesn't exist" , 10 ); }
+		
+	}
+	
+	/**
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
@@ -41,7 +74,7 @@ class NFramework{
 	 */
 	public static function InitAutoloader(){
 		
-		if( self::$autoloader_path ){
+		if( file_exists( self::$autoloader_path ) ){
 	
 			require_once( self::$autoloader_path );
 			

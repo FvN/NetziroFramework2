@@ -34,11 +34,9 @@ class NFCore extends NFramework{
 	 */
 	public static function LoadDatabaseLinks(){
 		
-		global $credentials;
-		
-		if( is_array( $credentials ) ){
+		if( is_array( parent::$credentials ) ){
 				
-			foreach( $credentials as $profile_name => $credential ){
+			foreach( parent::$credentials as $profile_name => $credential ){
 				
 				if( empty( $profile_name ) ){ $profile_name = self::$database_links_counter; }
 				self::$database_links[ $profile_name ] = new NFDatabase( $credential );
