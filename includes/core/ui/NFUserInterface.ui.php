@@ -107,6 +107,16 @@ class NFUserInterface extends NFramework{
 	 */
 	protected static $template_init;
 	
+	/**
+	 * @var unknown
+	 */
+	protected static $template_css_paths = array();
+	
+	/**
+	 * @var unknown
+	 */
+	protected static $template_js_paths = array();
+	
 		
 	/**
 	 * @author Alessio Nobile
@@ -172,6 +182,31 @@ class NFUserInterface extends NFramework{
 			
 		} else { throw new Exception( "The template " . self::$template . " directory or index doesn't exist", 4000 ); }
 		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * It populates the JS array
+	 *
+	 * @param string $js
+	 */
+	public static function IncludeJS( $js ){
+		if( !empty( $js ) ){ array_push( self::$template_js_paths , $js ); }		
+	}
+	
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * It populates the CSS array
+	 *
+	 * @param string $css
+	 */
+	public static function IncludeCSS( $css ){
+		if( !empty( $css ) ){ array_push( self::$template_css_paths , $css ); }
 	}
 	
 	/**
