@@ -28,6 +28,11 @@ class NFramework{
 	public static $autoloader_array = array();
 	
 	/**
+	 * @var $autoloader_path
+	 */
+	public static $autoloader_path = "includes/core/autoloader/NFAutoloader.core.php";
+	
+	/**
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
@@ -36,8 +41,18 @@ class NFramework{
 	 */
 	public static function InitAutoloader(){
 		
-		require_once( "includes/core/autoloader/NFAutoloader.core.php" );
-		self::$autoloader_array = $autoloader;
+		if( self::$autoloader_path ){
+	
+			require_once( self::$autoloader_path );
+			
+			if( isset( $autoloader ) ){
+				
+				self::$autoloader_array = $autoloader;
+				spl_autoload_register( array( "NFramework", "AutoLoader" ) );
+				
+			} else { throw new Exception( "NFAutoloader - You tried to load the autoloader array, but seems to be empty" , 11 ); }
+			
+		} else { throw new Exception( "NFAutoloader - You tried to load the autoloader array, but the file doesn't exist" , 10 ); }
 		
 	}
 	
@@ -101,5 +116,3 @@ class NFramework{
 		
 	
 }
-
-spl_autoload_register( array( "NFramework", "AutoLoader" ) );
