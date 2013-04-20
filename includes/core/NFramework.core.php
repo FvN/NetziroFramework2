@@ -58,6 +58,7 @@ class NFramework{
 			if( isset( $credentials ) ){
 				
 				self::$credentials = $credentials;
+				unset( $credentials );
 				
 			} else { throw new Exception( "NFAutoloader - You tried to load the DB credentials configurations, but it doesn't exist" , 11 ); }
 			
@@ -82,6 +83,7 @@ class NFramework{
 				
 				self::$autoloader_array = $autoloader;
 				spl_autoload_register( array( "NFramework", "AutoLoader" ) );
+				unset( $autoloader );
 				
 			} else { throw new Exception( "NFAutoloader - You tried to load the autoloader array, but seems to be empty" , 11 ); }
 			
@@ -107,6 +109,7 @@ class NFramework{
 				if( file_exists( $module_file ) ){
 					
 					require_once( $module_file );
+					unset( $module_file );
 						
 				} else { throw new Exception( "NFAutoloader - You tried to load the module $class, but the file doesn't exist" , 8 ); }
 				
@@ -121,6 +124,7 @@ class NFramework{
 				if( file_exists( $template_init ) ){
 					
 					require_once( $template_init );
+					unset( $template_init );
 						
 				} else { throw new Exception( "NFAutoloader - You tried to load the template $class, but the file doesn't exist" , 9 ); }
 				

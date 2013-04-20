@@ -153,6 +153,10 @@ class NFUserInterface extends NFramework{
 		self::$template_init = self::$nf_template_directory . $template . "/" . self::$nf_template_init;
 		// ------------------------------------- | END
 		
+		// ------------------------------------- | START Unsets
+		unset( $template );
+		// ------------------------------------- | END
+		
 	}
 	
 	/**

@@ -140,6 +140,11 @@ class NFLogger extends NFramework{
 		echo "// ------------------------------------- | <strong>END</strong><br />";
 		// ------------------------------------- | END
 		
+		// ------------------------------------- | START Get memory usage
+		echo "<strong> Memory Used: " . NFCore::FormatBytes( memory_get_usage() ) . "</strong><br />";
+		echo "<strong> Memory Peak Used: " . NFCore::FormatBytes( memory_get_peak_usage() ) . "</strong><br />";
+		// ------------------------------------- | END
+		
 	}
 	
 	
