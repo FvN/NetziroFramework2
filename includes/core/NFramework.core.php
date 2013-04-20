@@ -60,7 +60,7 @@ class NFramework{
 					
 					require_once( $module_file );
 						
-				} else { throw new Exception( "NFAutoloader - You tried to load the module $class, but the file doesn't exist" , 7 ); }
+				} else { throw new Exception( "NFAutoloader - You tried to load the module $class, but the file doesn't exist" , 8 ); }
 				
 				break;
 			// ------------------------------------- | END
@@ -74,16 +74,21 @@ class NFramework{
 					
 					require_once( $template_init );
 						
-				} else { throw new Exception( "NFAutoloader - You tried to load the template $class, but the file doesn't exist" , 8 ); }
+				} else { throw new Exception( "NFAutoloader - You tried to load the template $class, but the file doesn't exist" , 9 ); }
 				
 				break;
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Default case
 			default:
+				
 				if( key_exists( $class , self::$autoloader_array ) ){
 					
-					require_once( self::$autoloader_array[ $class ] );
+					if( file_exists( self::$autoloader_array[ $class ] ) ){
+						
+						require_once( self::$autoloader_array[ $class ] );
+						
+					} else { throw new Exception( "NFAutoloader - You tried to load the class $class, but the file doesn't exist" , 7 ); }
 					
 				} else { throw new Exception( "NFAutoloader - You tried to load the class $class, but cannot be associated" , 6 ); }
 					
