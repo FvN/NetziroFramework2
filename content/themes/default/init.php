@@ -52,10 +52,10 @@ class NFTheme extends NFUserInterface{
 	 */
 	public static function Init(){ 
 		
-		parent::IncludeCSS( "includes/css/bootstrap.css" );
-		parent::IncludeCSS( "includes/css/bootstrap-responsive.css" );
-		parent::IncludeJS( "includes/js/jquery.js" );
-		parent::IncludeJS( "includes/js/bootstrap.min.js" );
+		parent::IncludeCSS( "bootstrap.css" );
+		parent::IncludeCSS( "bootstrap-responsive.css" );
+		parent::IncludeJS( "jquery.js" );
+		parent::IncludeJS( "bootstrap.min.js" );
 		parent::RenderHTMLHead();
 		require_once( parent::$template_index );
 		parent::RenderJS(); 

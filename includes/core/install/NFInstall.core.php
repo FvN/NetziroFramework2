@@ -35,10 +35,10 @@ class NFInstall extends NFUserInterface{
 	public static function Init(){ 
 		
 		parent::IncludeCSSInline( " body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }" );
-		parent::IncludeCSS( "includes/css/bootstrap.css" );
-		parent::IncludeCSS( "includes/css/bootstrap-responsive.css" );
-		parent::IncludeJS( "includes/js/jquery.js" );
-		parent::IncludeJS( "includes/js/bootstrap.min.js" );
+		parent::IncludeCSS( "bootstrap.css" );
+		parent::IncludeCSS( "bootstrap-responsive.css" );
+		parent::IncludeJS( "jquery.js" );
+		parent::IncludeJS( "bootstrap.min.js" );
 		parent::RenderHTMLHead();
 		//require_once( parent::$template_index );
 		self::Welcome();

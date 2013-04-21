@@ -115,6 +115,13 @@ class NFUserInterface extends NFramework{
 	protected static $template_css_paths = array();
 	
 	/**
+	 * Default CSS path
+	 * 
+	 * @var string
+	 */
+	protected static $template_default_css_path = "includes/css/";
+	
+	/**
 	 * Inline CSS you want include on headers
 	 * 
 	 * @var string
@@ -127,6 +134,13 @@ class NFUserInterface extends NFramework{
 	 * @var array
 	 */
 	protected static $template_js_paths = array();
+	
+	/**
+	 * Default JS path
+	 * 
+	 * @var string
+	 */
+	protected static $template_default_js_path = "includes/js/";
 	
 	/**
 	 * Title HTML meta tag
@@ -311,7 +325,7 @@ class NFUserInterface extends NFramework{
 	 * @param string $js
 	 */
 	public static function IncludeJS( $js ){
-		if( !empty( $js ) ){ array_push( self::$template_js_paths , $js ); }		
+		if( !empty( $js ) ){ array_push( self::$template_js_paths , self::$template_default_js_path . $js ); }		
 	}
 	
 	
@@ -324,7 +338,7 @@ class NFUserInterface extends NFramework{
 	 * @param string $css
 	 */
 	public static function IncludeCSS( $css ){
-		if( !empty( $css ) ){ array_push( self::$template_css_paths , $css ); }
+		if( !empty( $css ) ){ array_push( self::$template_css_paths , self::$template_default_css_path . $css ); }
 	}
 	
 	/**
