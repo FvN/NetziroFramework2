@@ -108,41 +108,64 @@ class NFUserInterface extends NFramework{
 	protected static $template_init;
 	
 	/**
-	 * @var unknown
+	 * List of CSS paths to be included on the request
+	 * 
+	 * @var array
 	 */
 	protected static $template_css_paths = array();
 	
 	/**
-	 * @var unknown
+	 * Inline CSS you want include on headers
+	 * 
+	 * @var string
+	 */
+	protected static $template_css_inline;
+	
+	/**
+	 * List of JS paths to be included on the request
+	 * 
+	 * @var array
 	 */
 	protected static $template_js_paths = array();
 	
 	/**
+	 * Title HTML meta tag
+	 * 
 	 * @var string $html_title
 	 */
 	public static $meta_title = "Netziro Framework";
 	
 	/**
+	 * Copyright HTML meta tag
+	 * 
 	 * @var string
 	 */
 	public static $meta_copyright = "Alessio Nobile - All rights reserved";
 	
 	/**
+	 * Vendor HTML meta tag
+	 * 
 	 * @var string
 	 */
 	public static $meta_vendor = "Netziro Framework";
 	
 	/**
+	 * Author HTML meta tag
+	 * 
 	 * @var string
 	 */
 	public static $meta_author = "Alessio Nobile";
 	
 	/**
+	 * Email HTML meta tag
+	 * 
 	 * @var string
 	 */
 	public static $meta_email = "netziro@gmail.com";
 	
 	/**
+	 * Generator HTML meta tag
+	 * 
 	 * @var string
 	 */
 	public static $meta_generator = "Netziro Framework";
@@ -238,6 +261,7 @@ class NFUserInterface extends NFramework{
 		echo "<head>\n";
 		echo "<title>$title</title>\n";
 		echo "<meta charset=\"utf-8\" />\n";
+		echo "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
 		echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n";
 		echo "<meta name=\"Copyright\" content=\"$copyright\" />\n";
 		echo "<meta name=\"vendor\" content=\"$vendor\" />\n";
@@ -246,7 +270,7 @@ class NFUserInterface extends NFramework{
 		echo "<meta name=\"generator\" content=\"$generator\" />\n";
 		echo "<meta name=\"Language\" content=\"$lang\" />\n";
 		echo "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=8\" />\n";
-		self::IncludeCSS();
+		self::RenderCSS();
 		echo "</head>\n";
 		echo "<body>\n";
 		// ------------------------------------- | END
@@ -307,6 +331,20 @@ class NFUserInterface extends NFramework{
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
+	 * It populates the CSS array
+	 *
+	 * @param string $css
+	 */
+	public static function IncludeCSSInline( $css ){
+		if( !empty( $css ) ){ 
+			self::$template_css_inline .= "\n" . $css;
+		 }
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
 	 * Render html tags in order to include JS scripts previously loaded by IncludeJS
 	 *
 	 */
@@ -334,6 +372,17 @@ class NFUserInterface extends NFramework{
 	 */
 	public static function RenderCSS(){
 		
+		// ------------------------------------- | START Inline CSS Rendering
+		if( !empty( self::$template_css_inline ) ){
+			
+			echo "<style>\n";
+      			echo self::$template_css_inline;
+			echo "</style>\n";
+			
+		}
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Stylesheet CSS Including
 		if( count( self::$template_css_paths ) != 0 ){
 			
 			for( $r = 0; $r < count( self::$template_css_paths ); $r++ ){
@@ -344,6 +393,7 @@ class NFUserInterface extends NFramework{
 			}
 			
 		}
+		// ------------------------------------- | END
 		
 	}
 	

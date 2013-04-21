@@ -43,6 +43,25 @@
 
 class NFTheme extends NFUserInterface{
 	
-	public static function Init(){ require_once( parent::$template_index ); }
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Template Init Method
+	 *
+	 */
+	public static function Init(){ 
+		
+		parent::IncludeCSS( "includes/css/bootstrap.css" );
+		parent::IncludeCSS( "includes/css/bootstrap-responsive.css" );
+		parent::IncludeJS( "includes/js/jquery.js" );
+		parent::IncludeJS( "includes/js/bootstrap.min.js" );
+		parent::RenderHTMLHead();
+		require_once( parent::$template_index );
+		parent::RenderJS(); 
+		parent::RenderHTMLFooter();
+	
+	
+	}
 	
 }

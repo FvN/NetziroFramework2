@@ -24,8 +24,112 @@
  */
 class NFCore extends NFramework{
 
+	/**
+	 * It will contain all DB instances
+	 * 
+	 * @var array
+	 */
 	public static $database_links = array();
+	
+	/**
+	 * Counts the number of DB links
+	 * 
+	 * @var integer
+	 */
 	public static $database_links_counter = 0;
+	
+	/**
+	 * Contains the init instance type
+	 * 
+	 * @var string
+	 */
+	public static $instance_type;
+	
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Check the instance type and route the processing to the right classes
+	 *
+	 */
+	public static function RouteInstance(){
+		
+		switch( NF_INSTANCE ){
+			
+			// ------------------------------------- | START Application instance checking
+			case "application":
+				if( self::CheckInstallationIntegrity() ){ 
+					self::$instance_type = "application";
+					self::InitInstanceApplication();
+				} else {
+					self::$instance_type = "setup";
+					self::InitInstanceSetup();
+				}
+				break;
+			// ------------------------------------- | END
+				
+			// ------------------------------------- | START Setup instance checking
+			case "setup":
+				self::InitInstanceSetup();
+				break;
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START API instance checking
+			case "api":
+				self::InitInstanceAPI();
+				break;
+			// ------------------------------------- | END
+				
+			// ------------------------------------- | START Default
+			default:
+				throw new Exception( "Netziro Framework tried to init the instance but we couldn't recognize the instance type", 3 );
+				break;
+			// ------------------------------------- | END
+			
+		}
+		
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
+	protected static function InitInstanceApplication(){
+		
+		NFUserInterface::Init();
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
+	protected static function InitInstanceAPI(){
+		
+		
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
+	protected static function InitInstanceSetup(){
+		
+		NFInstall::Init();
+		
+	}
 	
 	/**
 	 * @desc
@@ -77,13 +181,16 @@ class NFCore extends NFramework{
 	
 	/**
 	 * @desc
-	 * Check if needed PHP modules are loaded
+	 * Check if required PHP modules are loaded
 	 * 
 	 */
 	public static function CheckPHPModules(){
 		
+		// ------------------------------------- | START Fetch loaded PHP modules
 		$modules = get_loaded_extensions( );
+		// ------------------------------------- | END
 		
+		// ------------------------------------- | START Modules checking
 		if( !in_array( "Core" , $modules ) ){ 
 			throw new Exception( "Netziro Framework requires the PHP Core module" , 5 );
 		} elseif( !in_array( "session" , $modules ) ){ 
@@ -97,6 +204,11 @@ class NFCore extends NFramework{
 		} elseif( !in_array( "mcrypt" , $modules ) ){ 
 			throw new Exception( "Netziro Framework requires the PHP mcrypt module" , 5 );
 		}
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Unsets
+		unset( $modules );
+		// ------------------------------------- | END
 		
 	}
 	
@@ -124,7 +236,8 @@ class NFCore extends NFramework{
 	 * 
 	 */
 	public static function CheckInstallationIntegrity(){
-		if( !NFSettings::IsTableExisting() ){ throw new Exception( "Netziro Framework Settings tables has been not created yet", 3 ); }
+		//if( !NFSettings::IsTableExisting() ){ throw new Exception( "Netziro Framework Settings tables has been not created yet", 3 ); }
+		return NFSettings::IsTableExisting();
 	}
 	
 	/**

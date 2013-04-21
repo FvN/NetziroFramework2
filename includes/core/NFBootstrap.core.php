@@ -32,9 +32,7 @@ try{
 	NFCore::DefineLocaleSettings();
 	NFCore::DefineTimeZoneSettings();
 	NFCore::LoadDatabaseLinks();
-	NFCore::CheckInstallationIntegrity();
-	NFUserInterface::Init();
-	// ------------------------------------- | END
-		
+	NFCore::RouteInstance();
+	// ------------------------------------- | END	
 	
 } catch( Exception $e ){ NFLogger::LogWrite( 0, $e->getMessage(), "General.NFBootstrap", $e->getCode() ); exit(0); }
