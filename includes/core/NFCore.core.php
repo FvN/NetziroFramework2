@@ -218,7 +218,7 @@ class NFCore extends NFramework{
 	 * 
 	 */
 	public static function CheckPHPVersion(){
-		if( ( PHP_MAJOR_VERSION !== 5 ) OR !( PHP_MINOR_VERSION >= 4 ) ){ throw new Exception( "Netziro Framework requires PHP 5.4>. You got " . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION , 4 ); }
+		if( ( PHP_MAJOR_VERSION === 5 ) AND !( PHP_MINOR_VERSION >= 4 ) ){ throw new Exception( "Netziro Framework requires PHP 5.4>. You got " . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION , 4 ); }
 	}
 	
 	/**
@@ -327,7 +327,7 @@ class NFCore extends NFramework{
 		
 		// ------------------------------------- | START If $lang layout isn't correct, we set default locale
 		$locales = NFIntl::GetLocalesSupported( );
-		if( strlen( $locale ) != 5 AND substr( $locale, 2, 1 ) != "_" ){ throw new Exception( "Netziro Framework $locale locale format not correct", 10 ); }
+		if( strlen( $locale ) != 5 OR substr( $locale, 2, 1 ) != "_" ){ throw new Exception( "Netziro Framework $locale locale format not correct", 10 ); }
 		if( !in_array( $locale , $locales ) ){ throw new Exception( "Netziro Framework $locale locale is not supported", 11 ); }
 		// ------------------------------------- | END
 		
