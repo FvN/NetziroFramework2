@@ -1,7 +1,7 @@
 Netziro Framework 2
 ======================
 
-Netziro Framework is an application builder which gives you the possibility to design and setup PHP application in few steps. 
+Netziro Framework is an application builder which gives you the possibility to design and setup PHP applications in few steps. 
 Following the install wizard you will be able to define your MVC structure and we will create the basement of your application.
 
 Main Features:
