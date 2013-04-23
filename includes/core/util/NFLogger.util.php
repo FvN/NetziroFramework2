@@ -139,14 +139,16 @@ class NFLogger extends NFramework{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Request headers
-		echo "<h5>Apache headers:</h5>";
-		echo "<div class=\"debug-div\">";
-			if( !isset( $argv ) ){ $headers = apache_request_headers(); }
-			echo "<strong>Request headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
-			if( !isset( $argv ) ){ $headers = apache_response_headers(); }
-			echo "<strong>Response headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
-		echo "</div>";
-		echo "<hr />";
+		if( function_exists( "apache_request_headers" ) AND function_exists( "apache_response_headers" ) ){
+			echo "<h5>Apache headers:</h5>";
+			echo "<div class=\"debug-div\">";
+				if( !isset( $argv ) ){ $headers = apache_request_headers(); }
+				echo "<strong>Request headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
+				if( !isset( $argv ) ){ $headers = apache_response_headers(); }
+				echo "<strong>Response headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
+			echo "</div>";
+			echo "<hr />";
+		}
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Get memory usage
