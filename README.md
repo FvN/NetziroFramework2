@@ -14,3 +14,16 @@ Main Features:
 - ***RequireJS*** => Easy JS integration for each application/module
 - ***jQuery2*** => Latest jQuery integration
 - ***TwitterBootstrap*** => Well known CSS framework
+
+Requirements
+============
+PHP 5.4 ( should include PDO libraries )
+php5-intl library
+php5-mcrypt library
+php5-mysql library
+
+How to install on Ubuntu
+========================
+```shell
+apt-get install php5 php5-intl php5-mcrypt php5-mysql
+```
