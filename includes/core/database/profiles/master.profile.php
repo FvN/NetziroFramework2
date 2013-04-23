@@ -15,5 +15,5 @@
 $credentials[ "hostname" ] = "localhost";
 $credentials[ "database" ] = "test";
 $credentials[ "username" ] = "root";
-$credentials[ "password" ] = "ph03nix";
+$credentials[ "password" ] = "eccolo";
 

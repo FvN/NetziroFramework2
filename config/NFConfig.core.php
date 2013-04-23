@@ -20,7 +20,7 @@ define( "NF_INSTANCE_APPLICATION_NAME", "NetziroFramework2" );
 $credentials[ "master" ][ "hostname" ] = "localhost";
 $credentials[ "master" ][ "database" ] = "test";
 $credentials[ "master" ][ "username" ] = "root";
-$credentials[ "master" ][ "password" ] = "ph03nix";
+$credentials[ "master" ][ "password" ] = "eccolo";
 // ------------------------------------- | END
 
 // ------------------------------------- | START Debugging settings
