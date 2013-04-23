@@ -45,6 +45,13 @@ class NFCore extends NFramework{
 	 */
 	public static $instance_type;
 	
+	/**
+	 * Array where to store GET and POST params into a key => value format
+	 * 
+	 * @var array
+	 */
+	protected static $request_array = array();
+	
 	
 	/**
 	 * @author Alessio Nobile
@@ -130,6 +137,41 @@ class NFCore extends NFramework{
 		NFInstall::Init();
 		
 	}
+	
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Fetch all POST and GET params from HTTP request into a class scope array 
+	 *
+	 */
+	public static function FetchRequest(){
+		
+		self::$request_array = $_REQUEST;
+		
+	}
+	
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Get a value from the HTTP request
+	 *
+	 * @param string $key
+	 * 
+	 */
+	public static function GetValueFromRequest( $key ){
+		
+		if( isset( self::$request_array[ $key ] ) ){
+			
+			return self::$request_array[ $key ];
+			
+		}
+		
+	}
+	
 	
 	/**
 	 * @desc

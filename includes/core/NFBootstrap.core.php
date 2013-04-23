@@ -32,6 +32,7 @@ try{
 	NFCore::DefineLocaleSettings();
 	NFCore::DefineTimeZoneSettings();
 	NFCore::LoadDatabaseLinks();
+	NFCore::FetchRequest();
 	NFCore::RouteInstance();
 	// ------------------------------------- | END	
 	
