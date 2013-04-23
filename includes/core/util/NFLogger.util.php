@@ -110,39 +110,52 @@ class NFLogger extends NFramework{
 	public static function BackTracePrint(){
 		
 		// ------------------------------------- | START Request info
-		echo "<br />// ------------------------------------- | <strong>START Request informations:</strong><br />";
-		echo "<strong>Server:</strong> " . $_SERVER[ "SERVER_ADDR" ] . "<br />";
-		echo "<strong>Request method:</strong> " . $_SERVER[ "REQUEST_METHOD" ] . "<br />";
-		echo "<strong>Request URI:</strong> " . $_SERVER[ "REQUEST_URI" ] . "<br />";
-		echo "<strong>Request Script:</strong> " . $_SERVER[ "PHP_SELF" ] . "<br />";
-		echo "<strong>Remote IP:</strong> " . $_SERVER[ "REMOTE_ADDR" ] . "<br />";
-		echo "// ------------------------------------- | <strong>END</strong><br />";
+		echo "<hr />";
+		echo "<h5>Request informations:</h5>";
+		echo "<div class=\"debug-div\">";
+			echo "<strong>Server:</strong> " . $_SERVER[ "SERVER_ADDR" ] . "<br />";
+			echo "<strong>Request method:</strong> " . $_SERVER[ "REQUEST_METHOD" ] . "<br />";
+			echo "<strong>Request URI:</strong> " . $_SERVER[ "REQUEST_URI" ] . "<br />";
+			echo "<strong>Request Script:</strong> " . $_SERVER[ "PHP_SELF" ] . "<br />";
+			echo "<strong>Remote IP:</strong> " . $_SERVER[ "REMOTE_ADDR" ] . "<br />";
+		echo "</div>";
+		echo "<hr />";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Logs printing
-		echo "// ------------------------------------- | <strong>START Netziro Framework logs:</strong><br />";
-		NFCore::PrintPre( self::$array_log );
-		echo "// ------------------------------------- | <strong>END</strong><br />";
+		echo "<h5>Netziro Framework logs:</h5>";
+		echo "<div class=\"debug-div\">";
+			NFCore::PrintPre( self::$array_log );
+		echo "</div>";
+		echo "<hr />";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START print out the list of included files
-		echo "// ------------------------------------- | <strong>START File Included:</strong><br />";
-		NFCore::PrintPre( get_included_files() );
-		echo "// ------------------------------------- | <strong>END</strong><br />";
+		echo "<h5>File Included:</h5>";
+		echo "<div class=\"debug-div\">";
+			NFCore::PrintPre( get_included_files() );
+		echo "</div>";
+		echo "<hr />";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Request headers
-		echo "// ------------------------------------- | <strong>START Apache headers:</strong><br />";
-		if( !isset( $argv ) ){ $headers = apache_request_headers(); }
-		echo "<strong>Request headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
-		if( !isset( $argv ) ){ $headers = apache_response_headers(); }
-		echo "<strong>Response headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
-		echo "// ------------------------------------- | <strong>END</strong><br />";
+		echo "<h5>Apache headers:</h5>";
+		echo "<div class=\"debug-div\">";
+			if( !isset( $argv ) ){ $headers = apache_request_headers(); }
+			echo "<strong>Request headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
+			if( !isset( $argv ) ){ $headers = apache_response_headers(); }
+			echo "<strong>Response headers:</strong> <br/ >" . NFCore::PrintPre( $headers );
+		echo "</div>";
+		echo "<hr />";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Get memory usage
-		echo "<strong> Memory Used: " . NFCore::FormatBytes( memory_get_usage() ) . "</strong><br />";
-		echo "<strong> Memory Peak Used: " . NFCore::FormatBytes( memory_get_peak_usage() ) . "</strong><br />";
+		echo "<h5>Memory usage info:</h5>";
+		echo "<div class=\"debug-div\">";
+			echo "<strong> Memory Used: " . NFCore::FormatBytes( memory_get_usage() ) . "</strong><br />";
+			echo "<strong> Memory Peak Used: " . NFCore::FormatBytes( memory_get_peak_usage() ) . "</strong><br />";
+		echo "</div>";
+		echo "<hr />";
 		// ------------------------------------- | END
 		
 	}
