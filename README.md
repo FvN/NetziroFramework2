@@ -18,10 +18,11 @@ Main Features:
 Requirements
 ============
 
-***PHP 5.4*** ( should include PDO libraries )
-***php5-intl*** library
-***php5-mcrypt*** library
-***php5-mysql*** library
+PHP and libraries that you should make sure to install:
+- ***PHP 5.4*** ( should include PDO libraries )
+- ***php5-intl*** library
+- ***php5-mcrypt*** library
+- ***php5-mysql*** library
 
 How to install on Ubuntu
 ========================
