@@ -114,10 +114,15 @@ class NFLogger extends NFramework{
 		echo "<h5>Request informations:</h5>";
 		echo "<div class=\"debug-div\">";
 			echo "<strong>Server:</strong> " . $_SERVER[ "SERVER_ADDR" ] . "<br />";
+			echo "<strong>Server Name:</strong> " . $_SERVER[ "SERVER_NAME" ] . "<br />";
 			echo "<strong>Request method:</strong> " . $_SERVER[ "REQUEST_METHOD" ] . "<br />";
 			echo "<strong>Request URI:</strong> " . $_SERVER[ "REQUEST_URI" ] . "<br />";
 			echo "<strong>Request Script:</strong> " . $_SERVER[ "PHP_SELF" ] . "<br />";
+			echo "<strong>Request ScriptName:</strong> " . $_SERVER[ "SCRIPT_NAME" ] . "<br />";
 			echo "<strong>Remote IP:</strong> " . $_SERVER[ "REMOTE_ADDR" ] . "<br />";
+			echo "<strong>NF_INSTANCE_URL:</strong> " . NF_INSTANCE_URL . "<br />";
+			echo "<strong>NF_INSTANCE_ROOT_DIRECTORY:</strong> " . NF_INSTANCE_ROOT_DIRECTORY . "<br />";
+			echo "<strong>NF_INSTANCE_ROOT_RELATIVE:</strong> " . NF_INSTANCE_ROOT_RELATIVE . "<br />";
 		echo "</div>";
 		echo "<hr />";
 		// ------------------------------------- | END
@@ -136,6 +141,15 @@ class NFLogger extends NFramework{
 			NFCore::PrintPre( get_included_files() );
 		echo "</div>";
 		echo "<hr />";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Request vars
+		echo "<h5>Request Vars:</h5>";
+		echo "<div class=\"debug-div\">";
+			NFCore::PrintPre( $_REQUEST );
+		echo "</div>";
+		echo "<hr />";
+		
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Request headers
