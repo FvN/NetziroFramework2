@@ -129,12 +129,16 @@ class NFCore extends NFramework{
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
+	 * Setup instance init
 	 * 
-	 *
 	 */
 	protected static function InitInstanceSetup(){
 		
-		NFInstall::Init();
+		try{
+			
+			NFInstall::Init();
+			
+		} catch( Exception $e ){ NFLogger::LogWrite( 4000, $e->getMessage(), "Instance.Setup - Your template doesn't match the Template methods requirement", $e->getCode() ); }
 		
 	}
 	

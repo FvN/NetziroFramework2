@@ -20,3 +20,4 @@ $autoloader[ "NFLogger" ] = "includes/core/util/NFLogger.util.php";
 $autoloader[ "NFCrypto" ] = "includes/core/util/NFCrypto.util.php";
 $autoloader[ "NFIntl" ] = "includes/core/util/NFIntl.util.php";
 $autoloader[ "NFInstall" ] = "includes/core/install/NFInstall.core.php";
+$autoloader[ "NFTemplate" ] = "includes/core/ui/NFTemplate.model.php";
