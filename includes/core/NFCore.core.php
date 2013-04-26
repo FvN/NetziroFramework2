@@ -103,6 +103,26 @@ class NFCore extends NFramework{
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
+	 * Check the request and route you on the right module
+	 *
+	 */
+	public static function RouteModule(){
+		
+		$module = self::GetValueFromRequest( "m" );
+			
+		if( !empty( $module ) ){
+			
+			
+			
+		}
+		
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
 	 * 
 	 *
 	 */
@@ -116,12 +136,12 @@ class NFCore extends NFramework{
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
-	 * 
+	 * API Instance init
 	 *
 	 */
 	protected static function InitInstanceAPI(){
 		
-		
+		self::RouteModule();
 		
 	}
 	
