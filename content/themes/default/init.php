@@ -41,7 +41,7 @@
  * 
  */
 
-class NFTheme implements NFTemplate{
+class NFTheme implements NFTemplateModel{
 	
 	/**
 	 * @author Alessio Nobile

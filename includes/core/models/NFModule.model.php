@@ -41,7 +41,33 @@
  * 
  */
 
-interface NFModule{
+interface NFModuleModel{
+	
+	protected $module_name;
+	
+	protected $dataset = array();
+	
+	
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Module Init Method and request router
+	 *
+	 */
+	public function Init();
+	
+	protected function LoadDataMapping();
+	
+	protected function LoadDataRelations();
+	
+	protected function LoadVisibilityRules();
+	
+}
+
+
+interface NFModuleView{
 	
 	/**
 	 * @author Alessio Nobile
@@ -50,6 +76,14 @@ interface NFModule{
 	 * Module Init Method
 	 *
 	 */
-	public function Init();
+	public function ListView();
 	
+	public function AddView();
+	
+	public function SearchView();
+	
+	public function DelView();
+	
+		
 }
+

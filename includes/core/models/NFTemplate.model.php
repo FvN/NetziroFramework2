@@ -41,7 +41,7 @@
  * 
  */
 
-interface NFTemplate{
+interface NFTemplateModel{
 	
 	/**
 	 * @author Alessio Nobile

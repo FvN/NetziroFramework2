@@ -23,7 +23,7 @@
  * 
  */
 
-class NFInstall implements NFTemplate{
+class NFInstall implements NFTemplateModel{
 	
 	/**
 	 * @author Alessio Nobile
