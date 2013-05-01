@@ -22,3 +22,4 @@ $autoloader[ "NFIntl" ] = "includes/core/util/NFIntl.util.php";
 $autoloader[ "NFInstall" ] = "includes/core/install/NFInstall.core.php";
 $autoloader[ "NFTemplateModel" ] = "includes/core/models/NFTemplate.model.php";
 $autoloader[ "NFModuleModel" ] = "includes/core/models/NFModule.model.php";
+$autoloader[ "NFModuleView" ] = "includes/core/models/NFModule.model.php";
