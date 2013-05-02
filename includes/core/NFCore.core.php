@@ -393,8 +393,8 @@ class NFCore extends NFramework{
 		
 		// ------------------------------------- | START If $lang layout isn't correct, we set default locale
 		$locales = NFIntl::GetLocalesSupported( );
-		if( strlen( $locale ) != 5 OR substr( $locale, 2, 1 ) != "_" ){ throw new Exception( "Netziro Framework $locale locale format not correct", 10 ); }
-		if( !in_array( $locale , $locales ) ){ throw new Exception( "Netziro Framework $locale locale is not supported", 11 ); }
+		if( strlen( $locale ) != 5 OR substr( $locale, 2, 1 ) != "_" ){ throw new Exception( "Netziro Framework $locale locale format not correct", 21 ); }
+		if( !in_array( $locale , $locales ) ){ throw new Exception( "Netziro Framework $locale locale is not supported", 22 ); }
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Set locale for the instance

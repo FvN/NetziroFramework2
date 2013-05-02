@@ -49,6 +49,8 @@
 
 class NFLogger extends NFramework{
 	
+	private static $array_errors_code = array();
+	
 	private static $array_log = array();
 	
 	/**
@@ -99,6 +101,46 @@ class NFLogger extends NFramework{
 	 *  
 	 */ 
 	public static function ErrorCodeList(){
+		
+		// ------------------------------------- | START Netziro Framework Core errors
+		self::$array_errors_code[ 1 ] = "Netziro Framework - Instance not defined yet";
+		self::$array_errors_code[ 2 ] = "Netziro Framework - Session has been not started yet";	
+		self::$array_errors_code[ 3 ] = "Netziro Framework - Tried to init the instance but we couldn't recognize the instance type";
+		self::$array_errors_code[ 4 ] = "Netziro Framework - Requires PHP 5.4>. You got " . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;
+		self::$array_errors_code[ 5 ] = "Netziro Framework - Requires the PHP {{details}} module";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START NFAutoloader errors
+		self::$array_errors_code[ 6 ] = "NFAutoloader - You tried to load the class {{details}}, but cannot be associated";
+		self::$array_errors_code[ 7 ] = "NFAutoloader - You tried to load the class {{details}}, but the file doesn't exist";
+		self::$array_errors_code[ 8 ] = "NFAutoloader - You tried to load the module {{details}}, but the file doesn't exist";
+		self::$array_errors_code[ 9 ] = "NFAutoloader - You tried to load the template {{details}}, but the file doesn't exist";
+		self::$array_errors_code[ 10 ] = "NFAutoloader - You tried to load the configuration file, but the file doesn't exist";
+		self::$array_errors_code[ 11 ] = "NFAutoloader - You tried to load the DB credentials configurations, but it doesn't exist";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START NFIntl errors
+		self::$array_errors_code[ 15 ] = "NFIntl - SetLocale failed. Empty locale value";
+		self::$array_errors_code[ 20 ] = "NFIntl - {{details}} timezone not supported";
+		self::$array_errors_code[ 21 ] = "NFIntl - {{details}} locale format not correct";
+		self::$array_errors_code[ 22 ] = "NFIntl - {{details}} locale is not supported";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START NFDatabase errors
+		self::$array_errors_code[ 1000 ] = "NFDatabase - Database credentials array has been not instanciated yet. Check your NFConfig file";
+		self::$array_errors_code[ 1001 ] = "NFDatabase - You must specify the hostname";
+		self::$array_errors_code[ 1002 ] = "NFDatabase - You must specify the database name";
+		self::$array_errors_code[ 1003 ] = "NFDatabase - You must specify an username";
+		self::$array_errors_code[ 1004 ] = "NFDatabase - You must specify a password";
+		self::$array_errors_code[ 1010 ] = "NFDatabase - You have specified a db profile, but the file has been not found";
+		self::$array_errors_code[ 1020 ] = "NFDatabase - The database class is locked";
+		self::$array_errors_code[ 1030 ] = "NFDatabase - Something wrong on the query";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START NFUserInterface errors
+		self::$array_errors_code[ 4000 ] = "NFUserInterface - The template {{details}} directory or index doesn't exist";
+		// ------------------------------------- | END
+		
 		
 	}
 	
