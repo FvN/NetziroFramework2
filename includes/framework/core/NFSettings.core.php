@@ -22,8 +22,6 @@
  */
 class NFSettings extends NFramework{
 	
-	protected static $settings_core_table = "nf_settings";
-	
 	
 	/**
 	 * @desc
@@ -35,7 +33,7 @@ class NFSettings extends NFramework{
 		
 		// ------------------------------------- | START Query executing
 		$sql = "SELECT COUNT(*) AS `check` FROM `information_schema`.`tables` WHERE `table_schema` = :database_name AND `table_name` = :table_name;";
-		$params = array( ':table_name' => self::$settings_core_table, ':database_name' => NFCore::$database_links[ "master" ]->GetDatabaseName() );
+		$params = array( ':table_name' => NFDependencies::GetCoreSettingsTableName(), ':database_name' => NFCore::$database_links[ "master" ]->GetDatabaseName() );
 		$results = NFCore::$database_links[ "master" ]->Query( $sql, $params );
 		$rows = NFCore::$database_links[ "master" ]->GetRows();
 		// ------------------------------------- | END
@@ -59,9 +57,9 @@ class NFSettings extends NFramework{
 	public static function FetchAll(){
 		
 		// ------------------------------------- | START Query executing
-		$sql = "SELECT `value` FROM :table_name";
-		$params = array( ':table_name' => self::$settings_core_table );
-		$results = NFCore::$database_links[ "master" ]->Query( $sql, $params );
+		$table_name = NFDependencies::GetCoreSettingsTableName();
+		$sql = "SELECT `value` FROM $table_name";
+		$results = NFCore::$database_links[ "master" ]->Query( $sql );
 		$rows = NFCore::$database_links[ "master" ]->GetRows();
 		// ------------------------------------- | END
 			
@@ -89,7 +87,7 @@ class NFSettings extends NFramework{
 		if( !empty( $key ) AND ctype_alnum( $key ) ){
 			
 			// ------------------------------------- | START Query executing
-			$table_name = self::$settings_core_table;
+			$table_name = NFDependencies::GetCoreSettingsTableName();
 			$sql = "SELECT `value` FROM `$table_name` WHERE `key` = :string_value";
 			$params = array( ":string_value" => $key );
 			$results = NFCore::$database_links[ "master" ]->Query( $sql, $params );

@@ -141,6 +141,13 @@ class NFLogger extends NFramework{
 		self::$array_errors_code[ 4000 ] = "NFUserInterface - The template {{details}} directory or index doesn't exist";
 		// ------------------------------------- | END
 		
+		// ------------------------------------- | START NFModule
+		self::$array_errors_code[ 6000 ] = "NFModule - The router couldn't find the module on your request";
+		self::$array_errors_code[ 6001 ] = "NFModule - Module not registered";
+		self::$array_errors_code[ 6002 ] = "NFModule - Error during the module registering";
+		self::$array_errors_code[ 6003 ] = "NFModule - The module is registered, but the directory doesn't exist";
+		// ------------------------------------- | END
+		
 		
 	}
 	

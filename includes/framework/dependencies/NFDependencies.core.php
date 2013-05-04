@@ -50,6 +50,7 @@ class NFDependencies extends NFramework{
 	public static function GenerateTables(){
 		
 		self::GenerateTablesSettings();
+		self::GenerateTablesModules();
 		
 	}
 	
@@ -79,6 +80,18 @@ class NFDependencies extends NFramework{
 	}
 	
 	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Get on the fly the settings table name
+	 *
+	 * @return string
+	 */
+	public static function GetCoreModulesTableName(){
+		return self::$tables_prefix . "modules";
+	}
+	
+	/**
 	 * @desc
 	 * Core settings table generator
 	 * 
@@ -96,6 +109,43 @@ class NFDependencies extends NFramework{
 				`id`  INT(11) NOT NULL AUTO_INCREMENT ,
 				`key` VARCHAR(50) NOT NULL ,
 				`value` TEXT NOT NULL ,
+				PRIMARY KEY (`id`),
+				UNIQUE INDEX `key` USING BTREE (`key`) 
+		)
+		ENGINE=InnoDB
+		DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+		AUTO_INCREMENT=1
+		ROW_FORMAT=COMPACT;
+		";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Query executing
+		$created = NFCore::$database_links[ "master" ]->Query( $sql );
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Return
+		if( $created !== false ){ return true; } else { return false; }
+		// ------------------------------------- | END
+		
+	}
+	
+/**
+	 * @desc
+	 * Core settings table generator
+	 * 
+	 * @return boolean
+	 */
+	private static function GenerateTablesModules(){
+		
+		// ------------------------------------- | START Define table name
+		$table = self::GetCoreModulesTableName();
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Query building
+		$sql = 	"
+			CREATE TABLE IF NOT EXISTS `$table` (
+				`id`  INT(11) NOT NULL AUTO_INCREMENT ,
+				`key` VARCHAR(50) NOT NULL ,
 				PRIMARY KEY (`id`),
 				UNIQUE INDEX `key` USING BTREE (`key`) 
 		)

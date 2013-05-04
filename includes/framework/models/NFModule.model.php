@@ -43,12 +43,6 @@
 
 interface NFModuleModel{
 	
-	protected $module_name;
-	
-	protected $dataset = array();
-	
-	
-	
 	/**
 	 * @author Alessio Nobile
 	 * 
@@ -56,13 +50,25 @@ interface NFModuleModel{
 	 * Module Init Method and request router
 	 *
 	 */
-	public function Init();
+	static function ModuleRouter();
 	
-	protected function LoadDataMapping();
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Load methods visibility rules 
+	 *
+	 */
+	static function LoadVisibilityRules();
 	
-	protected function LoadDataRelations();
-	
-	protected function LoadVisibilityRules();
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Load all User Interface requirements for the given module
+	 * 
+	 */
+	static function LoadUI();
 	
 }
 

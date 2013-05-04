@@ -14,7 +14,7 @@
 try{
 	
 	// ------------------------------------- | START Including Netziro Framework Core files
-	require_once( "includes/core/NFramework.core.php" );
+	require_once( "includes/framework/core/NFramework.core.php" );
 	NFramework::InitConf();
 	NFramework::InitAutoloader();
 	// ------------------------------------- | END

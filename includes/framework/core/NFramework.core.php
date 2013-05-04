@@ -30,7 +30,7 @@ class NFramework{
 	/**
 	 * @var $autoloader_path
 	 */
-	public static $autoloader_path = "includes/core/autoloader/NFAutoloader.core.php";
+	public static $autoloader_path = "includes/framework/autoloader/NFAutoloader.core.php";
 	
 	/**
 	 * @var $configurations_path
@@ -91,7 +91,23 @@ class NFramework{
 		
 	}
 	
-	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Add a new key into the autoloader array 
+	 *
+	 */
+	public static function AddAutoloaderKey( $key, $value ){
+
+		if( !empty( $key ) AND !empty( $value ) ){
+			
+			self::$autoloader_array[ $key ] = $value;
+			
+		}
+		
+	}
+		
 	/**
 	 * @desc
 	 * Netziro Framework AutoLoader method
@@ -100,22 +116,7 @@ class NFramework{
 	public static function AutoLoader( $class ){
 		
 		switch( $class ){
-			
-			// ------------------------------------- | START Module Including logic
-			case strstr( $class, "NFMod" ) != FALSE:
-				
-				$module_file = "modules/$class.module.php";
-				
-				if( file_exists( $module_file ) ){
-					
-					require_once( $module_file );
-					unset( $module_file );
-						
-				} else { throw new Exception( "NFAutoloader - You tried to load the module $class, but the file doesn't exist" , 8 ); }
-				
-				break;
-			// ------------------------------------- | END
-			
+									
 			// ------------------------------------- | START NFTheme
 			case "NFTheme":
 				

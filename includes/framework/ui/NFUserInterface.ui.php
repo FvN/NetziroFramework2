@@ -97,7 +97,7 @@ class NFUserInterface extends NFramework{
 	 * @var string
 	 * 
 	 */
-	protected static $template_index;
+	public static $template_index;
 	
 	/**
 	 * Current template's init file
