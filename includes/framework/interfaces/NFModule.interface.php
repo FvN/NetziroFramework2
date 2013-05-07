@@ -16,66 +16,89 @@
     along with Netziro Framework.  If not, see <http://www.gnu.org/licenses/>.
 
 * ----------------------------------------------------------------------
-*                 NETZIRO FRAMEWORK - Module Init
+*                 NETZIRO FRAMEWORK - MODULE MODEL INTERFACE
 * ----------------------------------------------------------------------
 * SOFTWARE UNDER GPL LICENSE
 * AUTHOR Alessio Nobile >> www.netziro.it >> netziro@gmail.com
 * ----------------------------------------------------------------------
-* CLASS NAME:				NFTheme
-* FILE RELATIVE LOCATION:	modules/$module/init.php
+* CLASS NAME:				NFModule
+* FILE RELATIVE LOCATION:	includes/core/models/NFModule.model.php
 * CREATOR:					Alessio Nobile
 * ----------------------------------------------------------------------
-* CLASS DESCRIPTION:		Class used to init the theme
+* CLASS DESCRIPTION:		Module model interface
 * ----------------------------------------------------------------------
 */
 
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
- * @package		NFapp
+ * @package		NFModule
  *
  * @desc
- * Theme init class
+ * Module model interface
  * 
- * ERROR CODES 4000-5000
+ * ERROR CODES 6000-8000
  * 
  */
 
-class app extends NFModule implements NFModuleModel{
-	
-	protected $module_name;
-	
-	protected $dataset = array();
+interface NFModuleModel{
 	
 	/**
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
-	 * Template Init Method
+	 * If your module requires any files add the logic here.
 	 *
 	 */
-	static function ModuleRouter(){ 
-		
-		
-		echo "ciao";
-		
+	static function AutoLoad();
 	
-	
-	}
-	
-
-	/* (non-PHPdoc)
-	 * @see NFModuleModel::LoadUI()
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Module Init Method and request router
+	 *
 	 */
-	static function LoadUI(){
-		
-		//NFUserInterface::IncludeCSS( "bootstrap.css" );
-		//NFUserInterface::IncludeCSS( "bootstrap-responsive.css" );
-		//NFUserInterface::IncludeJS( "jquery.js" );
-		//NFUserInterface::IncludeJS( "bootstrap.min.js" );
-		
-	}
+	static function ModuleRouter();
 	
-	static function LoadVisibilityRules(){}
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Load methods visibility rules 
+	 *
+	 */
+	static function LoadVisibilityRules();
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Load all User Interface requirements for the given module
+	 * 
+	 */
+	static function LoadUI();
 	
 }
+
+
+interface NFModuleView{
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Module Init Method
+	 *
+	 */
+	public function ListView();
+	
+	public function AddView();
+	
+	public function SearchView();
+	
+	public function DelView();
+	
+		
+}
+

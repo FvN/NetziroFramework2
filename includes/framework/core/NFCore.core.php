@@ -123,7 +123,7 @@ class NFCore extends NFramework{
 	 */
 	protected static function InitInstanceAPI(){
 		
-		NFModule::Router();
+		NFModule::Init();
 		
 	}
 	

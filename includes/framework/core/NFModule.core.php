@@ -102,6 +102,7 @@ class NFModule extends NFramework{
 			
 			if( self::Exist( $module ) ){
 				
+				call_user_func( array( $module, 'AutoLoad' ) );
 				call_user_func( array( $module, 'ModuleRouter' ) );
 				
 			}
@@ -173,9 +174,9 @@ class NFModule extends NFramework{
 			// ------------------------------------- | START Return true if the module is already registered
 			if( $rows == 1 ){
 				
-				if( file_exists( self::$module_directory ) AND file_exists( self::$module_index ) ){
+				if( file_exists( self::$module_directory ) AND file_exists( self::$module_init ) ){
 					
-					parent::AddAutoloaderKey( $module, self::$module_index );
+					parent::AddAutoloaderKey( $module, self::$module_init );
 					return true;
 						
 				} else { throw new Exception( "NFModule - The module is registered, but the directory doesn't exist", 6003 ); return false; }
