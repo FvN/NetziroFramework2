@@ -63,18 +63,22 @@ class NFLogger extends NFramework{
 	 * @param intege $code		| Log/Error code
 	 *  
 	 */
-	public static function LogWrite( $level = 3, $log, $class = "General", $code = 0 ){
+	public static function LogWrite( $level = 3, $log = "", $class = "General", $code = 0 ){
 		
-		if( !empty( $log ) ){
-				
-			self::$array_log[ $level ][ $class ][ ][ "message" ] = "$class - ( $code ) $log";
-			self::$array_log[ $level ][ $class ][ ][ "code" ] = $code;
-			self::$array_log[ $level ][ $class ][ ][ "log" ] = $log;
-			
-			if( defined( "NF_INSTANCE_LOG_OUTPUT" ) AND NF_INSTANCE_LOG_OUTPUT ){ echo "$class - ( $code ) $log"; }
-			
-		}
+		// ------------------------------------- | START If log is empty then get it from the error list
+		if( empty( $log ) AND isset( self::$array_errors_code[ $code ] ) ){ $log = self::$array_errors_code[ $code ]; }
+		// ------------------------------------- | END
 		
+		// ------------------------------------- | START Populate the array log
+		self::$array_log[ $level ][ $class ][ ][ "message" ] = "$class - ( $code ) $log";
+		self::$array_log[ $level ][ $class ][ ][ "code" ] = $code;
+		self::$array_log[ $level ][ $class ][ ][ "log" ] = $log;
+		// ------------------------------------- | END
+			
+		// ------------------------------------- | START Log output
+		if( defined( "NF_INSTANCE_LOG_OUTPUT" ) AND NF_INSTANCE_LOG_OUTPUT ){ echo "$class - ( $code ) $log"; }
+		// ------------------------------------- | END
+			
 	}
 	
 	/**
@@ -88,19 +92,10 @@ class NFLogger extends NFramework{
 	
 	/**
 	 * @desc
-	 * Error code inint
-	 *  
-	 */
-	public static function ErrorCodeInit(){
-		
-	}
-	
-	/**
-	 * @desc
 	 * Errors code list
 	 *  
 	 */ 
-	public static function ErrorCodeList(){
+	public static function ErrorCodeInit(){
 		
 		// ------------------------------------- | START Netziro Framework Core errors
 		self::$array_errors_code[ 1 ] = "Netziro Framework - Instance not defined yet";

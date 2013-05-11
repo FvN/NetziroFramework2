@@ -19,6 +19,10 @@ try{
 	NFramework::InitAutoloader();
 	// ------------------------------------- | END
 	
+	// ------------------------------------- | START Debug settings init
+	NFCore::InitDebugSettings();
+	// ------------------------------------- | END
+	
 	// ------------------------------------- | START Instance&Security checks
 	NFCore::CheckInstance();
 	NFCore::CheckSession();
@@ -26,7 +30,6 @@ try{
 	// ------------------------------------- | END
 	
 	// ------------------------------------- | START Executing bootstrap functions
-	NFCore::DefineDebugSettings();
 	NFCore::DefinePHPSettings();
 	NFCore::DefineApplicationPath();
 	NFCore::DefineLocaleSettings();

@@ -302,7 +302,11 @@ class NFCore extends NFramework{
 	 * Check if the session has been started
 	 * 
 	 */
-	public static function DefineDebugSettings(){
+	public static function InitDebugSettings(){
+		
+		// ------------------------------------- | START
+		NFLogger::ErrorCodeInit();
+		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Check if debug mode is on
 		if( defined( "NF_INSTANCE_DEBUG" ) AND NF_INSTANCE_DEBUG ){ error_reporting( E_ALL ); ini_set( "display_errors", 1 ); }
