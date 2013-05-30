@@ -18,6 +18,7 @@ $autoloader[ "NFDependencies" ] = "includes/framework/dependencies/NFDependencie
 $autoloader[ "NFUserInterface" ] = "includes/framework/ui/NFUserInterface.ui.php";
 $autoloader[ "NFLogger" ] = "includes/framework/core/NFLogger.core.php";
 $autoloader[ "NFCrypto" ] = "includes/framework/util/NFCrypto.util.php";
+$autoloader[ "NFCache" ] = "includes/framework/util/NFCache.util.php";
 $autoloader[ "NFIntl" ] = "includes/framework/util/NFIntl.util.php";
 $autoloader[ "NFInstall" ] = "includes/framework/install/NFInstall.core.php";
 $autoloader[ "NFTemplateModel" ] = "includes/framework/interfaces/NFTemplate.interface.php";
