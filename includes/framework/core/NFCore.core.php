@@ -203,6 +203,17 @@ class NFCore extends NFramework{
 	
 	/**
 	 * @desc
+	 * Load Cache infrastructure
+	 * 
+	 */
+	public static function LoadCache(){
+		
+		NFCache::Init();
+		
+	}
+	
+	/**
+	 * @desc
 	 * Define PHP Settings
 	 * 
 	 */

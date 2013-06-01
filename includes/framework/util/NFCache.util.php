@@ -36,17 +36,42 @@
  * @package		NFCache
  *
  * @desc
-
  * 
  */
 
-class NFCache{
+class NFCache extends NFDatabase{
 	
-	private static $redis = true;
+	/**
+	 * Class shared redis socket object
+	 * 
+	 * @var object
+	 */
 	private static $redis_socket;
+	
+	/**
+	 * Redis server hostname
+	 * 
+	 * @var string
+	 * @example localhost
+	 */
 	private static $redis_host = "localhost";
+	
+	/**
+	 * Redis server port
+	 * 
+	 * @var number
+	 * @example 6379
+	 */
 	private static $redis_port = 6379;
-	private static $referer;
+	
+	
+	/**
+	 * Redis keys prefix
+	 * 
+	 * @var string
+	 * @example mykeysets.
+	 */
+	private static $key_prefix;
 	
 	
 	/**
@@ -59,24 +84,29 @@ class NFCache{
 	static public function Init(){
 		
 		try{
+
+			// ------------------------------------- | START Predis class including and registering
+			require_once( "includes/ext/Predis/Autoloader.php" );
+			Predis\Autoloader::register();
+			self::$redis_socket = new Predis\Client( array( "host" => self::$redis_host, "port" => self::$redis_port ) );
+			// ------------------------------------- | END
 			
-			if( self::$redis ){
-				
-				require_once( "ext/Predis/Autoloader.php" );
-				Predis\Autoloader::register();
-				self::$redis_socket = new Predis\Client( array( "host" => self::$redis_host, "port" => self::$redis_port ) );
-				
-			} else { throw new Exception( "Redis option not activated" ); }
-			
-		} catch ( Exception $e ) { return false;  }
+		} catch ( Exception $e ) { echo $e->getMessage();return false;  }
 		
 	}
 	
-	static public function SetReferer( $referer ){
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
+	static public function SetKeyPrefix( $prefix ){
 		
-		if( !empty( $referer ) ){
+		if( !empty( $prefix ) ){
 
-			self::$referer = $referer;
+			self::$key_prefix = "$prefix.";
 			
 		} else { return false; }
 		
@@ -98,8 +128,21 @@ class NFCache{
 		
 		if( !empty( $key ) AND !empty( $value ) ){
 			
-			self::$redis_socket->set( self::$referer.".".$key, $value );
-			if( $exptime !== 0 ){ self::$redis_socket->expire( self::$referer.".".$key, $exptime ); }
+			try{
+				
+				// ------------------------------------- | START Set key value attempt
+				self::$redis_socket->set( self::$key_prefix.$key, $value );
+				if( $exptime !== 0 ){ self::$redis_socket->expire( self::$key_prefix.$key, $exptime ); }
+				// ------------------------------------- | END
+				
+			} catch ( Exception $e ) { 
+
+				// ------------------------------------- | START Pass the error to the global logger
+				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1100 );
+				return false; 
+				// ------------------------------------- | END
+				
+			}
 			
 		} else { return false; }
 		
@@ -118,7 +161,20 @@ class NFCache{
 		
 		if( !empty( $key ) ){
 			
-			return self::$redis_socket->get( self::$referer.".".$key );
+			try{
+				
+				// ------------------------------------- | START Get value attempt
+				return self::$redis_socket->get( self::$key_prefix.$key );
+				// ------------------------------------- | END
+				
+			} catch ( Exception $e ) { 
+
+				// ------------------------------------- | START Pass the error to the global logger
+				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1101 );
+				return false; 
+				// ------------------------------------- | END
+				
+			}
 			
 		} else { return false; }
 		
@@ -137,7 +193,20 @@ class NFCache{
 		
 		if( !empty( $key ) ){
 			
-			return self::$redis_socket->del( self::$referer.".".$key );
+			try{
+				
+				// ------------------------------------- | START Key deleting attempt
+				return self::$redis_socket->del( self::$key_prefix.$key );
+				// ------------------------------------- | END
+				
+			} catch ( Exception $e ) { 
+
+				// ------------------------------------- | START Pass the error to the global logger
+				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1102 );
+				return false; 
+				// ------------------------------------- | END
+				
+			}
 			
 		} else { return false; }
 		
@@ -155,12 +224,93 @@ class NFCache{
 	 * 
 	 * @return boolean
 	 */
-	static public function SetArrayValue( $key, $array, $exptime = 3600 ){
+	static public function SetHash( $key, $array, $exptime = 3600 ){
 		
 		if( !empty( $key ) AND !empty( $array ) ){
 			
-			self::$redis_socket->hmset( self::$referer.".".$key, $array );
-			if( $exptime !== 0 ){ self::$redis_socket->expire( self::$referer.".".$key, $exptime ); }
+			try{
+				
+				// ------------------------------------- | START Set hash attempt
+				self::$redis_socket->hmset( self::$key_prefix.$key );
+				if( $exptime !== 0 ){ self::$redis_socket->expire( self::$key_prefix.$key, $exptime ); }
+				// ------------------------------------- | END
+				
+			} catch ( Exception $e ) { 
+
+				// ------------------------------------- | START Pass the error to the global logger
+				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1103 );
+				return false; 
+				// ------------------------------------- | END
+				
+			}
+			
+		} else { return false; }
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Set a sub key-value for an existing hash
+	 *
+	 * @param string 	$key - Hash name
+	 * @param string 	$field - Field name
+	 * @param string	$value - Subkey value
+	 * 
+	 * 
+	 * @return boolean
+	 */
+	static public function SetHashField( $key, $field, $value ){
+		
+		if( !empty( $key ) AND !empty( $field ) AND !empty( $value ) ){
+			
+			try{ 
+
+				// ------------------------------------- | START Set value for the given field in hash
+				self::$redis_socket->hset( self::$key_prefix.$key, $field, $value );
+				// ------------------------------------- | END
+			
+			} catch ( Exception $e ) { 
+
+				// ------------------------------------- | START Pass the error to the global logger
+				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1104 );
+				return false; 
+				// ------------------------------------- | END
+				
+			}
+			
+		} else { return false; }
+		
+	}	
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Get value from a given key
+	 *
+	 * @param unknown $key
+	 * @return boolean
+	 */
+	static public function GetHash( $key ){
+		
+		if( !empty( $key ) ){
+			
+			try{ 
+			
+				// ------------------------------------- | START Get array
+				return self::$redis_socket->hgetall( self::$key_prefix.$key );
+				// ------------------------------------- | END
+				
+			} catch ( Exception $e ) { 
+
+				// ------------------------------------- | START Pass the error to the global logger
+				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1105 );
+				return false; 
+				// ------------------------------------- | END
+				
+			}
 			
 		} else { return false; }
 		
@@ -175,11 +325,24 @@ class NFCache{
 	 * @param unknown $key
 	 * @return boolean
 	 */
-	static public function GetArrayValue( $key ){
+	static public function GetHashField( $key, $field ){
 		
-		if( !empty( $key ) ){
+		if( !empty( $key ) AND !empty( $field ) ){
 			
-			return self::$redis_socket->hgetall( self::$referer.".".$key );
+			try{
+				
+				// ------------------------------------- | START Get field from hash attempt
+				return self::$redis_socket->hget( self::$key_prefix.$key, $field );
+				// ------------------------------------- | END
+								
+			} catch ( Exception $e ) { 
+
+				// ------------------------------------- | START Pass the error to the global logger
+				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1106 );
+				return false; 
+				// ------------------------------------- | END
+				
+			}
 			
 		} else { return false; }
 		
@@ -194,11 +357,24 @@ class NFCache{
 	 * @param unknown $key
 	 * @return boolean
 	 */
-	static public function DelArrayKey( $key, $array_key ){
+	static public function DelHashField( $key, $field ){
 		
-		if( !empty( $key ) AND !empty( $array_key ) ){
+		if( !empty( $key ) AND !empty( $field ) ){
 			
-			return self::$redis_socket->hdel( self::$referer.".".$key, $array_key );
+			try{
+			
+				// ------------------------------------- | START Del field from the hash attempt
+				return self::$redis_socket->hdel( self::$key_prefix.$key, $field );
+				// ------------------------------------- | END
+				
+			} catch ( Exception $e ) { 
+
+				// ------------------------------------- | START Pass the error to the global logger
+				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1107 );
+				return false; 
+				// ------------------------------------- | END
+				
+			}
 			
 		} else { return false; }
 		
@@ -218,7 +394,20 @@ class NFCache{
 		
 		if( !empty( $key ) ){
 			
-			return self::$redis_socket->ttl( self::$referer.".".$key );
+			try{ 
+				
+				// ------------------------------------- | START Get TTL from a given key
+				return self::$redis_socket->ttl( self::$key_prefix.$key );
+				// ------------------------------------- | END
+				
+			} catch ( Exception $e ) { 
+
+				// ------------------------------------- | START Pass the error to the global logger
+				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1108 );
+				return false; 
+				// ------------------------------------- | END
+				
+			}
 			
 		} else { return false; }
 		

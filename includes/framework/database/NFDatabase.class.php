@@ -197,7 +197,7 @@ class NFDatabase {
 	 * @param string	$encoding		Define the session's encoding - Default : utf8
 	 * 	 
 	 */
-	function NFDatabase( $credentials = array(), $timezone = "Europe/Amsterdam", $ssl = false, $database_type = "mysql", $encoding = "utf8" ) {
+	public function NFDatabase( $credentials = array(), $timezone = "Europe/Amsterdam", $ssl = false, $database_type = "mysql", $encoding = "utf8" ) {
 		
 		try{
 		
@@ -352,7 +352,7 @@ class NFDatabase {
 			
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = 'Line: ' . $e->getLine() . ' ' . $e->getMessage(); 
-			NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
+			NFLogger::LogWrite( 1, $e->getMessage() . $query, __CLASS__ . __METHOD__, $e->getCode() );
 			return false; 
 			// ------------------------------------- | END
 		

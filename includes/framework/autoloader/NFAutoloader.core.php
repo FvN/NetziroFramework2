@@ -25,3 +25,5 @@ $autoloader[ "NFTemplateModel" ] = "includes/framework/interfaces/NFTemplate.int
 $autoloader[ "NFModule" ] = "includes/framework/core/NFModule.core.php";
 $autoloader[ "NFModuleModel" ] = "includes/framework/interfaces/NFModule.interface.php";
 $autoloader[ "NFModuleView" ] = "includes/framework/interfaces/NFModule.interface.php";
+$autoloader[ "NFDataModelSimple" ] = "includes/framework/datamodels/NFDataModelSimple.class.php";
+$autoloader[ "NFDataModelTable" ] = "includes/framework/datamodels/NFDataModelTable.class.php";

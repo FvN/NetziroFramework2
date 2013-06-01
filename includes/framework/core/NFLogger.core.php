@@ -132,6 +132,18 @@ class NFLogger extends NFramework{
 		self::$array_errors_code[ 1030 ] = "NFDatabase - Something wrong on the query";
 		// ------------------------------------- | END
 		
+		// ------------------------------------- | START NFCache errors
+		self::$array_errors_code[ 1100 ] = "NFCache - SetKeyValue failed";
+		self::$array_errors_code[ 1101 ] = "NFCache - GetKeyValue failed";
+		self::$array_errors_code[ 1102 ] = "NFCache - DelKey failed";
+		self::$array_errors_code[ 1103 ] = "NFCache - SetHash failed";
+		self::$array_errors_code[ 1104 ] = "NFCache - SetHashField failed";
+		self::$array_errors_code[ 1105 ] = "NFCache - GetHash failed";
+		self::$array_errors_code[ 1106 ] = "NFCache - GetHashField failed";
+		self::$array_errors_code[ 1107 ] = "NFCache - DelHashField failed";
+		self::$array_errors_code[ 1108 ] = "NFCache - GetTTLkey failed";
+		// ------------------------------------- | END
+		
 		// ------------------------------------- | START NFUserInterface errors
 		self::$array_errors_code[ 4000 ] = "NFUserInterface - The template {{details}} directory or index doesn't exist";
 		// ------------------------------------- | END
