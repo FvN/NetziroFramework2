@@ -89,26 +89,48 @@ class NFDataModel{
 
 				foreach( $dataset as $field ){
 					
-					$this->RegisterField(
-							
-							$field[ "name" ],
-							$field[ "type" ],
-							$field[ "length" ],
-							$field[ "default_value" ],
-							$field[ "validation_type" ],
-							$field[ "mandatory" ],
-							$field[ "manipulation" ],
-							$field[ "index" ]
-							
-					);
+					if( $this->CheckInputFieldIntegrity( $field ) ){
+						
+						$this->RegisterField(
+								$field[ "name" ],
+								$field[ "type" ],
+								$field[ "length" ],
+								$field[ "default_value" ],
+								$field[ "validation_type" ],
+								$field[ "mandatory" ],
+								$field[ "manipulation" ],
+								$field[ "index" ]
+						);
+						
+					}
 					
 				}
 					
 			}
 			
-			
-			
 		} else { return false; }
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Check if the input array contains all required keys 
+	 *
+	 */
+	protected function CheckInputFieldIntegrity( $field = array() ){
+		
+		if( 
+			isset( $field[ "name" ] ) AND
+			isset( $field[ "type" ] ) AND
+			( isset( $field[ "length" ] ) AND is_int( $field[ "length" ] ) ) AND
+			isset( $field[ "default_value" ] ) AND
+			isset( $field[ "validation_type" ] ) AND
+			isset( $field[ "mandatory" ] ) AND
+			isset( $field[ "manipulation" ] ) AND
+			isset( $field[ "index" ] )
+		){ return true; } else { return false; }
 		
 	}
 	
