@@ -270,10 +270,14 @@ class NFDataModel{
 			
 			$params = array( ':todelete' => $id );
 			$sql = "DELETE FROM `$this->table` WHERE id = :todelete;";
-			NFCore::$database_links[ "master" ]->Query( $sql, $params );
-			if( $this->cache ){ NFCache::DelKey( "$this->table.id.$id" ); }
+			if( NFCore::$database_links[ "master" ]->Query( $sql, $params ) ){
+				
+				if( $this->cache ){ NFCache::DelKey( "$this->table.id.$id" ); }
+				return true;	
+				
+			} else { return false; }
 			
-		}
+		} else { return false; }
 		
 	}
 	

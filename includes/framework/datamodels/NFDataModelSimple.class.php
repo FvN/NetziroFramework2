@@ -290,7 +290,7 @@ class NFDataModelSimple{
 			// ------------------------------------- | START Exec query
 			$sql = "DELETE FROM `$this->table` WHERE ( `$this->field_key` = :toremove );";
 			$params = array( ':toremove' => $key );
-			NFCore::$database_links[ "master" ]->Query( $sql, $params );
+			return NFCore::$database_links[ "master" ]->Query( $sql, $params );
 			// ------------------------------------- | END
 			
 		} else { return false; }
@@ -353,11 +353,13 @@ class NFDataModelSimple{
 		
 		if( $this->Exist( $key ) ){
 			
-			$this->DeleteDB( $key );
-			if( $this->cache ){ NFCache::DelKey( "$this->table.$key" ); }
-			unset( $this->data_array[ $key ] );
-			
-			return true;
+			if( $this->DeleteDB( $key ) ){
+				
+				if( $this->cache ){ NFCache::DelKey( "$this->table.$key" ); }
+				unset( $this->data_array[ $key ] );
+				return true;
+				
+			} else { return false; }
 			
 		} else { return false; }
 		

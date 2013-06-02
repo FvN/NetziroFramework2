@@ -333,6 +333,7 @@ class NFDatabase {
 				// ------------------------------------- | START Define some info
 				if( preg_match( "/^SELECT/", $query ) OR preg_match( "/^SHOW/", $query ) ){ $this->rows = count( $this->result );	}
 				if( preg_match( "/^INSERT/", $query ) ){ $this->id = $this->link->lastInsertId( ); }
+				if( preg_match( "/^DELETE/", $query ) ){ $this->result = true; }
 				// ------------------------------------- | END
 				
 			} else { throw new PDOException( "Something wrong on the query", 1030 ); $this->query->closeCursor(); }

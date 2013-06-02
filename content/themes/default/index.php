@@ -56,6 +56,8 @@ if( NFCore::$database_links[ "master" ]->IsLinked() ){
 		$object->SetValue( "field3" , "i'm alessio" );
 		$object->Insert();
 		
+		$object->Delete( 41 );
+		
 		// ------------------------------------- | END
 		
 		
