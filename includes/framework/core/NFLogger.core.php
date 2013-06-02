@@ -155,6 +155,24 @@ class NFLogger extends NFramework{
 		self::$array_errors_code[ 6003 ] = "NFModule - The module is registered, but the directory doesn't exist";
 		// ------------------------------------- | END
 		
+		// ------------------------------------- | START NFData
+		self::$array_errors_code[ 7001 ] = "NFData - You must specify a field name";
+		self::$array_errors_code[ 7002 ] = "NFData - You must specify a supported field type";
+		self::$array_errors_code[ 7003 ] = "NFData - You must specify a supported data validation type";
+		self::$array_errors_code[ 7004 ] = "NFData - You must specify a supported index";
+		self::$array_errors_code[ 7005 ] = "NFData - ";
+		self::$array_errors_code[ 7006 ] = "NFData - ";
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START NFDataModel
+		self::$array_errors_code[ 8001 ] = "NFDataModel - ";
+		self::$array_errors_code[ 8002 ] = "NFDataModel - ";
+		self::$array_errors_code[ 8003 ] = "NFDataModel - ";
+		self::$array_errors_code[ 8004 ] = "NFDataModel - ";
+		self::$array_errors_code[ 8005 ] = "NFDataModel - ";
+		self::$array_errors_code[ 8006 ] = "NFDataModel - ";
+		// ------------------------------------- | END
+		
 		
 	}
 	

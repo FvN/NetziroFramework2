@@ -26,7 +26,7 @@
 * CREATOR:					Alessio Nobile
 * ----------------------------------------------------------------------
 * CLASS DESCRIPTION:		
-* 
+* Simple data model for key-value storaging and built-in caching method using NFCache class
 * ----------------------------------------------------------------------
 */
 
@@ -36,9 +36,8 @@
  * @package		NFDataModelSimple
  *
  * @desc
- *
- *
- *
+ * Simple data model for key-value storaging and built-in caching method using NFCache class
+ * 
  */
 class NFDataModelSimple{
 	
@@ -67,6 +66,18 @@ class NFDataModelSimple{
 	protected $data_array = array();
 	
 	/**
+	 * Caching system
+	 * @var boolean
+	 */
+	protected $cache = false;
+	
+	/**
+	 * Cache expiring time
+	 * @var boolean
+	 */
+	protected $cache_expire = 3600;
+	
+	/**
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
@@ -88,6 +99,26 @@ class NFDataModelSimple{
 		} else { return false; }
 		
 	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Set/Get Cache option for the given model
+	 *
+	 */
+	public function GetCache(){ return $this->cache; }
+	public function SetCache( $option = false ){ $this->cache = $option; }
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Set/Get Cache expiring time
+	 *
+	 */
+	public function GetCacheExpire(){ return $this->cache_expire; }
+	public function SetCacheExpire( $time = 3600 ){ $this->cache_expire = $time; }
 	
 	/**
 	 * @author Alessio Nobile
@@ -118,24 +149,28 @@ class NFDataModelSimple{
 	 */
 	protected function ExistInCache( $key ){
 		
-		// ------------------------------------- | START Get the key from the cache
-		$cache_result = NFCache::GetKeyValue( "$this->table.$key" );
-		// ------------------------------------- | END
+		if( $this->cache ){
 		
-		// ------------------------------------- | START Chek the result
-		if( $cache_result === false OR empty( $cache_result ) ){			
+			// ------------------------------------- | START Get the key from the cache
+			$cache_result = NFCache::GetKeyValue( "$this->table.$key" );
+			// ------------------------------------- | END
 			
-			unset( $cache_result );
-			return false;
+			// ------------------------------------- | START Chek the result
+			if( $cache_result === false OR empty( $cache_result ) ){			
+				
+				unset( $cache_result );
+				return false;
+				
+			} else { 
+				
+				$this->data_array[ $key ] = $cache_result;
+				unset( $cache_result );
+				return true;
+				
+			}
+			// ------------------------------------- | END
 			
-		} else { 
-			
-			$this->data_array[ $key ] = $cache_result;
-			unset( $cache_result );
-			return true;
-			
-		}
-		// ------------------------------------- | END
+		} else{ return false; }
 		
 	}
 	
@@ -170,7 +205,7 @@ class NFDataModelSimple{
 		} else { 
 			
 			$value = $results[ 0 ][ $this->field_value ];
-			NFCache::SetKeyValue( "$this->table.$key", $value );
+			if( $this->cache ){ NFCache::SetKeyValue( "$this->table.$key", $value, $this->cache_expire ); }
 			$this->data_array[ $key ] = $value;
 			unset( $results );
 			unset( $value );
@@ -279,7 +314,7 @@ class NFDataModelSimple{
 			if( !$this->Exist( $key ) ){
 				
 				$this->InsertDB( $key, $value );
-				NFCache::SetKeyValue( "$this->table.$key", $value );
+				if( $this->cache ){ NFCache::SetKeyValue( "$this->table.$key", $value, $this->cache_expire ); }
 				$this->data_array[ $key ] = $value;
 				
 			} else { return false; }
@@ -319,7 +354,7 @@ class NFDataModelSimple{
 		if( $this->Exist( $key ) ){
 			
 			$this->DeleteDB( $key );
-			NFCache::DelKey( "$this->table.$key" );
+			if( $this->cache ){ NFCache::DelKey( "$this->table.$key" ); }
 			unset( $this->data_array[ $key ] );
 			
 			return true;
@@ -327,7 +362,5 @@ class NFDataModelSimple{
 		} else { return false; }
 		
 	}
-	
-	
 	
 }

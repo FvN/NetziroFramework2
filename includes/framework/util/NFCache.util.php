@@ -231,7 +231,7 @@ class NFCache extends NFDatabase{
 			try{
 				
 				// ------------------------------------- | START Set hash attempt
-				self::$redis_socket->hmset( self::$key_prefix.$key );
+				self::$redis_socket->hmset( self::$key_prefix.$key, $array );
 				if( $exptime !== 0 ){ self::$redis_socket->expire( self::$key_prefix.$key, $exptime ); }
 				// ------------------------------------- | END
 				

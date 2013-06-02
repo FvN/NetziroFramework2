@@ -272,7 +272,7 @@ class NFDatabase {
 				// ------------------------------------- | END  
 				
 				// ------------------------------------- | START Define instance settings
-				$this->link->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+				$this->link->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT );
 				$this->link->query( "SET CHARACTER SET $this->encoding" );
 				$this->link->query( "SET NAMES '$this->encoding'" );
 				$this->link->query( "SET SESSION time_zone = '$this->timezone'" );
@@ -332,7 +332,7 @@ class NFDatabase {
 				
 				// ------------------------------------- | START Define some info
 				if( preg_match( "/^SELECT/", $query ) OR preg_match( "/^SHOW/", $query ) ){ $this->rows = count( $this->result );	}
-				if( preg_match( "/^INSERT/", $query ) ){ $this->id = $this->link->lastInsertId(); }
+				if( preg_match( "/^INSERT/", $query ) ){ $this->id = $this->link->lastInsertId( ); }
 				// ------------------------------------- | END
 				
 			} else { throw new PDOException( "Something wrong on the query", 1030 ); $this->query->closeCursor(); }
@@ -340,7 +340,6 @@ class NFDatabase {
 
 			// ------------------------------------- | START Variables cleaning up
 			unset( $query );
-			unset( $result );
 			$this->query->closeCursor();
 			// ------------------------------------- | END
 			

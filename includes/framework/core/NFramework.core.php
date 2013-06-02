@@ -132,16 +132,6 @@ class NFramework{
 				break;
 			// ------------------------------------- | END
 			
-			// ------------------------------------- | START Predis autoloader
-			/*case strpos( $class, "Predis\\" ):
-				
-			 	$parts = explode( '\\', substr( $class, $this->prefixLength ) );
-	            $filepath = $this->directory . DIRECTORY_SEPARATOR . implode( DIRECTORY_SEPARATOR, $parts ) . '.php';
-	
-	            if (is_file($filepath)) { require($filepath); }
-	            break;*/
-			// ------------------------------------- | END
-			
 			// ------------------------------------- | START Default case
 			default:
 				

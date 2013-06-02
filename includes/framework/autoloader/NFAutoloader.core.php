@@ -13,6 +13,7 @@
  
 $autoloader[ "NFDatabase" ] = "includes/framework/database/NFDatabase.class.php";
 $autoloader[ "NFCore" ] = "includes/framework/core/NFCore.core.php";
+$autoloader[ "NFData" ] = "includes/framework/core/NFData.core.php";
 $autoloader[ "NFSettings" ] = "includes/framework/core/NFSettings.core.php";
 $autoloader[ "NFDependencies" ] = "includes/framework/dependencies/NFDependencies.core.php";
 $autoloader[ "NFUserInterface" ] = "includes/framework/ui/NFUserInterface.ui.php";
@@ -26,4 +27,4 @@ $autoloader[ "NFModule" ] = "includes/framework/core/NFModule.core.php";
 $autoloader[ "NFModuleModel" ] = "includes/framework/interfaces/NFModule.interface.php";
 $autoloader[ "NFModuleView" ] = "includes/framework/interfaces/NFModule.interface.php";
 $autoloader[ "NFDataModelSimple" ] = "includes/framework/datamodels/NFDataModelSimple.class.php";
-$autoloader[ "NFDataModelTable" ] = "includes/framework/datamodels/NFDataModelTable.class.php";
+$autoloader[ "NFDataModel" ] = "includes/framework/datamodels/NFDataModel.class.php";
