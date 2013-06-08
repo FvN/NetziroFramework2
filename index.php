@@ -4,7 +4,8 @@ session_start();
 
 define( "NF_INSTANCE", "application" );
 
-require_once( "includes/framework/core/NFBootstrap.core.php" );
+require_once( "autoloader.register.php" );
+NFBootstrap::Init();
 
 
 ob_end_flush( );
