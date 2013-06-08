@@ -56,7 +56,7 @@ class Bootstrap{
 			Netziro\Framework::RouteInstance();
 			// ------------------------------------- | END	
 			
-		} catch( \Exception $e ){ Netziro\Core\Logger\NFLogger::LogWrite( 0, $e->getMessage(), "General.NFBootstrap", $e->getCode() ); exit(0); }
+		} catch( \Exception $e ){ Netziro\Core\Logger::LogWrite( 0, $e->getMessage(), "General.Bootstrap", $e->getCode() ); exit(0); }
 		
 	}
 	

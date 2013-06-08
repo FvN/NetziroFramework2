@@ -110,71 +110,71 @@ class Logger{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START NFAutoloader errors
-		self::$array_errors_code[ 6 ] = "NFAutoloader - You tried to load the class {{details}}, but cannot be associated";
-		self::$array_errors_code[ 7 ] = "NFAutoloader - You tried to load the class {{details}}, but the file doesn't exist";
-		self::$array_errors_code[ 8 ] = "NFAutoloader - You tried to load the module {{details}}, but the file doesn't exist";
-		self::$array_errors_code[ 9 ] = "NFAutoloader - You tried to load the template {{details}}, but the file doesn't exist";
-		self::$array_errors_code[ 10 ] = "NFAutoloader - You tried to load the configuration file, but the file doesn't exist";
-		self::$array_errors_code[ 11 ] = "NFAutoloader - You tried to load the DB credentials configurations, but it doesn't exist";
+		self::$array_errors_code[ 6 ] = "Autoloader - You tried to load the class {{details}}, but cannot be associated";
+		self::$array_errors_code[ 7 ] = "Autoloader - You tried to load the class {{details}}, but the file doesn't exist";
+		self::$array_errors_code[ 8 ] = "Autoloader - You tried to load the module {{details}}, but the file doesn't exist";
+		self::$array_errors_code[ 9 ] = "Autoloader - You tried to load the template {{details}}, but the file doesn't exist";
+		self::$array_errors_code[ 10 ] = "Autoloader - You tried to load the configuration file, but the file doesn't exist";
+		self::$array_errors_code[ 11 ] = "Autoloader - You tried to load the DB credentials configurations, but it doesn't exist";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START NFIntl errors
-		self::$array_errors_code[ 15 ] = "NFIntl - SetLocale failed. Empty locale value";
-		self::$array_errors_code[ 20 ] = "NFIntl - {{details}} timezone not supported";
-		self::$array_errors_code[ 21 ] = "NFIntl - {{details}} locale format not correct";
-		self::$array_errors_code[ 22 ] = "NFIntl - {{details}} locale is not supported";
+		self::$array_errors_code[ 15 ] = "Intl - SetLocale failed. Empty locale value";
+		self::$array_errors_code[ 20 ] = "Intl - {{details}} timezone not supported";
+		self::$array_errors_code[ 21 ] = "Intl - {{details}} locale format not correct";
+		self::$array_errors_code[ 22 ] = "Intl - {{details}} locale is not supported";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START NFDatabase errors
-		self::$array_errors_code[ 1000 ] = "NFDatabase - Database credentials array has been not instanciated yet. Check your NFConfig file";
-		self::$array_errors_code[ 1001 ] = "NFDatabase - You must specify the hostname";
-		self::$array_errors_code[ 1002 ] = "NFDatabase - You must specify the database name";
-		self::$array_errors_code[ 1003 ] = "NFDatabase - You must specify an username";
-		self::$array_errors_code[ 1004 ] = "NFDatabase - You must specify a password";
-		self::$array_errors_code[ 1010 ] = "NFDatabase - You have specified a db profile, but the file has been not found";
-		self::$array_errors_code[ 1020 ] = "NFDatabase - The database class is locked";
-		self::$array_errors_code[ 1030 ] = "NFDatabase - Something wrong on the query";
+		self::$array_errors_code[ 1000 ] = "Database - Database credentials array has been not instanciated yet. Check your NFConfig file";
+		self::$array_errors_code[ 1001 ] = "Database - You must specify the hostname";
+		self::$array_errors_code[ 1002 ] = "Database - You must specify the database name";
+		self::$array_errors_code[ 1003 ] = "Database - You must specify an username";
+		self::$array_errors_code[ 1004 ] = "Database - You must specify a password";
+		self::$array_errors_code[ 1010 ] = "Database - You have specified a db profile, but the file has been not found";
+		self::$array_errors_code[ 1020 ] = "Database - The database class is locked";
+		self::$array_errors_code[ 1030 ] = "Database - Something wrong on the query";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START NFCache errors
-		self::$array_errors_code[ 1100 ] = "NFCache - SetKeyValue failed";
-		self::$array_errors_code[ 1101 ] = "NFCache - GetKeyValue failed";
-		self::$array_errors_code[ 1102 ] = "NFCache - DelKey failed";
-		self::$array_errors_code[ 1103 ] = "NFCache - SetHash failed";
-		self::$array_errors_code[ 1104 ] = "NFCache - SetHashField failed";
-		self::$array_errors_code[ 1105 ] = "NFCache - GetHash failed";
-		self::$array_errors_code[ 1106 ] = "NFCache - GetHashField failed";
-		self::$array_errors_code[ 1107 ] = "NFCache - DelHashField failed";
-		self::$array_errors_code[ 1108 ] = "NFCache - GetTTLkey failed";
+		self::$array_errors_code[ 1100 ] = "Cache - SetKeyValue failed";
+		self::$array_errors_code[ 1101 ] = "Cache - GetKeyValue failed";
+		self::$array_errors_code[ 1102 ] = "Cache - DelKey failed";
+		self::$array_errors_code[ 1103 ] = "Cache - SetHash failed";
+		self::$array_errors_code[ 1104 ] = "Cache - SetHashField failed";
+		self::$array_errors_code[ 1105 ] = "Cache - GetHash failed";
+		self::$array_errors_code[ 1106 ] = "Cache - GetHashField failed";
+		self::$array_errors_code[ 1107 ] = "Cache - DelHashField failed";
+		self::$array_errors_code[ 1108 ] = "Cache - GetTTLkey failed";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START NFUserInterface errors
-		self::$array_errors_code[ 4000 ] = "NFUserInterface - The template {{details}} directory or index doesn't exist";
+		self::$array_errors_code[ 4000 ] = "UserInterface - The template {{details}} directory or index doesn't exist";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START NFModule
-		self::$array_errors_code[ 6000 ] = "NFModule - The router couldn't find the module on your request";
-		self::$array_errors_code[ 6001 ] = "NFModule - Module not registered";
-		self::$array_errors_code[ 6002 ] = "NFModule - Error during the module registering";
-		self::$array_errors_code[ 6003 ] = "NFModule - The module is registered, but the directory doesn't exist";
+		self::$array_errors_code[ 6000 ] = "Module - The router couldn't find the module on your request";
+		self::$array_errors_code[ 6001 ] = "Module - Module not registered";
+		self::$array_errors_code[ 6002 ] = "Module - Error during the module registering";
+		self::$array_errors_code[ 6003 ] = "Module - The module is registered, but the directory doesn't exist";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START NFData
-		self::$array_errors_code[ 7001 ] = "NFData - You must specify a field name";
-		self::$array_errors_code[ 7002 ] = "NFData - You must specify a supported field type";
-		self::$array_errors_code[ 7003 ] = "NFData - You must specify a supported data validation type";
-		self::$array_errors_code[ 7004 ] = "NFData - You must specify a supported index";
-		self::$array_errors_code[ 7005 ] = "NFData - ";
-		self::$array_errors_code[ 7006 ] = "NFData - ";
+		self::$array_errors_code[ 7001 ] = "DataTypes - You must specify a field name";
+		self::$array_errors_code[ 7002 ] = "DataTypes - You must specify a supported field type";
+		self::$array_errors_code[ 7003 ] = "DataTypes - You must specify a supported data validation type";
+		self::$array_errors_code[ 7004 ] = "DataTypes - You must specify a supported index";
+		self::$array_errors_code[ 7005 ] = "DataTypes - ";
+		self::$array_errors_code[ 7006 ] = "DataTypes - ";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START NFDataModel
-		self::$array_errors_code[ 8001 ] = "NFDataModel - ";
-		self::$array_errors_code[ 8002 ] = "NFDataModel - ";
-		self::$array_errors_code[ 8003 ] = "NFDataModel - ";
-		self::$array_errors_code[ 8004 ] = "NFDataModel - ";
-		self::$array_errors_code[ 8005 ] = "NFDataModel - ";
-		self::$array_errors_code[ 8006 ] = "NFDataModel - ";
+		self::$array_errors_code[ 8001 ] = "DataModel - ";
+		self::$array_errors_code[ 8002 ] = "DataModel - ";
+		self::$array_errors_code[ 8003 ] = "DataModel - ";
+		self::$array_errors_code[ 8004 ] = "DataModel - ";
+		self::$array_errors_code[ 8005 ] = "DataModel - ";
+		self::$array_errors_code[ 8006 ] = "DataModel - ";
 		// ------------------------------------- | END
 		
 		

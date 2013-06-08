@@ -90,7 +90,8 @@ class DataModel{
 			$this->table = $table;
 			
 			if( !empty( $dataset ) ){
-
+				
+				// ------------------------------------- | START Dataset registering
 				foreach( $dataset as $field ){
 					
 					if( $this->CheckInputFieldIntegrity( $field ) ){
@@ -109,6 +110,11 @@ class DataModel{
 					}
 					
 				}
+				// ------------------------------------- | END
+				
+				// ------------------------------------- | START Define caching
+				$this->SetCache( Netziro\Framework::$database_cache );
+				// ------------------------------------- | END
 					
 			}
 			

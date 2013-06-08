@@ -52,7 +52,6 @@ if( Netziro\Framework::$database_links[ "master" ]->IsLinked() ){
 		
 		$object = new Netziro\Data\Models\DataModel( "tabella_prova", $array );
 		
-		$object->SetCache( true );
 		$object->SetValue( "field1" , "i love you" );
 		$object->SetValue( "field2" , "i love you too" );
 		$object->SetValue( "field3" , "i'm alessio" );

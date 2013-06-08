@@ -96,9 +96,15 @@ class DataModelSimple{
 		
 		if( !empty( $table ) ){
 			
+			// ------------------------------------- | START Define settings
 			$this->table = $table;
 			$this->field_key = $field_key;
 			$this->field_value = $field_value;
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START Define caching
+			$this->SetCache( Netziro\Framework::$database_cache );
+			// ------------------------------------- | END
 			
 		} else { return false; }
 		

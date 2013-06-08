@@ -23,6 +23,10 @@ $credentials[ "master" ][ "username" ] = "root";
 $credentials[ "master" ][ "password" ] = "eccolo";
 // ------------------------------------- | END
 
+// ------------------------------------- | START Cache option
+define( "NF_INSTANCE_DB_CACHE", false );
+// ------------------------------------- | END
+
 // ------------------------------------- | START Debugging settings
 define( "NF_INSTANCE_DEBUG", true );
 // ------------------------------------- | END

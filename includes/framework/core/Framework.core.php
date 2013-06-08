@@ -43,6 +43,13 @@ class Framework{
 	public static $database_links_counter = 0;
 	
 	/**
+	 * Database cache active
+	 * 
+	 * @var bool
+	 */
+	public static $database_cache = false;
+	
+	/**
 	 * Contains the init instance type
 	 * 
 	 * @var string
@@ -59,7 +66,7 @@ class Framework{
 	/**
 	 * @var $configurations_path
 	 */
-	public static $configurations_path = "config/NFConfig.core.php";
+	public static $configurations_path = "config/Config.core.php";
 	
 	/**
 	 * @var $credentials
@@ -247,7 +254,12 @@ class Framework{
 	 */
 	public static function LoadCache(){
 		
-		Netziro\Util\Cache::Init();
+		if( defined( "NF_INSTANCE_DB_CACHE" ) AND NF_INSTANCE_DB_CACHE === true ){
+			
+			self::$database_cache = true;
+			Netziro\Util\Cache::Init();
+				
+		}
 		
 	}
 	
