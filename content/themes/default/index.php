@@ -20,7 +20,7 @@ if( Netziro\Framework::$database_links[ "master" ]->IsLinked() ){
 		
 		// ------------------------------------- | START Extended data model test
 		
-		$array = array();
+		/*$array = array();
 		
 		$array[ "field1" ][ "name" ] = "field1";
 		$array[ "field1" ][ "type" ] = "varchar";
@@ -57,12 +57,9 @@ if( Netziro\Framework::$database_links[ "master" ]->IsLinked() ){
 		$object->SetValue( "field3" , "i'm alessio" );
 		$object->Insert();
 		
-		$object->Delete( 41 );
-		
+		$object->Delete( 41 );*/
 		// ------------------------------------- | END
-		
-		
-		
+				
     	Netziro\Modules\Module::Init();
     	
     echo "</div>";

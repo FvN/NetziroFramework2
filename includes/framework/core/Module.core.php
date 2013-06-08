@@ -106,8 +106,8 @@ class Module{
 			
 			if( self::Exist( $module ) ){
 				
-				call_user_func( array( $module, 'AutoLoad' ) );
-				call_user_func( array( $module, 'ModuleRouter' ) );
+				call_user_func( array( "$module\\$module", 'AutoLoad' ) );
+				call_user_func( array( "$module\\$module", 'ModuleRouter' ) );
 				
 			}
 			
@@ -131,7 +131,7 @@ class Module{
 			if( !self::Exist( $module ) ){
 				
 				// ------------------------------------- | START Define query params array
-				$table_name = Netziro\Core\Dependencies\NFDependencies::GetCoreModulesTableName();
+				$table_name = Netziro\Core\Dependencies\Dependencies::GetCoreModulesTableName();
 				$param = array( ":key" => $module );
 				// ------------------------------------- | END
 				
@@ -168,7 +168,7 @@ class Module{
 		if( !empty( $module ) AND ctype_alnum( $module ) ){
 			
 			// ------------------------------------- | START Query executing
-			$table_name = Netziro\Core\Dependencies\NFDependencies::GetCoreModulesTableName();
+			$table_name = Netziro\Core\Dependencies\Dependencies::GetCoreModulesTableName();
 			$sql = "SELECT `key` FROM `$table_name` WHERE `key` = :string_value";
 			$params = array( ":string_value" => $module );
 			$results = Netziro\Framework::$database_links[ "master" ]->Query( $sql, $params );
@@ -180,7 +180,7 @@ class Module{
 				
 				if( file_exists( self::$module_directory ) AND file_exists( self::$module_init ) ){
 					
-					Netziro\Core\Autoloader\Autoloader::AddKey( $module, self::$module_init );
+					Netziro\Core\Autoloader\Autoloader::AddKey( "$module\\$module", self::$module_init );
 					return true;
 						
 				} else { throw new \Exception( "NFModule - The module is registered, but the directory doesn't exist", 6003 ); return false; }
