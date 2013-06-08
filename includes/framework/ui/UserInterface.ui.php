@@ -34,6 +34,7 @@ namespace Netziro\UI;
 use Netziro;
 use Theme;
 
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -46,7 +47,7 @@ use Theme;
  * 
  */
 
-class NFUserInterface extends Netziro\NFramework{
+class UserInterface{
 	
 	/**
 	 * Default relative themes directory
@@ -223,7 +224,7 @@ class NFUserInterface extends Netziro\NFramework{
 	private static function LoadTemplateSettings(){
 		
 		// ------------------------------------- | START Define the template name
-		$template = Netziro\Core\NFSettings::FetchByKey( "template" );
+		$template = Netziro\Core\Settings::FetchByKey( "template" );
 		if( $template === false ){ $template = self::$default_template; }
 		// ------------------------------------- | END
 		
@@ -249,7 +250,7 @@ class NFUserInterface extends Netziro\NFramework{
 		
 		if( file_exists( self::$template_directory ) AND file_exists( self::$template_index ) AND file_exists( self::$template_init ) ){
 			
-			Theme\NFTheme::Init();
+			Theme\Theme::Init();
 			
 		} else { throw new \Exception( "The template " . self::$template . " directory or index doesn't exist", 4000 ); }
 		

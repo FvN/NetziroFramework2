@@ -31,7 +31,7 @@
 * ----------------------------------------------------------------------
 */
 
-namespace Netziro\Database;
+namespace Netziro;
 
 use Netziro;
 use PDO;
@@ -50,7 +50,7 @@ use PDOException;
  * 
  * ERROR CODES 1000-2000
  */
-class NFDatabase {
+class Database {
 	 
 	/**
 	 * Database Hostname Use IP as possible. You will save time on dns resolution.
@@ -241,7 +241,7 @@ class NFDatabase {
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = $e->getMessage(); 
 			$this->lock = true;
-			Netziro\Core\Logger\NFLogger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
+			Netziro\Core\Logger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
 			return false; 
 			// ------------------------------------- | END
 			
@@ -296,7 +296,7 @@ class NFDatabase {
 			
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = 'Line: ' . $e->getLine() . ' ' . $e->getMessage(); 
-			Netziro\Core\Logger\NFLogger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__ , $e->getCode() );
+			Netziro\Core\Logger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__ , $e->getCode() );
 			$this->linked = false;
 			return false; 
 			// ------------------------------------- | END
@@ -359,7 +359,7 @@ class NFDatabase {
 			
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = 'Line: ' . $e->getLine() . ' ' . $e->getMessage(); 
-			Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage() . $query, __CLASS__ . __METHOD__, $e->getCode() );
+			Netziro\Core\Logger::LogWrite( 1, $e->getMessage() . $query, __CLASS__ . __METHOD__, $e->getCode() );
 			return false; 
 			// ------------------------------------- | END
 		

@@ -45,7 +45,7 @@ use Netziro;
  * 
  */
 
-class NFModule extends Netziro\NFramework{
+class Module{
 	
 	private static $ui = false;
 	private static $permissions_checking = false;
@@ -72,7 +72,7 @@ class NFModule extends Netziro\NFramework{
 	public static function Init(){
 		
 		// ------------------------------------- | START Get the module from the request
-		$module = Netziro\Core\NFCore::GetValueFromRequest( "m" );
+		$module = Netziro\Framework::GetValueFromRequest( "m" );
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Initialize template settings
@@ -140,7 +140,7 @@ class NFModule extends Netziro\NFramework{
 				// ------------------------------------- | END
 				
 				// ------------------------------------- | START Query executing
-				$created = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql );
+				$created = Netziro\Framework::$database_links[ "master" ]->Query( $sql );
 				// ------------------------------------- | END
 				
 				// ------------------------------------- | START Return
@@ -171,8 +171,8 @@ class NFModule extends Netziro\NFramework{
 			$table_name = Netziro\Core\Dependencies\NFDependencies::GetCoreModulesTableName();
 			$sql = "SELECT `key` FROM `$table_name` WHERE `key` = :string_value";
 			$params = array( ":string_value" => $module );
-			$results = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $params );
-			$rows = Netziro\Core\NFCore::$database_links[ "master" ]->GetRows();
+			$results = Netziro\Framework::$database_links[ "master" ]->Query( $sql, $params );
+			$rows = Netziro\Framework::$database_links[ "master" ]->GetRows();
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Return true if the module is already registered
@@ -180,7 +180,7 @@ class NFModule extends Netziro\NFramework{
 				
 				if( file_exists( self::$module_directory ) AND file_exists( self::$module_init ) ){
 					
-					parent::AddAutoloaderKey( $module, self::$module_init );
+					Netziro\Core\Autoloader\Autoloader::AddKey( $module, self::$module_init );
 					return true;
 						
 				} else { throw new \Exception( "NFModule - The module is registered, but the directory doesn't exist", 6003 ); return false; }

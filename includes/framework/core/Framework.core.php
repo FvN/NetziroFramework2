@@ -11,7 +11,7 @@
 * ----------------------------------------------------------------------
 */
 
-namespace Netziro\Core;
+namespace Netziro;
 
 use Netziro;
 
@@ -26,7 +26,7 @@ use Netziro;
  * ERROR CODES 0-1000
  * 
  */
-class NFCore extends Netziro\NFramework{
+class Framework{
 
 	/**
 	 * It will contain all DB instances
@@ -55,6 +55,41 @@ class NFCore extends Netziro\NFramework{
 	 * @var array
 	 */
 	protected static $request_array = array();
+	
+	/**
+	 * @var $configurations_path
+	 */
+	public static $configurations_path = "config/NFConfig.core.php";
+	
+	/**
+	 * @var $credentials
+	 */
+	protected static $credentials = array();
+	
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
+	public static function InitConf(){
+		
+		if( file_exists( self::$configurations_path ) ){
+	
+			require_once( self::$configurations_path );
+			
+			if( isset( $credentials ) ){
+				
+				self::$credentials = $credentials;
+				unset( $credentials );
+				
+			} else { throw new \Exception( "NFAutoloader - You tried to load the DB credentials configurations, but it doesn't exist" , 11 ); }
+			
+		} else { throw new \Exception( "NFAutoloader - You tried to load the configuration file, but the file doesn't exist" , 10 ); }
+		
+	}
 	
 	
 	/**
@@ -113,8 +148,8 @@ class NFCore extends Netziro\NFramework{
 	 */
 	protected static function InitInstanceApplication(){
 		
-		Netziro\Modules\NFModule::SetUI();
-		Netziro\UI\NFUserInterface::Init();
+		Netziro\Modules\Module::SetUI();
+		Netziro\UI\UserInterface::Init();
 		
 	}
 	
@@ -127,7 +162,7 @@ class NFCore extends Netziro\NFramework{
 	 */
 	protected static function InitInstanceAPI(){
 		
-		Netziro\Modules\NFModule::Init();
+		Netziro\Modules\Module::Init();
 		
 	}
 	
@@ -142,9 +177,9 @@ class NFCore extends Netziro\NFramework{
 		
 		try{
 			
-			Netziro\Install\NFInstall::Init();
+			Netziro\Install\Install::Init();
 			
-		} catch( \Exception $e ){ Netziro\Core\Logger\NFLogger::LogWrite( 4000, $e->getMessage(), "Instance.Setup - Your template doesn't match the Template methods requirement", $e->getCode() ); }
+		} catch( \Exception $e ){ Netziro\Core\Logger::LogWrite( 4000, $e->getMessage(), "Instance.Setup - Your template doesn't match the Template methods requirement", $e->getCode() ); }
 		
 	}
 	
@@ -190,12 +225,12 @@ class NFCore extends Netziro\NFramework{
 	 */
 	public static function LoadDatabaseLinks(){
 		
-		if( is_array( parent::$credentials ) ){
+		if( is_array( self::$credentials ) ){
 				
-			foreach( parent::$credentials as $profile_name => $credential ){
+			foreach( self::$credentials as $profile_name => $credential ){
 				
 				if( empty( $profile_name ) ){ $profile_name = self::$database_links_counter; }
-				self::$database_links[ $profile_name ] = new Netziro\Database\NFDatabase( $credential );
+				self::$database_links[ $profile_name ] = new Netziro\Database( $credential );
 				self::$database_links[ $profile_name ]->OpenLink();
 				self::$database_links_counter++;
 				
@@ -212,7 +247,7 @@ class NFCore extends Netziro\NFramework{
 	 */
 	public static function LoadCache(){
 		
-		Netziro\Util\NFCache::Init();
+		Netziro\Util\Cache::Init();
 		
 	}
 	
@@ -300,7 +335,7 @@ class NFCore extends Netziro\NFramework{
 	 */
 	public static function CheckInstallationIntegrity(){
 		//if( !NFSettings::IsTableExisting() ){ throw new Exception( "Netziro Framework Settings tables has been not created yet", 3 ); }
-		return NFSettings::IsTableExisting();
+		return Netziro\Core\Settings::IsTableExisting();
 	}
 	
 	/**
@@ -320,7 +355,7 @@ class NFCore extends Netziro\NFramework{
 	public static function InitDebugSettings(){
 		
 		// ------------------------------------- | START
-		Netziro\Core\Logger\NFLogger::ErrorCodeInit();
+		Netziro\Core\Logger::ErrorCodeInit();
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Check if debug mode is on
@@ -329,7 +364,7 @@ class NFCore extends Netziro\NFramework{
 		
 		// ------------------------------------- | START Check if backtrace needs to be printed out at the end of the execution
 		if( defined( "NF_INSTANCE_LOG_BACKTRACE" ) AND NF_INSTANCE_LOG_BACKTRACE ){
-			register_shutdown_function( array( "Netziro\\Core\\Logger\\NFLogger", "BackTracePrint" ) );
+			register_shutdown_function( array( "Netziro\\Core\\Logger", "BackTracePrint" ) );
 		}
 		// ------------------------------------- | END
 		
@@ -385,7 +420,7 @@ class NFCore extends Netziro\NFramework{
 		} elseif ( isset( $_SESSION[ "locale" ] ) ) {
 			$locale = $_SESSION[ "locale" ];
 		} else {
-			$locale = Netziro\Util\Locale\NFIntl::LocaleHttpHeader();
+			$locale = Netziro\Util\Locale\Intl::LocaleHttpHeader();
 			if( empty( $locale ) ){
 				if( defined( "NF_INSTANCE_LOCALE_DEFAULT" ) ){ $locale = NF_INSTANCE_LOCALE_DEFAULT; }	
 			}
@@ -393,13 +428,13 @@ class NFCore extends Netziro\NFramework{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START If $lang layout isn't correct, we set default locale
-		$locales = Netziro\Util\Locale\NFIntl::GetLocalesSupported( );
+		$locales = Netziro\Util\Locale\Intl::GetLocalesSupported( );
 		if( strlen( $locale ) != 5 OR substr( $locale, 2, 1 ) != "_" ){ throw new \Exception( "Netziro Framework $locale locale format not correct", 21 ); }
 		if( !in_array( $locale , $locales ) ){ throw new \Exception( "Netziro Framework $locale locale is not supported", 22 ); }
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Set locale for the instance
-		Netziro\Util\Locale\NFIntl::SetLocale( $locale );
+		Netziro\Util\Locale\Intl::SetLocale( $locale );
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Unset variables

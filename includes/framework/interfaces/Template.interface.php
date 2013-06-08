@@ -16,16 +16,16 @@
     along with Netziro Framework.  If not, see <http://www.gnu.org/licenses/>.
 
 * ----------------------------------------------------------------------
-*                 NETZIRO FRAMEWORK - MODULE MODEL INTERFACE
+*                 NETZIRO FRAMEWORK - TEMPLATE MODEL INTERFACE
 * ----------------------------------------------------------------------
 * SOFTWARE UNDER GPL LICENSE
 * AUTHOR Alessio Nobile >> www.netziro.it >> netziro@gmail.com
 * ----------------------------------------------------------------------
-* CLASS NAME:				NFModule
-* FILE RELATIVE LOCATION:	includes/core/models/NFModule.model.php
+* CLASS NAME:				NFTemplate
+* FILE RELATIVE LOCATION:	includes/core/ui/NFTemplate.model.php
 * CREATOR:					Alessio Nobile
 * ----------------------------------------------------------------------
-* CLASS DESCRIPTION:		Module model interface
+* CLASS DESCRIPTION:		Templates model interface
 * ----------------------------------------------------------------------
 */
 
@@ -34,73 +34,24 @@ namespace Netziro\Models;
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
- * @package		NFModule
+ * @package		NFTemplate
  *
  * @desc
- * Module model interface
+ * Template model interface
  * 
- * ERROR CODES 6000-8000
+ * ERROR CODES 4000-5000
  * 
  */
 
-interface NFModuleModel{
+interface TemplateModel{
 	
 	/**
 	 * @author Alessio Nobile
 	 * 
 	 * @desc
-	 * If your module requires any files add the logic here.
+	 * Template Init Method
 	 *
 	 */
-	static function AutoLoad();
-	
-	/**
-	 * @author Alessio Nobile
-	 * 
-	 * @desc
-	 * Module Init Method and request router
-	 *
-	 */
-	static function ModuleRouter();
-	
-	/**
-	 * @author Alessio Nobile
-	 * 
-	 * @desc
-	 * Load methods visibility rules 
-	 *
-	 */
-	static function LoadVisibilityRules();
-	
-	/**
-	 * @author Alessio Nobile
-	 * 
-	 * @desc
-	 * Load all User Interface requirements for the given module
-	 * 
-	 */
-	static function LoadUI();
+	public static function Init();
 	
 }
-
-
-interface NFModuleView{
-	
-	/**
-	 * @author Alessio Nobile
-	 * 
-	 * @desc
-	 * Module Init Method
-	 *
-	 */
-	public function ListView();
-	
-	public function AddView();
-	
-	public function SearchView();
-	
-	public function DelView();
-	
-		
-}
-

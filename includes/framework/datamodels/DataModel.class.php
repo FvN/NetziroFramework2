@@ -34,7 +34,6 @@ namespace Netziro\Data\Models;
 
 use Netziro;
 
-
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -45,7 +44,7 @@ use Netziro;
  *
  *
  */
-class NFDataModel{
+class DataModel{
 	
 	/**
 	 * Source table name
@@ -150,11 +149,11 @@ class NFDataModel{
 		
 		if( !empty( $name ) AND ctype_alnum( $name ) ){ 
 			
-			if( Netziro\Data\NFData::IsSupportedDataType( $type ) ){ 
+			if( Netziro\Data\DataTypes::IsSupportedDataType( $type ) ){ 
 				
-				if( empty( $validation_type ) OR Netziro\Data\NFData::IsSupportedDataValidationType( $validation_type ) ){
+				if( empty( $validation_type ) OR Netziro\Data\DataTypes::IsSupportedDataValidationType( $validation_type ) ){
 					 
-					if( empty( $index ) OR Netziro\Data\NFData::IsSupportedIndexType( $index ) ){
+					if( empty( $index ) OR Netziro\Data\DataTypes::IsSupportedIndexType( $index ) ){
 		
 						$this->dataset[ $name ][ "name" ] = $name;
 						$this->dataset[ $name ][ "type" ] = $type; 
@@ -244,12 +243,12 @@ class NFDataModel{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Query executing
-		$result = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $values );
-		$id = Netziro\Core\NFCore::$database_links[ "master" ]->id;
+		$result = Netziro\Framework::$database_links[ "master" ]->Query( $sql, $values );
+		$id = Netziro\Framework::$database_links[ "master" ]->id;
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Cache
-		if( $this->cache ){ Netziro\Util\NFCache::SetHash( "$this->table.id.$id", $values_cache, $this->cache_expire ); }
+		if( $this->cache ){ Netziro\Util\Cache::SetHash( "$this->table.id.$id", $values_cache, $this->cache_expire ); }
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Unsets
@@ -275,9 +274,9 @@ class NFDataModel{
 			
 			$params = array( ':todelete' => $id );
 			$sql = "DELETE FROM `$this->table` WHERE id = :todelete;";
-			if( Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $params ) ){
+			if( Netziro\Framework::$database_links[ "master" ]->Query( $sql, $params ) ){
 				
-				if( $this->cache ){ Netziro\Util\NFCache::DelKey( "$this->table.id.$id" ); }
+				if( $this->cache ){ Netziro\Util\Cache::DelKey( "$this->table.id.$id" ); }
 				return true;	
 				
 			} else { return false; }

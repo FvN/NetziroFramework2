@@ -44,7 +44,7 @@ use Predis;
  * 
  */
 
-class NFCache extends Netziro\Database\NFDatabase{
+class Cache{
 	
 	/**
 	 * Class shared redis socket object
@@ -91,7 +91,6 @@ class NFCache extends Netziro\Database\NFDatabase{
 		try{
 
 			// ------------------------------------- | START Predis class including and registering
-			require_once( "includes/ext/Predis/Autoloader.php" );
 			Predis\Autoloader::register();
 			self::$redis_socket = new Predis\Client( array( "host" => self::$redis_host, "port" => self::$redis_port ) );
 			// ------------------------------------- | END
@@ -143,7 +142,7 @@ class NFCache extends Netziro\Database\NFDatabase{
 			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1100 );
+				Netziro\Core\Logger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1100 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -175,7 +174,7 @@ class NFCache extends Netziro\Database\NFDatabase{
 			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1101 );
+				Netziro\Core\Logger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1101 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -207,7 +206,7 @@ class NFCache extends Netziro\Database\NFDatabase{
 			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1102 );
+				Netziro\Core\Logger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1102 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -243,7 +242,7 @@ class NFCache extends Netziro\Database\NFDatabase{
 			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1103 );
+				Netziro\Core\Logger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1103 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -279,7 +278,7 @@ class NFCache extends Netziro\Database\NFDatabase{
 			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1104 );
+				Netziro\Core\Logger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1104 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -311,7 +310,7 @@ class NFCache extends Netziro\Database\NFDatabase{
 			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1105 );
+				Netziro\Core\Logger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1105 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -343,7 +342,7 @@ class NFCache extends Netziro\Database\NFDatabase{
 			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1106 );
+				Netziro\Core\Logger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1106 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -375,7 +374,7 @@ class NFCache extends Netziro\Database\NFDatabase{
 			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1107 );
+				Netziro\Core\Logger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1107 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -408,7 +407,7 @@ class NFCache extends Netziro\Database\NFDatabase{
 			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1108 );
+				Netziro\Core\Logger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1108 );
 				return false; 
 				// ------------------------------------- | END
 				

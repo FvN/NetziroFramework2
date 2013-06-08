@@ -24,7 +24,7 @@ use Netziro;
  * NFSettings class will contain core methods to handle framework settings
  * 
  */
-class NFSettings extends Netziro\NFramework{
+class Settings{
 	
 	
 	/**
@@ -37,9 +37,9 @@ class NFSettings extends Netziro\NFramework{
 		
 		// ------------------------------------- | START Query executing
 		$sql = "SELECT COUNT(*) AS `check` FROM `information_schema`.`tables` WHERE `table_schema` = :database_name AND `table_name` = :table_name;";
-		$params = array( ':table_name' => Netziro\Core\Dependencies\NFDependencies::GetCoreSettingsTableName(), ':database_name' => Netziro\Core\NFCore::$database_links[ "master" ]->GetDatabaseName() );
-		$results = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $params );
-		$rows = Netziro\Core\NFCore::$database_links[ "master" ]->GetRows();
+		$params = array( ':table_name' => Netziro\Core\Dependencies\Dependencies::GetCoreSettingsTableName(), ':database_name' => Netziro\Framework::$database_links[ "master" ]->GetDatabaseName() );
+		$results = Netziro\Framework::$database_links[ "master" ]->Query( $sql, $params );
+		$rows = Netziro\Framework::$database_links[ "master" ]->GetRows();
 		// ------------------------------------- | END
 			
 		// ------------------------------------- | START Return results if there are, false otherwise
@@ -61,10 +61,10 @@ class NFSettings extends Netziro\NFramework{
 	public static function FetchAll(){
 		
 		// ------------------------------------- | START Query executing
-		$table_name = Netziro\Core\Dependencies\NFDependencies::GetCoreSettingsTableName();
+		$table_name = Netziro\Core\Dependencies\Dependencies::GetCoreSettingsTableName();
 		$sql = "SELECT `value` FROM $table_name";
-		$results = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql );
-		$rows = Netziro\Core\NFCore::$database_links[ "master" ]->GetRows();
+		$results = Netziro\Framework::$database_links[ "master" ]->Query( $sql );
+		$rows = Netziro\Framework::$database_links[ "master" ]->GetRows();
 		// ------------------------------------- | END
 			
 		// ------------------------------------- | START Return results if there are, false otherwise
@@ -91,11 +91,11 @@ class NFSettings extends Netziro\NFramework{
 		if( !empty( $key ) AND ctype_alnum( $key ) ){
 			
 			// ------------------------------------- | START Query executing
-			$table_name = Netziro\Core\Dependencies\NFDependencies::GetCoreSettingsTableName();
+			$table_name = Netziro\Core\Dependencies\Dependencies::GetCoreSettingsTableName();
 			$sql = "SELECT `value` FROM `$table_name` WHERE `key` = :string_value";
 			$params = array( ":string_value" => $key );
-			$results = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $params );
-			$rows = Netziro\Core\NFCore::$database_links[ "master" ]->GetRows();
+			$results = Netziro\Framework::$database_links[ "master" ]->Query( $sql, $params );
+			$rows = Netziro\Framework::$database_links[ "master" ]->GetRows();
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Data Processing if there is a single result

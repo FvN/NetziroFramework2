@@ -30,7 +30,7 @@
 * ----------------------------------------------------------------------
 */
 
-namespace Netziro\Core\Logger;
+namespace Netziro\Core;
 
 use Netziro;
 
@@ -51,7 +51,7 @@ use Netziro;
  * 
  */
 
-class NFLogger extends Netziro\NFramework{
+class Logger{
 	
 	private static $array_errors_code = array();
 	
@@ -208,7 +208,7 @@ class NFLogger extends Netziro\NFramework{
 		// ------------------------------------- | START Logs printing
 		echo "<h5>Netziro Framework logs:</h5>";
 		echo "<div class=\"debug-div\">";
-			Netziro\Core\NFCore::PrintPre( self::$array_log );
+			Netziro\Framework::PrintPre( self::$array_log );
 		echo "</div>";
 		echo "<hr />";
 		// ------------------------------------- | END
@@ -216,7 +216,7 @@ class NFLogger extends Netziro\NFramework{
 		// ------------------------------------- | START print out the list of included files
 		echo "<h5>File Included:</h5>";
 		echo "<div class=\"debug-div\">";
-			Netziro\Core\NFCore::PrintPre( get_included_files() );
+			Netziro\Framework::PrintPre( get_included_files() );
 		echo "</div>";
 		echo "<hr />";
 		// ------------------------------------- | END
@@ -224,7 +224,7 @@ class NFLogger extends Netziro\NFramework{
 		// ------------------------------------- | START Request vars
 		echo "<h5>Request Vars:</h5>";
 		echo "<div class=\"debug-div\">";
-			Netziro\Core\NFCore::PrintPre( $_REQUEST );
+			Netziro\Framework::PrintPre( $_REQUEST );
 		echo "</div>";
 		echo "<hr />";
 		
@@ -235,9 +235,9 @@ class NFLogger extends Netziro\NFramework{
 			echo "<h5>Apache headers:</h5>";
 			echo "<div class=\"debug-div\">";
 				if( !isset( $argv ) ){ $headers = apache_request_headers(); }
-				echo "<strong>Request headers:</strong> <br/ >" . Netziro\Core\NFCore::PrintPre( $headers );
+				echo "<strong>Request headers:</strong> <br/ >" . Netziro\Framework::PrintPre( $headers );
 				if( !isset( $argv ) ){ $headers = apache_response_headers(); }
-				echo "<strong>Response headers:</strong> <br/ >" . Netziro\Core\NFCore::PrintPre( $headers );
+				echo "<strong>Response headers:</strong> <br/ >" . Netziro\Framework::PrintPre( $headers );
 			echo "</div>";
 			echo "<hr />";
 		}
@@ -246,8 +246,8 @@ class NFLogger extends Netziro\NFramework{
 		// ------------------------------------- | START Get memory usage
 		echo "<h5>Memory usage info:</h5>";
 		echo "<div class=\"debug-div\">";
-			echo "<strong> Memory Used: " . Netziro\Core\NFCore::FormatBytes( memory_get_usage() ) . "</strong><br />";
-			echo "<strong> Memory Peak Used: " . Netziro\Core\NFCore::FormatBytes( memory_get_peak_usage() ) . "</strong><br />";
+			echo "<strong> Memory Used: " . Netziro\Framework::FormatBytes( memory_get_usage() ) . "</strong><br />";
+			echo "<strong> Memory Peak Used: " . Netziro\Framework::FormatBytes( memory_get_peak_usage() ) . "</strong><br />";
 		echo "</div>";
 		echo "<hr />";
 		// ------------------------------------- | END

@@ -13,8 +13,6 @@
 
 namespace Netziro\Data;
 
-use Netziro;
-
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -25,7 +23,7 @@ use Netziro;
  * ERROR CODES 0-1000
  * 
  */
-class NFData extends Netziro\NFramework{
+class DataTypes{
 	
 	/**
 	 * Supported datatypes

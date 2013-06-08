@@ -39,8 +39,6 @@
 
 namespace Netziro\Util;
 
-
-
 /**
  * 
  * @copyright 	Alessio Nobile <netziro@gmail.com>
@@ -51,7 +49,7 @@ namespace Netziro\Util;
  * 
  */
 
-class NFCrypto{
+class Crypto{
 	
 	private $key;
 	private $auth;

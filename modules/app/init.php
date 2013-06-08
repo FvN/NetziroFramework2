@@ -29,6 +29,11 @@
 * ----------------------------------------------------------------------
 */
 
+namespace app;
+
+use Netziro\Modules;
+use Netziro\Models;
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -41,7 +46,7 @@
  * 
  */
 
-class app extends NFModule implements NFModuleModel{
+class app extends Modules\Module implements Models\ModuleModel{
 	
 	protected $module_name;
 	

@@ -25,7 +25,7 @@ use Netziro;
  * NFCore class will contain core methods used overall the application
  * 
  */
-class NFDependencies extends Netziro\NFramework{
+class Dependencies{
 
 	/**
 	 * @var string | Core tables name prefix
@@ -125,7 +125,7 @@ class NFDependencies extends Netziro\NFramework{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Query executing
-		$created = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql );
+		$created = Netziro\Framework::$database_links[ "master" ]->Query( $sql );
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Return
@@ -162,7 +162,7 @@ class NFDependencies extends Netziro\NFramework{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Query executing
-		$created = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql );
+		$created = Netziro\Framework::$database_links[ "master" ]->Query( $sql );
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Return
@@ -199,7 +199,7 @@ class NFDependencies extends Netziro\NFramework{
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Query executing
-			$created = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql );
+			$created = Netziro\Framework::$database_links[ "master" ]->Query( $sql );
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Return

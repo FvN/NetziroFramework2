@@ -1,7 +1,7 @@
 <?php
 
 
-if( Netziro\Core\NFCore::$database_links[ "master" ]->IsLinked() ){
+if( Netziro\Framework::$database_links[ "master" ]->IsLinked() ){
 	 
 	echo "<div class=\"container\">";
 		echo "<h1>Socket opened</h1>";
@@ -50,7 +50,7 @@ if( Netziro\Core\NFCore::$database_links[ "master" ]->IsLinked() ){
 		$array[ "field3" ][ "index" ] = "";
 		
 		
-		$object = new Netziro\Data\Models\NFDataModel( "tabella_prova", $array );
+		$object = new Netziro\Data\Models\DataModel( "tabella_prova", $array );
 		
 		$object->SetCache( true );
 		$object->SetValue( "field1" , "i love you" );
@@ -64,7 +64,7 @@ if( Netziro\Core\NFCore::$database_links[ "master" ]->IsLinked() ){
 		
 		
 		
-    	Netziro\Modules\NFModule::Init();
+    	Netziro\Modules\Module::Init();
     	
     echo "</div>";
 	

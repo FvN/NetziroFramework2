@@ -31,7 +31,8 @@
 
 namespace Theme;
 
-use Netziro;
+use Netziro\UI;
+use Netziro\Models;
 
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
@@ -45,7 +46,7 @@ use Netziro;
  * 
  */
 
-class NFTheme implements Netziro\Models\NFTemplateModel{
+class Theme implements Models\TemplateModel{
 	
 	/**
 	 * @author Alessio Nobile
@@ -56,14 +57,14 @@ class NFTheme implements Netziro\Models\NFTemplateModel{
 	 */
 	public static function Init(){ 
 		
-		Netziro\UI\NFUserInterface::IncludeCSS( "bootstrap.css" );
-		Netziro\UI\NFUserInterface::IncludeCSS( "bootstrap-responsive.css" );
-		Netziro\UI\NFUserInterface::IncludeJS( "jquery.js" );
-		Netziro\UI\NFUserInterface::IncludeJS( "bootstrap.min.js" );
-		Netziro\UI\NFUserInterface::RenderHTMLHead();
-		require_once( Netziro\UI\NFUserInterface::$template_index );
-		Netziro\UI\NFUserInterface::RenderJS(); 
-		Netziro\UI\NFUserInterface::RenderHTMLFooter();
+		UI\UserInterface::IncludeCSS( "bootstrap.css" );
+		UI\UserInterface::IncludeCSS( "bootstrap-responsive.css" );
+		UI\UserInterface::IncludeJS( "jquery.js" );
+		UI\UserInterface::IncludeJS( "bootstrap.min.js" );
+		UI\UserInterface::RenderHTMLHead();
+		require_once( UI\UserInterface::$template_index );
+		UI\UserInterface::RenderJS(); 
+		UI\UserInterface::RenderHTMLFooter();
 	
 	
 	}

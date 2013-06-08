@@ -31,9 +31,7 @@
 
 namespace Netziro\Util\Locale;
 
-use Netziro;
-
-class NFIntl extends Netziro\NFramework{
+class Intl{
 	
 	private static $locale_instance;
 	private static $NumberFormatter;
