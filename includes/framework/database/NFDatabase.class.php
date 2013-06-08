@@ -31,6 +31,13 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Database;
+
+use Netziro;
+use PDO;
+use PDOException;
+
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -197,8 +204,8 @@ class NFDatabase {
 	 * @param string	$encoding		Define the session's encoding - Default : utf8
 	 * 	 
 	 */
-	public function NFDatabase( $credentials = array(), $timezone = "Europe/Amsterdam", $ssl = false, $database_type = "mysql", $encoding = "utf8" ) {
-		
+	public function __construct( $credentials = array(), $timezone = "Europe/Amsterdam", $ssl = false, $database_type = "mysql", $encoding = "utf8" ) {
+
 		try{
 		
 			// ------------------------------------- | START Check the DB Profile existence
@@ -209,17 +216,17 @@ class NFDatabase {
 					
 					if( file_exists( $profile_file ) ){ 
 						require_once( $profile_file );
-					} else { throw new Exception( "You have specified a db profile, but the file has been not found", 1010 ); }
+					} else { throw new \Exception( "You have specified a db profile, but the file has been not found", 1010 ); }
 					
 				}
 			}
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Check core variables existence
-			if( !empty( $credentials[ "hostname" ] ) ){ $this->hostname = $credentials[ "hostname" ]; } else { throw new Exception( "You must specify the hostname", 1001  ); }
-			if( !empty( $credentials[ "database" ] ) ){ $this->database = $credentials[ "database" ]; } else { throw new Exception( "You must specify the database name", 1002 ); }
-			if( !empty( $credentials[ "username" ] ) ){ $this->username = $credentials[ "username" ]; } else { throw new Exception( "You must specify an username", 1003 ); }
-			if( !empty( $credentials[ "password" ] ) ){ $this->password = $credentials[ "password" ]; } else { throw new Exception( "You must specify a password", 1004 ); }
+			if( !empty( $credentials[ "hostname" ] ) ){ $this->hostname = $credentials[ "hostname" ]; } else { throw new \Exception( "You must specify the hostname", 1001  ); }
+			if( !empty( $credentials[ "database" ] ) ){ $this->database = $credentials[ "database" ]; } else { throw new \Exception( "You must specify the database name", 1002 ); }
+			if( !empty( $credentials[ "username" ] ) ){ $this->username = $credentials[ "username" ]; } else { throw new \Exception( "You must specify an username", 1003 ); }
+			if( !empty( $credentials[ "password" ] ) ){ $this->password = $credentials[ "password" ]; } else { throw new \Exception( "You must specify a password", 1004 ); }
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Set secondary importance database variables
@@ -229,12 +236,12 @@ class NFDatabase {
 			$this->encoding = $encoding;
 			// ------------------------------------- | END
 			
-		} catch( Exception $e ){
+		} catch( \Exception $e ){
 			 
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = $e->getMessage(); 
 			$this->lock = true;
-			NFLogger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
+			Netziro\Core\Logger\NFLogger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
 			return false; 
 			// ------------------------------------- | END
 			
@@ -289,7 +296,7 @@ class NFDatabase {
 			
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = 'Line: ' . $e->getLine() . ' ' . $e->getMessage(); 
-			NFLogger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__, $e->getCode() );
+			Netziro\Core\Logger\NFLogger::LogWrite( 0, $e->getMessage(), __CLASS__ . __METHOD__ , $e->getCode() );
 			$this->linked = false;
 			return false; 
 			// ------------------------------------- | END
@@ -352,7 +359,7 @@ class NFDatabase {
 			
 			// ------------------------------------- | START Store the error and return false
 			$this->errors[ ] = 'Line: ' . $e->getLine() . ' ' . $e->getMessage(); 
-			NFLogger::LogWrite( 1, $e->getMessage() . $query, __CLASS__ . __METHOD__, $e->getCode() );
+			Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage() . $query, __CLASS__ . __METHOD__, $e->getCode() );
 			return false; 
 			// ------------------------------------- | END
 		

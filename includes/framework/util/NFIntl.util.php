@@ -29,7 +29,11 @@
 * ----------------------------------------------------------------------
 */
 
-class NFIntl extends NFramework{
+namespace Netziro\Util\Locale;
+
+use Netziro;
+
+class NFIntl extends Netziro\NFramework{
 	
 	private static $locale_instance;
 	private static $NumberFormatter;
@@ -56,7 +60,7 @@ class NFIntl extends NFramework{
 			define( 'NF_INSTANCE_LANGUAGE', strtoupper( substr( $locale, 0, 2 ) ) );
 			// ------------------------------------- | END
 			
-		} else { throw new Exception( "NFIntl SetLocale failed. Empty locale value", 15 ); }
+		} else { throw new \Exception( "NFIntl SetLocale failed. Empty locale value", 15 ); }
 		
 	}
 	
@@ -70,7 +74,7 @@ class NFIntl extends NFramework{
 	 */
 	public static function LocaleHttpHeader(){
 		
-		$locale = Locale::acceptFromHttp( $_SERVER[ "HTTP_ACCEPT_LANGUAGE" ] );
+		$locale = \Locale::acceptFromHttp( $_SERVER[ "HTTP_ACCEPT_LANGUAGE" ] );
 		return $locale;
 		
 	}	
@@ -87,7 +91,7 @@ class NFIntl extends NFramework{
 		
 		if( is_float( $value ) ){
 			
-			$a = new NumberFormatter( self::$locale_instance, NumberFormatter::DECIMAL ); 
+			$a = new \NumberFormatter( self::$locale_instance, \NumberFormatter::DECIMAL ); 
 			return $a->format( $value ); 
 			
 		} else { return "Your value is not a decimal number."; }
@@ -106,7 +110,7 @@ class NFIntl extends NFramework{
 		
 		if( is_float( $value ) ){
 			
-			$a = new NumberFormatter( self::$locale_instance, NumberFormatter::CURRENCY ); 
+			$a = new \NumberFormatter( self::$locale_instance, \NumberFormatter::CURRENCY ); 
 			return $a->format( $value ); 
 			
 		} else { return "Your value is not a decimal number."; }

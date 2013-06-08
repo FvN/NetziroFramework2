@@ -30,6 +30,11 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Data\Models;
+
+use Netziro;
+
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -145,11 +150,11 @@ class NFDataModel{
 		
 		if( !empty( $name ) AND ctype_alnum( $name ) ){ 
 			
-			if( NFData::IsSupportedDataType( $type ) ){ 
+			if( Netziro\Data\NFData::IsSupportedDataType( $type ) ){ 
 				
-				if( empty( $validation_type ) OR NFData::IsSupportedDataValidationType( $validation_type ) ){
+				if( empty( $validation_type ) OR Netziro\Data\NFData::IsSupportedDataValidationType( $validation_type ) ){
 					 
-					if( empty( $index ) OR NFData::IsSupportedIndexType( $index ) ){
+					if( empty( $index ) OR Netziro\Data\NFData::IsSupportedIndexType( $index ) ){
 		
 						$this->dataset[ $name ][ "name" ] = $name;
 						$this->dataset[ $name ][ "type" ] = $type; 
@@ -161,13 +166,13 @@ class NFDataModel{
 						
 						if( $mandatory ){ array_push( $this->mandatory_fields , $name); }
 						
-					} else { throw new Exception( "You must specify a supported index", 7004 ); }	
+					} else { throw new \Exception( "You must specify a supported index", 7004 ); }	
 					
-				} else { throw new Exception( "You must specify a supported data validation type", 7003 ); }
+				} else { throw new \Exception( "You must specify a supported data validation type", 7003 ); }
 				
-			} else { throw new Exception( "You must specify a supported field type", 7002 ); }
+			} else { throw new \Exception( "You must specify a supported field type", 7002 ); }
 			
-		} else { throw new Exception( "You must specify a field name", 7001 ); }
+		} else { throw new \Exception( "You must specify a field name", 7001 ); }
 		
 	}
 	
@@ -239,12 +244,12 @@ class NFDataModel{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Query executing
-		$result = NFCore::$database_links[ "master" ]->Query( $sql, $values );
-		$id = NFCore::$database_links[ "master" ]->id;
+		$result = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $values );
+		$id = Netziro\Core\NFCore::$database_links[ "master" ]->id;
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Cache
-		if( $this->cache ){ NFCache::SetHash( "$this->table.id.$id", $values_cache, $this->cache_expire ); }
+		if( $this->cache ){ Netziro\Util\NFCache::SetHash( "$this->table.id.$id", $values_cache, $this->cache_expire ); }
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Unsets
@@ -270,9 +275,9 @@ class NFDataModel{
 			
 			$params = array( ':todelete' => $id );
 			$sql = "DELETE FROM `$this->table` WHERE id = :todelete;";
-			if( NFCore::$database_links[ "master" ]->Query( $sql, $params ) ){
+			if( Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $params ) ){
 				
-				if( $this->cache ){ NFCache::DelKey( "$this->table.id.$id" ); }
+				if( $this->cache ){ Netziro\Util\NFCache::DelKey( "$this->table.id.$id" ); }
 				return true;	
 				
 			} else { return false; }

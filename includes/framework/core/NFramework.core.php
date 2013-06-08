@@ -11,6 +11,8 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro;
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -50,9 +52,9 @@ class NFramework{
 				self::$credentials = $credentials;
 				unset( $credentials );
 				
-			} else { throw new Exception( "NFAutoloader - You tried to load the DB credentials configurations, but it doesn't exist" , 11 ); }
+			} else { throw new \Exception( "NFAutoloader - You tried to load the DB credentials configurations, but it doesn't exist" , 11 ); }
 			
-		} else { throw new Exception( "NFAutoloader - You tried to load the configuration file, but the file doesn't exist" , 10 ); }
+		} else { throw new \Exception( "NFAutoloader - You tried to load the configuration file, but the file doesn't exist" , 10 ); }
 		
 	}
 	

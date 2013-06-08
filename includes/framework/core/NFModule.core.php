@@ -29,6 +29,10 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Modules;
+
+use Netziro;
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -41,7 +45,7 @@
  * 
  */
 
-class NFModule extends NFramework{
+class NFModule extends Netziro\NFramework{
 	
 	private static $ui = false;
 	private static $permissions_checking = false;
@@ -68,7 +72,7 @@ class NFModule extends NFramework{
 	public static function Init(){
 		
 		// ------------------------------------- | START Get the module from the request
-		$module = NFCore::GetValueFromRequest( "m" );
+		$module = Netziro\Core\NFCore::GetValueFromRequest( "m" );
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Initialize template settings
@@ -127,7 +131,7 @@ class NFModule extends NFramework{
 			if( !self::Exist( $module ) ){
 				
 				// ------------------------------------- | START Define query params array
-				$table_name = NFDependencies::GetCoreModulesTableName();
+				$table_name = Netziro\Core\Dependencies\NFDependencies::GetCoreModulesTableName();
 				$param = array( ":key" => $module );
 				// ------------------------------------- | END
 				
@@ -136,7 +140,7 @@ class NFModule extends NFramework{
 				// ------------------------------------- | END
 				
 				// ------------------------------------- | START Query executing
-				$created = NFCore::$database_links[ "master" ]->Query( $sql );
+				$created = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql );
 				// ------------------------------------- | END
 				
 				// ------------------------------------- | START Return
@@ -164,11 +168,11 @@ class NFModule extends NFramework{
 		if( !empty( $module ) AND ctype_alnum( $module ) ){
 			
 			// ------------------------------------- | START Query executing
-			$table_name = NFDependencies::GetCoreModulesTableName();
+			$table_name = Netziro\Core\Dependencies\NFDependencies::GetCoreModulesTableName();
 			$sql = "SELECT `key` FROM `$table_name` WHERE `key` = :string_value";
 			$params = array( ":string_value" => $module );
-			$results = NFCore::$database_links[ "master" ]->Query( $sql, $params );
-			$rows = NFCore::$database_links[ "master" ]->GetRows();
+			$results = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $params );
+			$rows = Netziro\Core\NFCore::$database_links[ "master" ]->GetRows();
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Return true if the module is already registered
@@ -179,12 +183,12 @@ class NFModule extends NFramework{
 					parent::AddAutoloaderKey( $module, self::$module_init );
 					return true;
 						
-				} else { throw new Exception( "NFModule - The module is registered, but the directory doesn't exist", 6003 ); return false; }
+				} else { throw new \Exception( "NFModule - The module is registered, but the directory doesn't exist", 6003 ); return false; }
 				
-			} else { throw new Exception( "NFModule - Module not registered", 6001 ); return false; }
+			} else { throw new \Exception( "NFModule - Module not registered", 6001 ); return false; }
 			// ------------------------------------- | END
 			
-		} else { throw new Exception( "NFModule - The router couldn't find the module on your request", 6000 ); return false; }
+		} else { throw new \Exception( "NFModule - The router couldn't find the module on your request", 6000 ); return false; }
 		// ------------------------------------- | END
 		
 		

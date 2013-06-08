@@ -11,6 +11,10 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Data;
+
+use Netziro;
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -21,7 +25,7 @@
  * ERROR CODES 0-1000
  * 
  */
-class NFData extends NFramework{
+class NFData extends Netziro\NFramework{
 	
 	/**
 	 * Supported datatypes

@@ -11,6 +11,11 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Core\Dependencies;
+
+use Netziro;
+
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -20,7 +25,7 @@
  * NFCore class will contain core methods used overall the application
  * 
  */
-class NFDependencies extends NFramework{
+class NFDependencies extends Netziro\NFramework{
 
 	/**
 	 * @var string | Core tables name prefix
@@ -120,7 +125,7 @@ class NFDependencies extends NFramework{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Query executing
-		$created = NFCore::$database_links[ "master" ]->Query( $sql );
+		$created = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql );
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Return
@@ -157,7 +162,7 @@ class NFDependencies extends NFramework{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Query executing
-		$created = NFCore::$database_links[ "master" ]->Query( $sql );
+		$created = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql );
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Return
@@ -194,7 +199,7 @@ class NFDependencies extends NFramework{
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Query executing
-			$created = NFCore::$database_links[ "master" ]->Query( $sql );
+			$created = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql );
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Return

@@ -29,6 +29,9 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Models;
+
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile

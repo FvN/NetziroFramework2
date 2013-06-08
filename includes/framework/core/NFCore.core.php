@@ -11,6 +11,10 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Core;
+
+use Netziro;
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -22,7 +26,7 @@
  * ERROR CODES 0-1000
  * 
  */
-class NFCore extends NFramework{
+class NFCore extends Netziro\NFramework{
 
 	/**
 	 * It will contain all DB instances
@@ -90,7 +94,7 @@ class NFCore extends NFramework{
 				
 			// ------------------------------------- | START Default
 			default:
-				throw new Exception( "Netziro Framework tried to init the instance but we couldn't recognize the instance type", 3 );
+				throw new \Exception( "Netziro Framework tried to init the instance but we couldn't recognize the instance type", 3 );
 				break;
 			// ------------------------------------- | END
 			
@@ -109,8 +113,8 @@ class NFCore extends NFramework{
 	 */
 	protected static function InitInstanceApplication(){
 		
-		NFModule::SetUI();
-		NFUserInterface::Init();
+		Netziro\Modules\NFModule::SetUI();
+		Netziro\UI\NFUserInterface::Init();
 		
 	}
 	
@@ -123,7 +127,7 @@ class NFCore extends NFramework{
 	 */
 	protected static function InitInstanceAPI(){
 		
-		NFModule::Init();
+		Netziro\Modules\NFModule::Init();
 		
 	}
 	
@@ -138,9 +142,9 @@ class NFCore extends NFramework{
 		
 		try{
 			
-			NFInstall::Init();
+			Netziro\Install\NFInstall::Init();
 			
-		} catch( Exception $e ){ NFLogger::LogWrite( 4000, $e->getMessage(), "Instance.Setup - Your template doesn't match the Template methods requirement", $e->getCode() ); }
+		} catch( \Exception $e ){ Netziro\Core\Logger\NFLogger::LogWrite( 4000, $e->getMessage(), "Instance.Setup - Your template doesn't match the Template methods requirement", $e->getCode() ); }
 		
 	}
 	
@@ -191,13 +195,13 @@ class NFCore extends NFramework{
 			foreach( parent::$credentials as $profile_name => $credential ){
 				
 				if( empty( $profile_name ) ){ $profile_name = self::$database_links_counter; }
-				self::$database_links[ $profile_name ] = new NFDatabase( $credential );
+				self::$database_links[ $profile_name ] = new Netziro\Database\NFDatabase( $credential );
 				self::$database_links[ $profile_name ]->OpenLink();
 				self::$database_links_counter++;
 				
 			}
 			
-		} else { throw new Exception( "Database credentials array has been not instanciated yet. Check your NFConfig file", 1000 ); } 
+		} else { throw new \Exception( "Database credentials array has been not instanciated yet. Check your NFConfig file", 1000 ); } 
 		
 	}
 	
@@ -208,7 +212,7 @@ class NFCore extends NFramework{
 	 */
 	public static function LoadCache(){
 		
-		NFCache::Init();
+		Netziro\Util\NFCache::Init();
 		
 	}
 	
@@ -251,17 +255,17 @@ class NFCore extends NFramework{
 		
 		// ------------------------------------- | START Modules checking
 		if( !in_array( "Core" , $modules ) ){ 
-			throw new Exception( "Netziro Framework requires the PHP Core module" , 5 );
+			throw new \Exception( "Netziro Framework requires the PHP Core module" , 5 );
 		} elseif( !in_array( "session" , $modules ) ){ 
-			throw new Exception( "Netziro Framework requires the PHP Session module" , 5 );
+			throw new \Exception( "Netziro Framework requires the PHP Session module" , 5 );
 		} elseif( !in_array( "SimpleXML" , $modules ) ){ 
-			throw new Exception( "Netziro Framework requires the PHP SimpleXML module" , 5 );
+			throw new \Exception( "Netziro Framework requires the PHP SimpleXML module" , 5 );
 		} elseif( !in_array( "PDO" , $modules ) ){ 
-			throw new Exception( "Netziro Framework requires the PHP PDO module" , 5 );
+			throw new \Exception( "Netziro Framework requires the PHP PDO module" , 5 );
 		} elseif( !in_array( "pdo_mysql" , $modules ) ){ 
-			throw new Exception( "Netziro Framework requires the PHP pdo_mysql module" , 5 );
+			throw new \Exception( "Netziro Framework requires the PHP pdo_mysql module" , 5 );
 		} elseif( !in_array( "mcrypt" , $modules ) ){ 
-			throw new Exception( "Netziro Framework requires the PHP mcrypt module" , 5 );
+			throw new \Exception( "Netziro Framework requires the PHP mcrypt module" , 5 );
 		}
 		// ------------------------------------- | END
 		
@@ -277,7 +281,7 @@ class NFCore extends NFramework{
 	 * 
 	 */
 	public static function CheckPHPVersion(){
-		if( ( PHP_MAJOR_VERSION === 5 ) AND !( PHP_MINOR_VERSION >= 4 ) ){ throw new Exception( "Netziro Framework requires PHP 5.4>. You got " . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION , 4 ); }
+		if( ( PHP_MAJOR_VERSION === 5 ) AND !( PHP_MINOR_VERSION >= 4 ) ){ throw new \Exception( "Netziro Framework requires PHP 5.4>. You got " . PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION , 4 ); }
 	}
 	
 	/**
@@ -286,7 +290,7 @@ class NFCore extends NFramework{
 	 * 
 	 */
 	public static function CheckSession(){
-		if( session_status() != PHP_SESSION_ACTIVE ){ throw new Exception( "Netziro Framework session has been not started yet", 2 ); }
+		if( session_status() != PHP_SESSION_ACTIVE ){ throw new \Exception( "Netziro Framework session has been not started yet", 2 ); }
 	}
 	
 	/**
@@ -305,7 +309,7 @@ class NFCore extends NFramework{
 	 * 
 	 */
 	public static function CheckInstance(){
-		if( !defined( "NF_INSTANCE" ) ){ throw new Exception( "Netziro Framework instance not defined yet", 1 ); }
+		if( !defined( "NF_INSTANCE" ) ){ throw new \Exception( "Netziro Framework instance not defined yet", 1 ); }
 	}
 	
 	/**
@@ -316,7 +320,7 @@ class NFCore extends NFramework{
 	public static function InitDebugSettings(){
 		
 		// ------------------------------------- | START
-		NFLogger::ErrorCodeInit();
+		Netziro\Core\Logger\NFLogger::ErrorCodeInit();
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Check if debug mode is on
@@ -325,7 +329,7 @@ class NFCore extends NFramework{
 		
 		// ------------------------------------- | START Check if backtrace needs to be printed out at the end of the execution
 		if( defined( "NF_INSTANCE_LOG_BACKTRACE" ) AND NF_INSTANCE_LOG_BACKTRACE ){
-			register_shutdown_function( array( "NFLogger", "BackTracePrint" ) );
+			register_shutdown_function( array( "Netziro\\Core\\Logger\\NFLogger", "BackTracePrint" ) );
 		}
 		// ------------------------------------- | END
 		
@@ -350,7 +354,7 @@ class NFCore extends NFramework{
 		
 		// ------------------------------------- | START Check if the timezone is supported
 		$zones = timezone_identifiers_list();
-		if( !in_array( $timezone , $zones ) ){ throw new Exception( "Netziro Framework $timezone timezone not supported", 20 ); }
+		if( !in_array( $timezone , $zones ) ){ throw new \Exception( "Netziro Framework $timezone timezone not supported", 20 ); }
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Define Timezone
@@ -381,7 +385,7 @@ class NFCore extends NFramework{
 		} elseif ( isset( $_SESSION[ "locale" ] ) ) {
 			$locale = $_SESSION[ "locale" ];
 		} else {
-			$locale = NFIntl::LocaleHttpHeader();
+			$locale = Netziro\Util\Locale\NFIntl::LocaleHttpHeader();
 			if( empty( $locale ) ){
 				if( defined( "NF_INSTANCE_LOCALE_DEFAULT" ) ){ $locale = NF_INSTANCE_LOCALE_DEFAULT; }	
 			}
@@ -389,13 +393,13 @@ class NFCore extends NFramework{
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START If $lang layout isn't correct, we set default locale
-		$locales = NFIntl::GetLocalesSupported( );
-		if( strlen( $locale ) != 5 OR substr( $locale, 2, 1 ) != "_" ){ throw new Exception( "Netziro Framework $locale locale format not correct", 21 ); }
-		if( !in_array( $locale , $locales ) ){ throw new Exception( "Netziro Framework $locale locale is not supported", 22 ); }
+		$locales = Netziro\Util\Locale\NFIntl::GetLocalesSupported( );
+		if( strlen( $locale ) != 5 OR substr( $locale, 2, 1 ) != "_" ){ throw new \Exception( "Netziro Framework $locale locale format not correct", 21 ); }
+		if( !in_array( $locale , $locales ) ){ throw new \Exception( "Netziro Framework $locale locale is not supported", 22 ); }
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Set locale for the instance
-		NFIntl::SetLocale( $locale );
+		Netziro\Util\Locale\NFIntl::SetLocale( $locale );
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Unset variables

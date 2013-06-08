@@ -37,6 +37,10 @@
 * 
 */
 
+namespace Netziro\Util;
+
+
+
 /**
  * 
  * @copyright 	Alessio Nobile <netziro@gmail.com>
@@ -47,7 +51,7 @@
  * 
  */
 
-class NFCrypto extends NFramework{
+class NFCrypto{
 	
 	private $key;
 	private $auth;
@@ -201,7 +205,7 @@ class NFCrypto extends NFramework{
         if( defined( MCRYPT_DEV_URANDOM ) ) {
             return mcrypt_create_iv( $length, MCRYPT_DEV_URANDOM );
         } else {
-            throw new Exception( "Some errors on the key generator. Please check your OpenSSL + MCRYPT settings" );
+            throw new \Exception( "Some errors on the key generator. Please check your OpenSSL + MCRYPT settings" );
         }
         // ------------------------------------- | END
         	

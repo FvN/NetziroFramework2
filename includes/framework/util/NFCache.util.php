@@ -30,6 +30,11 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Util;
+
+use Netziro;
+use Predis;
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -39,7 +44,7 @@
  * 
  */
 
-class NFCache extends NFDatabase{
+class NFCache extends Netziro\Database\NFDatabase{
 	
 	/**
 	 * Class shared redis socket object
@@ -91,7 +96,7 @@ class NFCache extends NFDatabase{
 			self::$redis_socket = new Predis\Client( array( "host" => self::$redis_host, "port" => self::$redis_port ) );
 			// ------------------------------------- | END
 			
-		} catch ( Exception $e ) { echo $e->getMessage();return false;  }
+		} catch ( \Exception $e ) { echo $e->getMessage();return false;  }
 		
 	}
 	
@@ -135,10 +140,10 @@ class NFCache extends NFDatabase{
 				if( $exptime !== 0 ){ self::$redis_socket->expire( self::$key_prefix.$key, $exptime ); }
 				// ------------------------------------- | END
 				
-			} catch ( Exception $e ) { 
+			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1100 );
+				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1100 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -167,10 +172,10 @@ class NFCache extends NFDatabase{
 				return self::$redis_socket->get( self::$key_prefix.$key );
 				// ------------------------------------- | END
 				
-			} catch ( Exception $e ) { 
+			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1101 );
+				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1101 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -199,10 +204,10 @@ class NFCache extends NFDatabase{
 				return self::$redis_socket->del( self::$key_prefix.$key );
 				// ------------------------------------- | END
 				
-			} catch ( Exception $e ) { 
+			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1102 );
+				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1102 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -235,10 +240,10 @@ class NFCache extends NFDatabase{
 				if( $exptime !== 0 ){ self::$redis_socket->expire( self::$key_prefix.$key, $exptime ); }
 				// ------------------------------------- | END
 				
-			} catch ( Exception $e ) { 
+			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1103 );
+				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1103 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -271,10 +276,10 @@ class NFCache extends NFDatabase{
 				self::$redis_socket->hset( self::$key_prefix.$key, $field, $value );
 				// ------------------------------------- | END
 			
-			} catch ( Exception $e ) { 
+			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1104 );
+				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1104 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -303,10 +308,10 @@ class NFCache extends NFDatabase{
 				return self::$redis_socket->hgetall( self::$key_prefix.$key );
 				// ------------------------------------- | END
 				
-			} catch ( Exception $e ) { 
+			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1105 );
+				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1105 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -335,10 +340,10 @@ class NFCache extends NFDatabase{
 				return self::$redis_socket->hget( self::$key_prefix.$key, $field );
 				// ------------------------------------- | END
 								
-			} catch ( Exception $e ) { 
+			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1106 );
+				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1106 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -367,10 +372,10 @@ class NFCache extends NFDatabase{
 				return self::$redis_socket->hdel( self::$key_prefix.$key, $field );
 				// ------------------------------------- | END
 				
-			} catch ( Exception $e ) { 
+			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1107 );
+				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1107 );
 				return false; 
 				// ------------------------------------- | END
 				
@@ -400,10 +405,10 @@ class NFCache extends NFDatabase{
 				return self::$redis_socket->ttl( self::$key_prefix.$key );
 				// ------------------------------------- | END
 				
-			} catch ( Exception $e ) { 
+			} catch ( \Exception $e ) { 
 
 				// ------------------------------------- | START Pass the error to the global logger
-				NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1108 );
+				Netziro\Core\Logger\NFLogger::LogWrite( 1, $e->getMessage(), __CLASS__ . __METHOD__, 1108 );
 				return false; 
 				// ------------------------------------- | END
 				

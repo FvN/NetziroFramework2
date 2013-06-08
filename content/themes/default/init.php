@@ -29,6 +29,10 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Theme;
+
+use Netziro;
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -41,7 +45,7 @@
  * 
  */
 
-class NFTheme implements NFTemplateModel{
+class NFTheme implements Netziro\Models\NFTemplateModel{
 	
 	/**
 	 * @author Alessio Nobile
@@ -52,14 +56,14 @@ class NFTheme implements NFTemplateModel{
 	 */
 	public static function Init(){ 
 		
-		NFUserInterface::IncludeCSS( "bootstrap.css" );
-		NFUserInterface::IncludeCSS( "bootstrap-responsive.css" );
-		NFUserInterface::IncludeJS( "jquery.js" );
-		NFUserInterface::IncludeJS( "bootstrap.min.js" );
-		NFUserInterface::RenderHTMLHead();
-		require_once( NFUserInterface::$template_index );
-		NFUserInterface::RenderJS(); 
-		NFUserInterface::RenderHTMLFooter();
+		Netziro\UI\NFUserInterface::IncludeCSS( "bootstrap.css" );
+		Netziro\UI\NFUserInterface::IncludeCSS( "bootstrap-responsive.css" );
+		Netziro\UI\NFUserInterface::IncludeJS( "jquery.js" );
+		Netziro\UI\NFUserInterface::IncludeJS( "bootstrap.min.js" );
+		Netziro\UI\NFUserInterface::RenderHTMLHead();
+		require_once( Netziro\UI\NFUserInterface::$template_index );
+		Netziro\UI\NFUserInterface::RenderJS(); 
+		Netziro\UI\NFUserInterface::RenderHTMLFooter();
 	
 	
 	}

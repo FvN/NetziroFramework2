@@ -30,6 +30,10 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Data\Models;
+
+use Netziro;
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -152,7 +156,7 @@ class NFDataModelSimple{
 		if( $this->cache ){
 		
 			// ------------------------------------- | START Get the key from the cache
-			$cache_result = NFCache::GetKeyValue( "$this->table.$key" );
+			$cache_result = Netziro\Util\NFCache::GetKeyValue( "$this->table.$key" );
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Chek the result
@@ -188,7 +192,7 @@ class NFDataModelSimple{
 		// ------------------------------------- | START Exec query
 		$sql = "SELECT `$this->field_value` FROM `$this->table` WHERE `$this->field_key` = :tofetch";
 		$params = array( ':tofetch' => $key );
-		$results = NFCore::$database_links[ "master" ]->Query( $sql, $params );
+		$results = Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $params );
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START Unset strings
@@ -205,7 +209,7 @@ class NFDataModelSimple{
 		} else { 
 			
 			$value = $results[ 0 ][ $this->field_value ];
-			if( $this->cache ){ NFCache::SetKeyValue( "$this->table.$key", $value, $this->cache_expire ); }
+			if( $this->cache ){ Netziro\Util\NFCache::SetKeyValue( "$this->table.$key", $value, $this->cache_expire ); }
 			$this->data_array[ $key ] = $value;
 			unset( $results );
 			unset( $value );
@@ -266,7 +270,7 @@ class NFDataModelSimple{
 			// ------------------------------------- | START Exec query
 			$sql = "INSERT INTO `$this->table` ( `$this->field_key`, `$this->field_value` ) VALUES ( :toadd, :value );";
 			$params = array( ':toadd' => $key, ':value' => $value );
-			NFCore::$database_links[ "master" ]->Query( $sql, $params );
+			Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $params );
 			// ------------------------------------- | END
 			
 		} else { return false; }
@@ -290,7 +294,7 @@ class NFDataModelSimple{
 			// ------------------------------------- | START Exec query
 			$sql = "DELETE FROM `$this->table` WHERE ( `$this->field_key` = :toremove );";
 			$params = array( ':toremove' => $key );
-			return NFCore::$database_links[ "master" ]->Query( $sql, $params );
+			return Netziro\Core\NFCore::$database_links[ "master" ]->Query( $sql, $params );
 			// ------------------------------------- | END
 			
 		} else { return false; }
@@ -314,7 +318,7 @@ class NFDataModelSimple{
 			if( !$this->Exist( $key ) ){
 				
 				$this->InsertDB( $key, $value );
-				if( $this->cache ){ NFCache::SetKeyValue( "$this->table.$key", $value, $this->cache_expire ); }
+				if( $this->cache ){ Netziro\Util\NFCache::SetKeyValue( "$this->table.$key", $value, $this->cache_expire ); }
 				$this->data_array[ $key ] = $value;
 				
 			} else { return false; }
@@ -355,7 +359,7 @@ class NFDataModelSimple{
 			
 			if( $this->DeleteDB( $key ) ){
 				
-				if( $this->cache ){ NFCache::DelKey( "$this->table.$key" ); }
+				if( $this->cache ){ Netziro\Util\NFCache::DelKey( "$this->table.$key" ); }
 				unset( $this->data_array[ $key ] );
 				return true;
 				

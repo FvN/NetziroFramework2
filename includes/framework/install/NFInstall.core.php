@@ -11,6 +11,10 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Install;
+
+use Netziro;
+
 /**
  * @copyright 	Alessio Nobile <netziro@gmail.com>
  * @author 		Alessio Nobile
@@ -23,7 +27,7 @@
  * 
  */
 
-class NFInstall implements NFTemplateModel{
+class NFInstall implements Netziro\Models\NFTemplateModel{
 	
 	/**
 	 * @author Alessio Nobile
@@ -34,17 +38,17 @@ class NFInstall implements NFTemplateModel{
 	 */
 	public static function Init(){ 
 		
-		NFUserInterface::IncludeCSSInline( " body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }" );
-		NFUserInterface::IncludeCSS( "bootstrap.css" );
-		NFUserInterface::IncludeCSS( "bootstrap-responsive.css" );
-		NFUserInterface::IncludeCSS( "install/install.css" );
-		NFUserInterface::IncludeJS( "jquery.js" );
-		NFUserInterface::IncludeJS( "bootstrap.min.js" );
-		NFUserInterface::RenderHTMLHead();
+		Netziro\UI\NFUserInterface::IncludeCSSInline( " body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }" );
+		Netziro\UI\NFUserInterface::IncludeCSS( "bootstrap.css" );
+		Netziro\UI\NFUserInterface::IncludeCSS( "bootstrap-responsive.css" );
+		Netziro\UI\NFUserInterface::IncludeCSS( "install/install.css" );
+		Netziro\UI\NFUserInterface::IncludeJS( "jquery.js" );
+		Netziro\UI\NFUserInterface::IncludeJS( "bootstrap.min.js" );
+		Netziro\UI\NFUserInterface::RenderHTMLHead();
 		//require_once( parent::$template_index );
 		self::Welcome();
-		NFUserInterface::RenderJS(); 
-		NFUserInterface::RenderHTMLFooter();
+		Netziro\UI\NFUserInterface::RenderJS(); 
+		Netziro\UI\NFUserInterface::RenderHTMLFooter();
 	
 	}
 	

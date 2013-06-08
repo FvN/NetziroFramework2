@@ -11,6 +11,9 @@
 * ----------------------------------------------------------------------
 */
 
+namespace Netziro\Core\Bootstrap;
+
+use Netziro;
 /**
  * @author alessio
  *
@@ -29,31 +32,31 @@ class NFBootstrap{
 		try{
 			
 			// ------------------------------------- | START Including Netziro Framework Core files
-			NFramework::InitConf();
+			Netziro\NFramework::InitConf();
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Debug settings init
-			NFCore::InitDebugSettings();
+			Netziro\Core\NFCore::InitDebugSettings();
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Instance&Security checks
-			NFCore::CheckInstance();
-			NFCore::CheckSession();
-			NFCore::CheckPHPEnvironment();
+			Netziro\Core\NFCore::CheckInstance();
+			Netziro\Core\NFCore::CheckSession();
+			Netziro\Core\NFCore::CheckPHPEnvironment();
 			// ------------------------------------- | END
 			
 			// ------------------------------------- | START Executing bootstrap functions
-			NFCore::DefinePHPSettings();
-			NFCore::DefineApplicationPath();
-			NFCore::DefineLocaleSettings();
-			NFCore::DefineTimeZoneSettings();
-			NFCore::LoadDatabaseLinks();
-			NFCore::LoadCache();
-			NFCore::FetchRequest();
-			NFCore::RouteInstance();
+			Netziro\Core\NFCore::DefinePHPSettings();
+			Netziro\Core\NFCore::DefineApplicationPath();
+			Netziro\Core\NFCore::DefineLocaleSettings();
+			Netziro\Core\NFCore::DefineTimeZoneSettings();
+			Netziro\Core\NFCore::LoadDatabaseLinks();
+			Netziro\Core\NFCore::LoadCache();
+			Netziro\Core\NFCore::FetchRequest();
+			Netziro\Core\NFCore::RouteInstance();
 			// ------------------------------------- | END	
 			
-		} catch( Exception $e ){ NFLogger::LogWrite( 0, $e->getMessage(), "General.NFBootstrap", $e->getCode() ); exit(0); }
+		} catch( \Exception $e ){ Netziro\Core\Logger\NFLogger::LogWrite( 0, $e->getMessage(), "General.NFBootstrap", $e->getCode() ); exit(0); }
 		
 	}
 	
