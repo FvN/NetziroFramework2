@@ -52,7 +52,7 @@ interface ModuleModel{
 	 * If your module requires any files add the logic here.
 	 *
 	 */
-	static function AutoLoad();
+	function AutoLoad();
 	
 	/**
 	 * @author Alessio Nobile
@@ -61,7 +61,7 @@ interface ModuleModel{
 	 * Module Init Method and request router
 	 *
 	 */
-	static function ModuleRouter();
+	function ModuleRouter();
 	
 	/**
 	 * @author Alessio Nobile
@@ -70,7 +70,7 @@ interface ModuleModel{
 	 * Load methods visibility rules 
 	 *
 	 */
-	static function LoadVisibilityRules();
+	function LoadVisibilityRules();
 	
 	/**
 	 * @author Alessio Nobile
@@ -79,7 +79,7 @@ interface ModuleModel{
 	 * Load all User Interface requirements for the given module
 	 * 
 	 */
-	static function LoadUI();
+	function LoadUI();
 	
 }
 

@@ -59,13 +59,10 @@ class app extends Modules\Module implements Models\ModuleModel{
 	 * Template Init Method
 	 *
 	 */
-	public static function AutoLoad(){ 
+	public function AutoLoad(){ 
 		
+		$this->ModuleRouter();
 		
-		//echo "ciao";
-		
-	
-	
 	}
 	
 	/**
@@ -75,11 +72,11 @@ class app extends Modules\Module implements Models\ModuleModel{
 	 * Template Init Method
 	 *
 	 */
-	public static function ModuleRouter(){ 
+	public function ModuleRouter(){ 
 		
 		
 		echo "ciao";
-		
+		//echo $this->test();
 	
 	
 	}
@@ -88,7 +85,7 @@ class app extends Modules\Module implements Models\ModuleModel{
 	/* (non-PHPdoc)
 	 * @see NFModuleModel::LoadUI()
 	 */
-	public static function LoadUI(){
+	public function LoadUI(){
 		
 		//NFUserInterface::IncludeCSS( "bootstrap.css" );
 		//NFUserInterface::IncludeCSS( "bootstrap-responsive.css" );
@@ -97,6 +94,6 @@ class app extends Modules\Module implements Models\ModuleModel{
 		
 	}
 	
-	public static function LoadVisibilityRules(){}
+	public function LoadVisibilityRules(){}
 	
 }

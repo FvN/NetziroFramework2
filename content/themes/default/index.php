@@ -61,7 +61,7 @@ if( Netziro\Framework::$database_links[ "master" ]->IsLinked() ){
 		// ------------------------------------- | END
 				
     	Netziro\Modules\Module::Init();
-    	
+    	//Netziro\Modules\Module::Test();
     echo "</div>";
 	
 	

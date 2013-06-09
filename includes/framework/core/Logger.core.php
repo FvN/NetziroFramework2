@@ -157,6 +157,8 @@ class Logger{
 		self::$array_errors_code[ 6001 ] = "Module - Module not registered";
 		self::$array_errors_code[ 6002 ] = "Module - Error during the module registering";
 		self::$array_errors_code[ 6003 ] = "Module - The module is registered, but the directory doesn't exist";
+		self::$array_errors_code[ 6004 ] = "Module - You have called a method which doesn't exist";
+		self::$array_errors_code[ 6005 ] = "Module - You have called a static method which doesn't exist";
 		// ------------------------------------- | END
 		
 		// ------------------------------------- | START NFData

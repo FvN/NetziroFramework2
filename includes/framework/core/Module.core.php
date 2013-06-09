@@ -59,6 +59,34 @@ class Module{
 	private static $nf_module_init = "init.php";
 	
 	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Methods overloading  
+	 *
+	 */
+	public function __call( $method, $arguments ){
+		
+		echo "The method $method doesn't exist";
+		throw new \Exception( "You have called a method which doesn't exist", 6004 );
+		
+	}
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * Static methods overloading
+	 *
+	 */
+	public static function __callStatic( $method, $arguments ){
+		
+		echo "The method $method doesn't exist";
+		throw new \Exception( "You have called a static method which doesn't exist", 6005 );
+		
+	}
+	
 	public static function SetUI( $value = true ){ self::$ui = $value; }
 	public static function SetPermissionsChecking( $value = true ){ self::$permissions_checking = $value; }
 	
@@ -106,8 +134,19 @@ class Module{
 			
 			if( self::Exist( $module ) ){
 				
-				call_user_func( array( "$module\\$module", 'AutoLoad' ) );
-				call_user_func( array( "$module\\$module", 'ModuleRouter' ) );
+				// ------------------------------------- | START Instanciate a new object on the fly 
+				$module_call = "$module\\$module";
+				$object = new $module_call;
+				// ------------------------------------- | END
+				
+				// ------------------------------------- | START Call the object autoloader
+				call_user_func( array( $object, 'AutoLoad' ) );
+				// ------------------------------------- | END
+				
+				// ------------------------------------- | START Unset Object and class
+				unset( $object );
+				unset( $module_class );
+				// ------------------------------------- | END
 				
 			}
 			
@@ -141,6 +180,12 @@ class Module{
 				
 				// ------------------------------------- | START Query executing
 				$created = Netziro\Framework::$database_links[ "master" ]->Query( $sql );
+				// ------------------------------------- | END
+				
+				// ------------------------------------- | START Unset
+				unset( $sql );
+				unset( $param );
+				unset( $table_name );
 				// ------------------------------------- | END
 				
 				// ------------------------------------- | START Return
