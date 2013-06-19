@@ -390,8 +390,8 @@ class Framework{
 	public static function DefineTimeZoneSettings(){
 	
 		// ------------------------------------- | START Fetch settings from get/session
-		if( isset( $_GET[ "timezone" ] ) ){ 
-			$timezone = $_GET[ "timezone" ];
+		if( self::GetValueFromRequest( "timezone" ) != "" ){ 
+			$timezone = self::GetValueFromRequest( "timezone" );
 		} elseif ( isset( $_SESSION[ "timezone" ] ) ) {
 			$timezone = $_SESSION[ "timezone" ];
 		} else {
@@ -427,8 +427,8 @@ class Framework{
 	public static function DefineLocaleSettings(){
 		
 		// ------------------------------------- | START Fetch settings from get/session
-		if( isset( $_GET[ "locale" ] ) ){ 
-			$locale = $_GET[ "locale" ];
+		if( self::GetValueFromRequest( "locale" ) != "" ){ 
+			$locale = self::GetValueFromRequest( "locale" );
 		} elseif ( isset( $_SESSION[ "locale" ] ) ) {
 			$locale = $_SESSION[ "locale" ];
 		} else {

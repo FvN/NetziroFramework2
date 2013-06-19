@@ -48,11 +48,11 @@ class Bootstrap{
 			// ------------------------------------- | START Executing bootstrap functions
 			Netziro\Framework::DefinePHPSettings();
 			Netziro\Framework::DefineApplicationPath();
+			Netziro\Framework::FetchRequest();
 			Netziro\Framework::DefineLocaleSettings();
 			Netziro\Framework::DefineTimeZoneSettings();
 			Netziro\Framework::LoadDatabaseLinks();
 			Netziro\Framework::LoadCache();
-			Netziro\Framework::FetchRequest();
 			Netziro\Framework::RouteInstance();
 			// ------------------------------------- | END	
 			
