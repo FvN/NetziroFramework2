@@ -50,6 +50,7 @@ class Module{
 	private static $ui = false;
 	private static $permissions_checking = false;
 	
+	protected static $module;
 	private static $module_directory;
 	private static $module_index;
 	private static $module_init;
@@ -57,6 +58,11 @@ class Module{
 	private static $nf_module_directory = "modules/";
 	private static $nf_module_index = "index.php";
 	private static $nf_module_init = "init.php";
+	
+	protected static $api_output_format;
+	
+	protected static $params = array();
+	protected static $action;
 	
 	
 	/**
@@ -87,6 +93,43 @@ class Module{
 		
 	}
 	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
+	public static function SetModule( $module ){ if( !empty( $module ) ){ self::$module = $module; } }
+	public static function GetModule(){ return self::$module; }
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
+	public static function SetAction( $action ){ if( !empty( $action ) ){ self::$action = $action; } }
+	public static function GetAction(){ return self::$action; }
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
+	public static function SetParams( $params = array( ) ){ if( !empty( $params ) ){ self::$params = $params; } }
+	public static function GetParams(){ return self::$params; }
+	
+	/**
+	 * @author Alessio Nobile
+	 * 
+	 * @desc
+	 * 
+	 *
+	 */
 	public static function SetUI( $value = true ){ self::$ui = $value; }
 	public static function SetPermissionsChecking( $value = true ){ self::$permissions_checking = $value; }
 	
@@ -97,25 +140,21 @@ class Module{
 	 * 
 	 *
 	 */
-	public static function Init(){
+	public static function Init( ){
 		
-		// ------------------------------------- | START Get the module from the request
-		$module = Netziro\Framework::GetValueFromRequest( "m" );
-		// ------------------------------------- | END
+		if( !empty( self::$module ) ){
 		
-		// ------------------------------------- | START Initialize template settings
-		self::$module_directory = self::$nf_module_directory . $module;
-		self::$module_index = self::$nf_module_directory . $module . "/" . self::$nf_module_index;
-		self::$module_init = self::$nf_module_directory . $module . "/" . self::$nf_module_init;
-		// ------------------------------------- | END
-
-		// ------------------------------------- | START Route
-		if( !empty( $module ) ){ self::Router( $module ); }
-		// ------------------------------------- | END
-		
-		// ------------------------------------- | START Unsets
-		unset( $module );
-		// ------------------------------------- | END
+			// ------------------------------------- | START Initialize template settings
+			self::$module_directory = self::$nf_module_directory . self::$module;
+			self::$module_index = self::$nf_module_directory . self::$module . "/" . self::$nf_module_index;
+			self::$module_init = self::$nf_module_directory . self::$module . "/" . self::$nf_module_init;
+			// ------------------------------------- | END
+	
+			// ------------------------------------- | START Route
+			if( !empty( self::$module ) ){ self::Router( ); }
+			// ------------------------------------- | END
+			
+		} else {  }
 		
 	}
 	
@@ -128,14 +167,14 @@ class Module{
 	 * Route your request into the module
 	 *
 	 */
-	private static function Router( $module ){
+	private static function Router( ){
 			
-		if( !empty( $module ) ){
+		if( !empty( self::$module ) ){
 			
-			if( self::Exist( $module ) ){
+			if( self::Exist( self::$module ) ){
 				
 				// ------------------------------------- | START Instanciate a new object on the fly 
-				$module_call = "$module\\$module";
+				$module_call = self::$module . "\\" . self::$module;
 				$object = new $module_call;
 				// ------------------------------------- | END
 				

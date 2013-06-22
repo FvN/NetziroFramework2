@@ -2,5 +2,11 @@ Options All -Indexes
 Order allow,deny
 Allow from all
 
+RewriteEngine on
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^api/(.*)  api.php?$1
+
 #RewriteEngine on
 #RewriteRule (.*)/(.*)$ index.php?module=$1&action=$2

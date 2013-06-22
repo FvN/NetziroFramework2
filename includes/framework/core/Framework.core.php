@@ -155,8 +155,25 @@ class Framework{
 	 */
 	protected static function InitInstanceApplication(){
 		
+		// ------------------------------------- | START Get the module&action from the request
+		$module = Netziro\Framework::GetValueFromRequest( "m" );
+		$action = Netziro\Framework::GetValueFromRequest( "a" );
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Set Action and module
+		Netziro\Modules\Module::SetAction( $action );
+		Netziro\Modules\Module::SetModule( $module );
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Init UI
 		Netziro\Modules\Module::SetUI();
 		Netziro\UI\UserInterface::Init();
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Unset
+		unset( $module );
+		unset( $action );
+		// ------------------------------------- | END
 		
 	}
 	
@@ -169,7 +186,47 @@ class Framework{
 	 */
 	protected static function InitInstanceAPI(){
 		
-		Netziro\Modules\Module::Init();
+		// ------------------------------------- | START Get the server path info and make an array
+		$request = $_SERVER[ 'PATH_INFO' ];
+		$request = explode( '/', $request );
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START get class name and method name from server path
+		$module = $request[ 1 ];
+		$action = $request[ 2 ];
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Define the request's format type
+		$format = '';
+		$pos = strripos( $action, "." );
+		if ( $pos !== false ) { $format = substr( $action , $pos+1 , strlen( $action ) - $pos ); }
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START remove .json or .xml from function name
+		$supported_format = array( ".json" , ".xml" );
+		$action = str_replace( $supported_format, "", $action );
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Summarize all params
+		$count  = count( $_GET );
+		$params = array_slice( $_GET, 0, $count );
+		// ------------------------------------- | END
+				
+		// ------------------------------------- | START Module Init
+		Netziro\Modules\Module::SetAction( $action );
+		Netziro\Modules\Module::SetModule( $module );
+		Netziro\Modules\Module::SetParams( $params );
+		Netziro\Modules\Module::Init( );
+		// ------------------------------------- | END
+		
+		// ------------------------------------- | START Unset
+		unset( $request );
+		unset( $module );
+		unset( $action );
+		unset( $supported_format );
+		unset( $count );
+		unset( $params );
+		// ------------------------------------- | END
 		
 	}
 	
@@ -184,7 +241,19 @@ class Framework{
 		
 		try{
 			
+			// ------------------------------------- | START Get the module&action from the request
+			$module = Netziro\Framework::GetValueFromRequest( "m" );
+			$action = Netziro\Framework::GetValueFromRequest( "a" );
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START Set Action and module
+			Netziro\Modules\Module::SetAction( $action );
+			Netziro\Modules\Module::SetModule( $module );
+			// ------------------------------------- | END
+			
+			// ------------------------------------- | START
 			Netziro\Install\Install::Init();
+			// ------------------------------------- | END
 			
 		} catch( \Exception $e ){ Netziro\Core\Logger::LogWrite( 4000, $e->getMessage(), "Instance.Setup - Your template doesn't match the Template methods requirement", $e->getCode() ); }
 		

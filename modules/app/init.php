@@ -49,7 +49,6 @@ use Netziro\Models;
 class app extends Modules\Module implements Models\ModuleModel{
 	
 	protected $module_name;
-	
 	protected $dataset = array();
 	
 	/**
@@ -59,7 +58,7 @@ class app extends Modules\Module implements Models\ModuleModel{
 	 * Template Init Method
 	 *
 	 */
-	public function AutoLoad(){ 
+	public function AutoLoad( ){ 
 		
 		$this->ModuleRouter();
 		
